@@ -14,7 +14,7 @@ const sequelize = new Sequelize(database.dbname, database.username, database.pas
 });
 sequelize
 .authenticate().then(() => {
-  console.log("Connect Database")
+  console.log("Login Database Pass")
 })
 .catch(err => {
   console.error('Unable to connect to the database:', err)
@@ -25,7 +25,7 @@ const Admins = admindb(sequelize, Sequelize)
 
 sequelize.sync()
   .then(() => {
-    console.log(`Database & tables created!`)
+    console.log(`Connect Database`)
   })
 
 module.exports = {
