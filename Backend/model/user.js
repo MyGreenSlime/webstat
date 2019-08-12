@@ -11,7 +11,7 @@ module.exports = (sequelize, type) => {
         section : {
             type : type.STRING,
             require : true,
-            defaultValue : "CPE"
+            defaultValue : "cpe"
         }
     })
 }

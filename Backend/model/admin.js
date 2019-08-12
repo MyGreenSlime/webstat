@@ -11,7 +11,7 @@ module.exports = (sequelize, type) => {
         status : {
             type : type.STRING,
             require : true,
-            defaultValue : "Instructor"
+            defaultValue : "instructor"
         }
     })
 }

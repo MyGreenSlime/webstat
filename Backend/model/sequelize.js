@@ -23,12 +23,13 @@ sequelize
 const Users = userdb(sequelize, Sequelize)
 const Admins = admindb(sequelize, Sequelize)
 
-sequelize.sync()
+sequelize.sync({force: false})
   .then(() => {
     console.log(`Connect Database`)
   })
 
 module.exports = {
     Users,
-    Admins
+    Admins,
+    sequelize
 }
