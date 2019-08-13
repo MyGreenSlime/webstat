@@ -1,0 +1,72 @@
+Base Url : localhost:3001
+
+USER SECTION : /api/users
+
+Method : Register
+Request Type : POST
+Path : /register
+
+require : {
+    username : string,
+    fullname : string,
+    section : string ("cpe" or "ske")
+}
+
+response : {
+    status code : 200 or 500
+    message : created or username does exist or error
+    detail {
+        userdata or error
+    }
+}
+
+----------------------------------------------------------------------
+
+Base Url : localhost:3001
+
+USER SECTION : /api/users
+
+Method : Login
+Request Type : POST
+Path : /login
+
+require : {
+   username : string 
+   password : string
+   (nontri account)
+}
+
+response : {
+    status code : 200 or 500
+    message : Login Succeed or Login Failed
+    detail {
+        userdata or cause of login Failed
+    }
+}
+
+------------------------------------------------------------------
+Method : Get Profile
+Request Type : GET
+Path : /profile
+
+require : {
+   none
+}
+
+response : {
+    status code : 200 or 401
+    userdata or "unauthorize"
+}
+
+Method : Logout
+Request Type : POST
+Path : /logout
+
+require : {
+   none
+}
+
+response : {
+    status code : 200 or 401
+    "Logout succeed" or "unauthorize"
+}

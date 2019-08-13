@@ -2,13 +2,13 @@ const LocalStrategy = require("passport-local").Strategy;
 const CustomStrategy = require("passport-custom").Strategy;
 const { Users, Admins,  } = require("../model/sequelize");
 
-const Imap = require("../Imap/imap"); // for auth with kasetsart university (IMAP protocol)
+const Imap = require("../middleware/imap"); // for auth with kasetsart university (IMAP protocol)
 
 module.exports = passport => {
   passport.use('user',
     new CustomStrategy((req, done) => {
-      const username = req.body.username
-      const password = req.body.password
+      const username = req.body.username.toLowerCase()
+      const password = req.body.password.toLowerCase()
       Users.findOne({
         where: {
           username: username
@@ -39,18 +39,7 @@ module.exports = passport => {
   });
   
   passport.deserializeUser(function(sessionUser, done) {
-    Users.findOne({
-      where : {
-        username : sessionUser.username
-      }
-    })
-    .then(user => {
-      if(user) {
-        done(null, user.get())
-      } else {
-        done(user.errors, null)
-      }
-    })
+    done(null, sessionUser)
     
   });
   
