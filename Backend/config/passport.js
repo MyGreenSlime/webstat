@@ -1,6 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy;
 const CustomStrategy = require("passport-custom").Strategy;
-const { Users, Admins,  } = require("../model/sequelize");
+const Users  = require("../model/user");
 
 const Imap = require("../middleware/imap"); // for auth with kasetsart university (IMAP protocol)
 
@@ -8,13 +8,10 @@ module.exports = passport => {
   passport.use('user',
     new CustomStrategy((req, done) => {
       const username = req.body.username.toLowerCase()
-      const password = req.body.password.toLowerCase()
+      const password = req.body.password
       Users.findOne({
-        where: {
-          username: username
-        },
-        attributes: ['username', 'fullname', 'section']
-      }).then(user => {
+        username: username
+      }, 'username fullname section admin').then(user => {
         if (user === null) {
           return done(null, false, { issue: "Incorrect username." });
         } else {
@@ -34,7 +31,7 @@ module.exports = passport => {
     })
   );
   passport.serializeUser(function(user, done) {
-    var sessionUser = {username: user.username, fullname: user.fullname, section: user.section }
+    var sessionUser = {username: user.username, fullname: user.fullname, section: user.section, admin : user.admin }
     done(null, sessionUser);
   });
   

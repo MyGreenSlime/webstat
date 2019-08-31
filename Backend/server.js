@@ -2,14 +2,28 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+
+const mongoose = require("mongoose")
+const MongoStore = require('connect-mongo')(session);
+
 const passport = require('passport');
 const uuid = require('uuid/v4')
 
-const {sequelize} =require('./model/sequelize')
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
 const app = express();
 const port = 3001;
+
+
+mongoose.connect('mongodb://localhost:27018/webstat', {
+  useNewUrlParser: true,
+  "auth": { "authSource": "admin" },
+    "user": "root",
+    "pass": "webstat",
+  })
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("connect database")
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,10 +35,7 @@ app.use(session({
     console.log(req.sessionID)
     return uuid() // use UUIDs for session IDs
   },
-  store : new SequelizeStore({
-    db : sequelize,
-    checkExpirationInterval: 15 * 60 * 1000
-  }),
+  store : new MongoStore({ mongooseConnection: db }),
   secret: 'catcat',
   resave: true,
   saveUninitialized: true,
@@ -39,7 +50,7 @@ require('./config/passport')(passport)
 app.use(passport.initialize());
 app.use(passport.session());
 
-// router
+// // router
 const UserApi = require("./router/users");
 app.use("/api/users", UserApi);
 

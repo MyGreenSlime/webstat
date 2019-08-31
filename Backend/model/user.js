@@ -1,17 +1,18 @@
-module.exports = (sequelize, type) => {
-    return sequelize.define('Users',{
-        username : {
-            type : type.STRING,
-            primaryKey : true,
-        },
-        fullname : {
-            type : type.STRING,
-            require : true,
-        },
-        section : {
-            type : type.STRING,
-            require : true,
-            defaultValue : "cpe"
-        }
-    })
-}
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+var ObjectId = mongoose.Schema.Types.ObjectId
+const UserSchema = new Schema({
+
+    username : String,
+    fullname : String,
+    admin :  {
+        type : Boolean,
+        default : false
+    },
+    section : {
+        type : String,
+        default : "cpe"
+    }
+});
+
+module.exports = User = mongoose.model('Users', UserSchema);
