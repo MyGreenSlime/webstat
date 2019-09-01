@@ -1,0 +1,31 @@
+<div class="register-page-wrapper">
+  <div class="register-form">
+    <div class="title-register">REGISTER</div>
+    <form [formGroup]="registerForm">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="username" placeholder="Username">
+      </div>
+      <div class="radio-block">
+        <div class="custom-control custom-radio">
+          <input type="radio" [(ngModel)]="major" formControlName="major" id="CPE" [value]="'CPE'"
+            class="custom-control-input">
+          <label class="custom-control-label" for="CPE">CPE</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" [(ngModel)]="major" formControlName="major" id="SKE" [value]="'SKE'"
+            class="custom-control-input">
+          <label class="custom-control-label" for="SKE">SKE</label>
+        </div>
+      </div>
+      <div class="button-block">
+        <button class="btn btn-info btn-block">
+          Submit
+        </button>
+        <span>or</span>
+        <button class="btn btn-primary btn-block">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

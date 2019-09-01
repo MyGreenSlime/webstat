@@ -8,7 +8,7 @@ const database = {
   dbname : "dondon"
 }
 const sequelize = new Sequelize(database.dbname, database.username, database.password, {
-  host: 'localhost',
+  host: '192.168.99.100',
   port: '5432',
   dialect: 'postgres'
 });
