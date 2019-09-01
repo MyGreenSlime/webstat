@@ -52,7 +52,10 @@ app.use(passport.session());
 
 // // router
 const UserApi = require("./router/users");
+const DistributionsApi = require("./router/distributions")
 app.use("/api/users", UserApi);
+app.use("/api/distributions", DistributionsApi);
+
 
 app.all("/*", function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
