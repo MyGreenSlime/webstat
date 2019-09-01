@@ -57,7 +57,6 @@ router.put('/admin/edit/:exerciseid', permission.isAdmin, (req, res) => {
     })
 })
 
-
 router.post("/admin/create", permission.isAdmin, (req,res) => {
     const data = req.body
     Exercises.create({
