@@ -53,8 +53,10 @@ app.use(passport.session());
 // // router
 const UserApi = require("./router/users");
 const DistributionsApi = require("./router/distributions")
+const ExerciseApi = require('./router/exercises')
 app.use("/api/users", UserApi);
 app.use("/api/distributions", DistributionsApi);
+app.use("/api/exercises",ExerciseApi)
 
 
 app.all("/*", function(req, res, next) {
