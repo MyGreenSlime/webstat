@@ -12,13 +12,13 @@ if you wanna manage your database
 
 go to url : localhost:8080 adminer
 
-how to login adminer
+how to login mongo compass
 // for dev
-system : postgresql
-server : database
-username : dondon
-password : dondon
-databasename : dondon
+hostname :localhost
+port : 27018
+username : root 
+password : webstat
+
 
 
 

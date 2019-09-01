@@ -2,35 +2,33 @@ const express = require('express')
 const router = express.Router()
 
 const MessageHandle = require('../middleware/message')
-const {Users} = require('../model/sequelize')
+const Users = require('../model/user')
 
 const passport = require('passport')
 const permission = require('../middleware/permission')
 
 router.post("/register", (req,res) => {
     const data = req.body
-    
     Users.findOne({
-      where : {
-        username : data.username.toLowerCase()
-      },
-      attributes: ['username']
+      username : data.username.toLowerCase()
     })
     .then(user => {
       if(user === null){
         Users.create({
           username : data.username.toLowerCase(),
           fullname : data.fullname.toLowerCase(),
-          section : data.section.toLowerCase()
+          section : data.section.toLowerCase(),
+          admin : data.admin
         })
         .then((newuser) => {
-          res.status(200).send(MessageHandle.ResponseText("created", newuser.get()))
+          res.status(200).send(MessageHandle.ResponseText("created", newuser))
         })
         .catch(err => {
+          console.log(err)
           res.status(500).send(MessageHandle.ResponseText("error", err))
         })
       } else {
-        res.status(200).send(MessageHandle.ResponseText("username does exist", user.get()))
+        res.status(200).send(MessageHandle.ResponseText("username does exist", user.get))
       }
     })
     .catch(err => {
@@ -55,7 +53,7 @@ router.post("/register", (req,res) => {
       })
     })(req, res, next);
   })
-
+ 
   router.get("/profile", permission.isLogin , (req, res) => {
     res.status(200).send(req.user)
   })
