@@ -1,32 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ApiService } from "src/app/shared/services/api.service";
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  selector: "app-login-page",
+  templateUrl: "./login-page.component.html",
+  styleUrls: ["./login-page.component.scss"]
 })
 export class LoginPageComponent implements OnInit {
-
-  loginForm = new FormGroup ({
+  loginForm = new FormGroup({
     username: new FormControl("", Validators.required),
     password: new FormControl("", Validators.required)
-  })
+  });
 
-  constructor(private apiService: ApiService) { }
+  showInvalidAlert = false;
 
-  ngOnInit() {
-  }
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {}
 
   loginClick() {
-    let param = {
-      username: this.loginForm.controls.username.value,
-      password: this.loginForm.controls.password.value
+    if (this.loginForm.invalid) {
+      this.showInvalidAlert = true;
+      setTimeout(() => {
+        this.showInvalidAlert = false;
+      }, 3000);
+    } else {
+      this.apiService.login(this.loginForm.value).subscribe(res => {
+      });
     }
-    this.apiService.login(param).subscribe(res => {
-      console.log(res);
-    });
   }
-
 }

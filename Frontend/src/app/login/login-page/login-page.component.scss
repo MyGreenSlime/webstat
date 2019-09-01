@@ -9,6 +9,11 @@
   background-image: url("../../../assets/background.png");
   background-size: cover;
 
+  .invalid-alert {
+    position: absolute;
+    top: 20px;
+  }
+
   .title {
     font-size: 1.7em;
     margin-bottom: 30px;

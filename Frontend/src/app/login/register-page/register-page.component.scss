@@ -8,6 +8,11 @@
   flex-direction: column;
   background-image: url("../../../assets/background-gradient.webp");
 
+  .invalid-alert {
+    position: absolute;
+    top: 20px;
+  }
+
   .title {
     font-size: 1.7em;
     margin-bottom: 30px;
