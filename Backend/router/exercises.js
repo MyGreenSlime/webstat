@@ -38,9 +38,25 @@ router.get('/admin/:exerciseid', permission.isAdmin, (req, res) => {
         } else {
             res.status(404).send(MessageHandle.ResponseText("Not Found This Exercise"))
         }
-        
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText('error', err))
     })
 })
+
+router.put('/admin/edit/:exerciseid', permission.isAdmin, (req, res) => {
+    const data = req.body
+    Exercises.updateOne({
+        _id : req.params.exerciseid
+    },{$set : data})
+    .then(editedExercise => {
+        res.status(200).send(MessageHandle.ResponseText("edited", editedExercise))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText("error", err))
+    })
+})
+
 
 router.post("/admin/create", permission.isAdmin, (req,res) => {
     const data = req.body
