@@ -53,7 +53,7 @@ router.post("/register", (req,res) => {
       })
     })(req, res, next);
   })
-
+ 
   router.get("/profile", permission.isLogin , (req, res) => {
     res.status(200).send(req.user)
   })
