@@ -16,7 +16,7 @@ router.post("/register", (req,res) => {
       if(user === null){
         Users.create({
           username : data.username.toLowerCase(),
-          fullname : data.fullname.toLowerCase(),
+          fullname : data.fullname,
           section : data.section.toLowerCase(),
           admin : data.admin
         })

@@ -7,8 +7,12 @@ const Imap = require("../middleware/imap"); // for auth with kasetsart universit
 module.exports = passport => {
   passport.use('user',
     new CustomStrategy((req, done) => {
-      const username = req.body.username.toLowerCase()
-      const password = req.body.password
+      if (!req.headers.authorization || req.headers.authorization.indexOf('Basic ') === -1) {
+        return  done(null, false, { issue: "Missing Authorization Header" });
+      }
+      const base64Credentials =  req.headers.authorization.split(' ')[1];
+      const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
+      const [username, password] = credentials.split(':');
       Users.findOne({
         username: username
       }, 'username fullname section admin').then(user => {
