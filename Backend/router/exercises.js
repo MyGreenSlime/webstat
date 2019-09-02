@@ -34,7 +34,7 @@ router.get('/admin/:exerciseid', permission.isAdmin, (req, res) => {
     Exercises.findById(req.params.exerciseid, 'nameshow name section tasks disable')
     .then(exercise => {
         if(exercise){
-            res.status(200).send(MessageHandle.ResponseText('Find One Exercises', exercise))
+            res.status(200).send(MessageHandle.ResponseText('Find One Exercise', exercise))
         } else {
             res.status(404).send(MessageHandle.ResponseText("Not Found This Exercise"))
         }

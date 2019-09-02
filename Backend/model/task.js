@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
 const TaskSchema = new Schema({
+    nameshow : String,
     name : String,
     distribution : {type : ObjectId, ref : "Distributions"},
     parameters : [{

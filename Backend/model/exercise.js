@@ -9,6 +9,7 @@ const ExerciseSchema = new Schema({
         default : "cpe"
     },
     tasks : [{
+        nameshow : String,
         taskid : {type : ObjectId, ref : "Tasks"}
     }],
     disable : {
