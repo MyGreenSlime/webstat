@@ -57,6 +57,42 @@ router.put('/admin/edit/:exerciseid', permission.isAdmin, (req, res) => {
     })
 })
 
+router.put('/admin/addtask/:exerciseid', permission.isAdmin, (req, res) => {
+    const data = req.body
+    Exercises.updateOne({
+        _id : req.params.exerciseid
+    }, {$push : {
+        tasks : {
+            $each : data.tasks
+        }
+    }})
+    .then(editedExercise => {
+        res.status(200).send(MessageHandle.ResponseText("edited", editedExercise))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText("error", err))
+    })
+})
+
+router.put('/admin/removetask/:exerciseid', permission.isAdmin, (req, res) => {
+    const data = req.body
+    Exercises.updateOne({
+        _id : req.params.exerciseid
+    }, {$pull : {
+        tasks : {
+            taskid  : {
+                $in : data.tasks
+            }
+        }
+    }})
+    .then(editedExercise => {
+        res.status(200).send(MessageHandle.ResponseText("edited", editedExercise))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText("error", err))
+    })
+})
+
 router.post("/admin/create", permission.isAdmin, (req,res) => {
     const data = req.body
     Exercises.create({
@@ -72,6 +108,8 @@ router.post("/admin/create", permission.isAdmin, (req,res) => {
         res.status(500).send(MessageHandle.ResponseText("error", err))
     })
 })
+
+
 
 
 

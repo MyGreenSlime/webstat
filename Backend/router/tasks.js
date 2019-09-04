@@ -10,6 +10,9 @@ router.get('/', permission.isLogin , (req, res)=> {
     Tasks.find({
         disable : false
     }, 'nameshow name distribution parameters disable')
+    .populate('distribution', {
+        name : 'distribution.name'
+    })
     .then(tasks => {
         res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
     })
@@ -20,6 +23,9 @@ router.get('/', permission.isLogin , (req, res)=> {
 
 router.get('/admin/', permission.isAdmin , (req, res)=> {
     Tasks.find({}, 'nameshow name distribution parameters disable')
+    .populate('distribution', {
+        name : 'distribution.name'
+    })
     .then(tasks => {
         res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
     })
@@ -34,6 +40,9 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
         _id : taskid,
         disable : false
     }, 'nameshow name distribution parameters')
+    .populate('distribution', {
+        name : 'distribution.name'
+    })
     .then(task => {
         if(task){
             res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
@@ -49,6 +58,9 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
 router.get('/admin/:taskid', permission.isAdmin, (req, res) => {
     const taskid = req.params.taskid
     Tasks.findById(taskid, 'nameshow name distribution parameters disable')
+    .populate('distribution', {
+        name : 'distribution.name'
+    })
     .then(task => {
         if(task){
             res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
@@ -60,7 +72,21 @@ router.get('/admin/:taskid', permission.isAdmin, (req, res) => {
         res.status(200).send(MessageHandle.ResponseText("error", err))
     })
 })
-
+router.put('/edit/:taskid', permission.isAdmin, (req, res) => {
+    const data = req.body
+    console.log(data)
+    Tasks.updateOne({
+        _id : req.params.taskid
+    }, {
+        $set : data
+    })
+    .then(editedTask => {
+        res.status(200).send(MessageHandle.ResponseText("edited", editedTask))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText("error", err))
+    })
+})
 router.post('/create', permission.isAdmin, (req, res)=> {
     const data = req.body
     Tasks.findOne({
@@ -85,5 +111,29 @@ router.post('/create', permission.isAdmin, (req, res)=> {
     })
 })
 
+router.delete('/delete/:taskid', permission.isAdmin, (req, res) => {
+    Exercises.updateMany({
+        'tasks.taskid' : req.params.taskid
+    }, { $pull : {
+        tasks : {
+            taskid : req.params.taskid
+        }
+    }})
+    .then(editExercise => {
+        // res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", editExercise))
+        Tasks.deleteOne({
+            _id : req.params.taskid
+        })
+        .then(delTask => {
+            res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", delTask))
+        })
+        .catch(err => {
+            res.status(500).send(MessageHandle.ResponseText('error', err))
+        })
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText('error', err))
+    })
+})
 
 module.exports = router
