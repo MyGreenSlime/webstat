@@ -22,4 +22,8 @@ export class ApiService {
   register(param): Observable<any> {
     return this.http.post("/api/users/register", param);
   }
+
+  getProfile(): Observable<any> {
+    return this.http.get("/api/users/user");
+  }
 }

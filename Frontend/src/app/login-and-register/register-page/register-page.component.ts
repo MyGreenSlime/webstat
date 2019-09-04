@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ApiService } from "src/app/shared/services/api.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register-page",
@@ -16,8 +17,9 @@ export class RegisterPageComponent implements OnInit {
 
   section = "CPE";
   showInvalidAlert = false;
+  showInvalidError = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -28,9 +30,17 @@ export class RegisterPageComponent implements OnInit {
         this.showInvalidAlert = false;
       }, 3000);
     } else {
-      this.apiService
-        .register(this.registerForm.value)
-        .subscribe(res => {}, error => {});
+      this.apiService.register(this.registerForm.value).subscribe(
+        res => {
+          this.router.navigate(["/login"]);
+        },
+        error => {
+          this.showInvalidError = true;
+          setTimeout(() => {
+            this.showInvalidError = false;
+          }, 3000);
+        }
+      );
     }
   }
 }

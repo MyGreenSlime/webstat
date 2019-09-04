@@ -1,12 +1,13 @@
 @import "../../../styles/styles.scss";
 
-.register-page-wrapper {
+.login-page-wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-image: url("../../../assets/background-gradient.webp");
+  background-image: url("../../../assets/background.png");
+  background-size: cover;
 
   .invalid-alert {
     position: absolute;
@@ -20,29 +21,20 @@
     color: $white;
   }
 
-  .register-form {
+  .login-form {
     width: 450px;
     max-width: 90%;
     padding: 3% 5%;
     font-size: 1.25em;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 2px 10px 0 $gray-600;
     background-color: $white;
 
-    .title-register {
+    .title-login {
       font-size: 1.5em;
       margin-bottom: 20px;
       text-align: center;
-      color: $gray-700;
-    }
-
-    .radio-block {
-      display: flex;
-
-      div {
-        flex: 1 1 auto;
-        text-align: center;
-      }
+      color: $gray-900;
     }
 
     .button-block {

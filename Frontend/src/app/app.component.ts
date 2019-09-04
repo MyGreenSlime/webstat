@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-root",
@@ -9,12 +10,16 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {
   constructor(
     private cookieService: CookieService,
+    private router: Router
   ) {
     this.cookieHandler();
   }
 
   cookieHandler() {
-    let cookies = this.cookieService.getAll()
-    console.log(JSON.stringify(cookies));
+    let cookies = this.cookieService.get('connect.sid')
+    if(!cookies) {
+      this.router.navigate(["login"]);
+      return;
+    }
   }
 }
