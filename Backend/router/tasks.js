@@ -6,9 +6,19 @@ const Exercises = require('../model/exercise')
 const Tasks = require('../model/task')
 
 const permission = require('../middleware/permission')
+router.get('/', permission.isLogin , (req, res)=> {
+    Tasks.find({
+        disable : false
+    }, 'nameshow name distribution parameters disable')
+    .then(tasks => {
+        res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText("error", err))
+    })
+})
 
-
-router.get('admin/', permission.isAdmin , (req, res)=> {
+router.get('/admin/', permission.isAdmin , (req, res)=> {
     Tasks.find({}, 'nameshow name distribution parameters disable')
     .then(tasks => {
         res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))

@@ -40,7 +40,6 @@ app.use(session({
   secret: 'catcat',
   resave: true,
   saveUninitialized: true,
-  rolling : true,
   cookie : {
     httpOnly : false,
     maxAge : 1000 * 60 * 60 * 3
@@ -55,9 +54,11 @@ app.use(passport.session());
 const UserApi = require("./router/users");
 const DistributionsApi = require("./router/distributions")
 const ExerciseApi = require('./router/exercises')
+const TaskApi =  require('./router/tasks')
 app.use("/api/users", UserApi);
 app.use("/api/distributions", DistributionsApi);
 app.use("/api/exercises",ExerciseApi)
+app.use("/api/tasks", TaskApi)
 
 
 app.all("/*", function(req, res, next) {
