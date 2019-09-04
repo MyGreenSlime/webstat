@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ApiService } from "src/app/shared/services/api.service";
+import { ApiService } from "../../shared/services/api.service";
 import { Router } from "@angular/router";
 import { timeout } from "q";
 import { CookieService } from "ngx-cookie-service";
@@ -36,10 +36,10 @@ export class LoginPageComponent implements OnInit {
     } else {
       this.apiService.login(this.loginForm.value).subscribe(
         res => {
-          if (res.data.admin) {
-            this.cookieService.set('cookie-isa', btoa('admin'));
+          if (res.detail.data.admin) {
+            this.cookieService.set('cookie-isa', btoa("admin"));
           } else {
-            this.cookieService.set('cookie-isa', btoa('user'));
+            this.cookieService.set('cookie-isa', btoa("user"));
           }
           this.router.navigate(["/home"]);
         },

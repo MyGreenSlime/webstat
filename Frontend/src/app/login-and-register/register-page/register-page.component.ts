@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ApiService } from "src/app/shared/services/api.service";
+import { ApiService } from "../../shared/services/api.service";
 import { Router } from "@angular/router";
 
 @Component({

@@ -17,9 +17,9 @@ export class AppComponent {
 
   cookieHandler() {
     let cookies = this.cookieService.get('connect.sid')
-    if(!cookies) {
-      this.router.navigate(["login"]);
-      return;
-    }
+    // if(!cookies) {
+    //   this.router.navigate(["login"]);
+    //   return;
+    // }
   }
 }

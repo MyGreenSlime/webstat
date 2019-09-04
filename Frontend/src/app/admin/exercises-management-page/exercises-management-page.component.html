@@ -1,0 +1,17 @@
+<section class="exercises-management-wrapper">
+  <app-navbar></app-navbar>
+  <div class="btn-group-toggle option" data-toggle="buttons">
+    <button class="btn btn-info active" routerLink="/admin/ex/list">
+      <input type="radio" name="options" id="option1" autocomplete="off" checked=""> List
+    </button>
+    <button class="btn btn-info" routerLink="/admin/ex/addex">
+      <input type="radio" name="options" id="option2" autocomplete="off"> Add exercise
+    </button>
+    <button class="btn btn-info" routerLink="/admin/ex/addtask">
+      <input type="radio" name="options" id="option3" autocomplete="off"> Add Task
+    </button>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</section>

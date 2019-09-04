@@ -1,0 +1,39 @@
+<section class="exercise-wrapper">
+  <h2 class="title">Exercise</h2>
+  <form [formGroup]="exerciseForm">
+    <div class="form-group row">
+      <label for="name" class="col-md-3 col-form-label">Exercise Name: </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="name" placeholder="exercise name">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="nameshow" class="col-md-3 col-form-label">Exercise Title: </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="nameshow" placeholder="exercise title">
+      </div>
+    </div>
+    <div class="radio-block">
+      <span>Section: </span>
+      <div class="custom-control custom-radio">
+        <input type="radio" [(ngModel)]="section" formControlName="section" id="CPE" [value]="'CPE'"
+          class="custom-control-input">
+        <label class="custom-control-label" for="CPE">CPE</label>
+      </div>
+      <div class="custom-control custom-radio">
+        <input type="radio" [(ngModel)]="section" formControlName="section" id="SKE" [value]="'SKE'"
+          class="custom-control-input">
+        <label class="custom-control-label" for="SKE">SKE</label>
+      </div>
+    </div>
+
+    <div class="button-block">
+      <button class="btn btn-primary" (click)="saveClick()">
+        Save
+      </button>
+      <button class="btn btn-danger">
+        Delete
+      </button>
+    </div>
+  </form>
+</section>

@@ -13,7 +13,8 @@ export class NavbarComponent implements OnInit {
   constructor(private cookieService: CookieService) {}
 
   ngOnInit() {
-    if (this.cookieService.get("cookir-isa") === btoa("admin")) {
+    console.log(this.cookieService.get("cookie-isa"))
+    if (atob(this.cookieService.get("cookie-isa")) === "admin") {
       this.isAdmin = true;
     }
     if (this.cookieService.get("connect.sid")) {

@@ -26,4 +26,12 @@ export class ApiService {
   getProfile(): Observable<any> {
     return this.http.get("/api/users/user");
   }
+
+  addExercise(params): Observable<any> {
+    return this.http.post("/api/exercises/admin/create", params);
+  }
+
+  getExercise():Observable<any> {
+    return this.http.get("/api/exercises")
+  }
 }
