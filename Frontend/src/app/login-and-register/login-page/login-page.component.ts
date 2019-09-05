@@ -4,6 +4,7 @@ import { ApiService } from "../../shared/services/api.service";
 import { Router } from "@angular/router";
 import { timeout } from "q";
 import { CookieService } from "ngx-cookie-service";
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: "app-login-page",
@@ -20,7 +21,7 @@ export class LoginPageComponent implements OnInit {
   showInvalidUser = false;
 
   constructor(
-    private apiService: ApiService,
+    private authService: AuthService,
     private router: Router,
     private cookieService: CookieService
   ) {}
@@ -34,7 +35,7 @@ export class LoginPageComponent implements OnInit {
         this.showInvalidAlert = false;
       }, 3000);
     } else {
-      this.apiService.login(this.loginForm.value).subscribe(
+      this.authService.login(this.loginForm.value).subscribe(
         res => {
           if (res.detail.data.admin) {
             this.cookieService.set('cookie-isa', btoa("admin"));

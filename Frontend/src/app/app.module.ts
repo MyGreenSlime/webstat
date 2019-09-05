@@ -17,6 +17,7 @@ import { UsersManagementPageComponent } from './admin/users-management-page/user
 import { ExerciseComponent } from './admin/exercises-management-page/components/exercise/exercise.component';
 import { TaskComponent } from './admin/exercises-management-page/components/task/task.component';
 import { ListComponent } from './admin/exercises-management-page/components/list/list.component';
+import { GeneratePageComponent } from './generate/generate-page/generate-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ListComponent } from './admin/exercises-management-page/components/list
     ExerciseComponent,
     TaskComponent,
     ListComponent,
+    GeneratePageComponent,
   ],
   imports: [
     BrowserModule,

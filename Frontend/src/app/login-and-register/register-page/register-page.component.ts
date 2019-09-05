@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ApiService } from "../../shared/services/api.service";
 import { Router } from "@angular/router";
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: "app-register-page",
@@ -19,7 +19,7 @@ export class RegisterPageComponent implements OnInit {
   showInvalidAlert = false;
   showInvalidError = false;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -30,7 +30,7 @@ export class RegisterPageComponent implements OnInit {
         this.showInvalidAlert = false;
       }, 3000);
     } else {
-      this.apiService.register(this.registerForm.value).subscribe(
+      this.authService.register(this.registerForm.value).subscribe(
         res => {
           this.router.navigate(["/login"]);
         },

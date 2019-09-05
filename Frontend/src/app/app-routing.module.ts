@@ -8,12 +8,21 @@ import { UsersManagementPageComponent } from './admin/users-management-page/user
 import { ExerciseComponent } from './admin/exercises-management-page/components/exercise/exercise.component';
 import { TaskComponent } from './admin/exercises-management-page/components/task/task.component';
 import { ListComponent } from './admin/exercises-management-page/components/list/list.component';
+import { GeneratePageComponent } from './generate/generate-page/generate-page.component';
+import { AuthGuard } from "./shared/helper/auth.guard";
+import { RoleGuard } from "./shared/helper/role.guard";
 
 
 const routes: Routes = [
   {
     path: "home",
-    component: HomePageComponent
+    component: HomePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "exercise",
+    component: GeneratePageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "login",
@@ -21,10 +30,12 @@ const routes: Routes = [
   },
   {
     path: "register",
-    component: RegisterPageComponent
+    component: RegisterPageComponent,
+    canActivate: [!AuthGuard]
   },
   {
     path: "admin",
+    canActivate: [RoleGuard],
     children: [
       {
         path: "ex",
@@ -35,11 +46,11 @@ const routes: Routes = [
             component: ListComponent,
           },
           {
-            path: "addex",
+            path: "exercise",
             component: ExerciseComponent,
           },
           {
-            path: "addtask",
+            path: "task",
             component: TaskComponent,
           },
           { path: "", redirectTo: "list", pathMatch: "full" }
@@ -56,7 +67,7 @@ const routes: Routes = [
       }
     ]
   },
-  { path: "*", redirectTo: "home", pathMatch: "full" }
+  { path: "**", redirectTo: "home", pathMatch: "full" }
 ];
 
 @NgModule({

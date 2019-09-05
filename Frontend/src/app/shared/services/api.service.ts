@@ -8,21 +8,6 @@ import { Observable } from "rxjs";
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  login(param): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        "Authorization": "Basic " + btoa(param.username + ':' + param.password)
-      })
-    };
-    console.log(httpOptions);
-    return this.http.post("/api/users/login", null, httpOptions);
-  }
-
-  register(param): Observable<any> {
-    return this.http.post("/api/users/register", param);
-  }
-
   getProfile(): Observable<any> {
     return this.http.get("/api/users/user");
   }
@@ -31,7 +16,11 @@ export class ApiService {
     return this.http.post("/api/exercises/admin/create", params);
   }
 
-  getExercise():Observable<any> {
-    return this.http.get("/api/exercises")
+  getExercises(): Observable<any> {
+    return this.http.get("/api/exercises");
+  }
+
+  getTasks(): Observable<any> {
+    return this.http.get("/api/tasks");
   }
 }
