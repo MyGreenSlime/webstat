@@ -13,7 +13,7 @@ const app = express();
 const port = 3001;
 
 
-mongoose.connect('mongodb://localhost:27018/webstat', {
+mongoose.connect('mongodb://spire.cpe.ku.ac.th:27018/webstat', {
   useNewUrlParser: true,
   "auth": { "authSource": "admin" },
     "user": "root",
