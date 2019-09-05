@@ -7,70 +7,70 @@ const Tasks = require('../model/task')
 
 const permission = require('../middleware/permission')
 router.get('/', permission.isLogin , (req, res)=> {
-    Tasks.find({
-        disable : false
-    }, 'nameshow name distribution parameters disable')
-    .populate('distribution', {
-        name : 'distribution.name'
-    })
-    .then(tasks => {
-        res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
-    })
-    .catch(err => {
-        res.status(500).send(MessageHandle.ResponseText("error", err))
-    })
-})
-
-router.get('/admin/', permission.isAdmin , (req, res)=> {
-    Tasks.find({}, 'nameshow name distribution parameters disable')
-    .populate('distribution', {
-        name : 'distribution.name'
-    })
-    .then(tasks => {
-        res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
-    })
-    .catch(err => {
-        res.status(500).send(MessageHandle.ResponseText("error", err))
-    })
+    if(!req.user.admin){
+        Tasks.find({
+            disable : false
+        }, 'nameshow name distribution parameters')
+        .populate('distribution', {
+            name : 'distribution.name'
+        })
+        .then(tasks => {
+            res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
+        })
+        .catch(err => {
+            res.status(500).send(MessageHandle.ResponseText("error", err))
+        })
+    } else {
+        Tasks.find({}, 'nameshow name distribution parameters disable')
+        .populate('distribution', {
+            name : 'distribution.name'
+        })
+        .then(tasks => {
+            res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
+        })
+        .catch(err => {
+            res.status(500).send(MessageHandle.ResponseText("error", err))
+        })
+    }
 })
 
 router.get('/:taskid', permission.isLogin, (req, res) => {
     const taskid = req.params.taskid
-    Tasks.findOne({
-        _id : taskid,
-        disable : false
-    }, 'nameshow name distribution parameters')
-    .populate('distribution', {
-        name : 'distribution.name'
-    })
-    .then(task => {
-        if(task){
-            res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
-        } else {
-            res.status(400).send(MessageHandle.ResponseText("Not Found This Task"))
-        }
-    })
-    .catch(err => {
-        res.status(200).send(MessageHandle.ResponseText("error", err))
-    })
-})
-
-router.get('/admin/:taskid', permission.isAdmin, (req, res) => {
-    const taskid = req.params.taskid
-    Tasks.findById(taskid, 'nameshow name distribution parameters disable')
-    .populate('distribution', {
-        name : 'distribution.name'
-    })
-    .then(task => {
-        if(task){
-            res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
-        } else {
-            res.status(400).send(MessageHandle.ResponseText("Not Found This Task"))
-        }
-    })
-    .catch(err => {
-        res.status(200).send(MessageHandle.ResponseText("error", err))
-    })
+    if(!req.user.admin){
+        Tasks.findOne({
+            _id : taskid,
+            disable : false
+        }, 'nameshow name distribution parameters')
+        .populate('distribution', {
+            name : 'distribution.name'
+        })
+        .then(task => {
+            if(task){
+                res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
+            } else {
+                res.status(400).send(MessageHandle.ResponseText("Not Found This Task"))
+            }
+        })
+        .catch(err => {
+            res.status(200).send(MessageHandle.ResponseText("error", err))
+        })
+    } else {
+        Tasks.findById(taskid, 'nameshow name distribution parameters disable')
+        .populate('distribution', {
+            name : 'distribution.name'
+        })
+        .then(task => {
+            if(task){
+                res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
+            } else {
+                res.status(400).send(MessageHandle.ResponseText("Not Found This Task"))
+            }
+        })
+        .catch(err => {
+            res.status(200).send(MessageHandle.ResponseText("error", err))
+        })
+    }
+    
 })
 router.put('/edit/:taskid', permission.isAdmin, (req, res) => {
     const data = req.body

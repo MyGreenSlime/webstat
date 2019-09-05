@@ -4,6 +4,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId
 const ExerciseSchema = new Schema({
     nameshow : String,
     name : String,
+    description : String,
     section : {
         type : String,
         default : "cpe"
