@@ -11,9 +11,7 @@ router.get('/', permission.isLogin , (req, res)=> {
         Tasks.find({
             disable : false
         }, 'nameshow name distribution parameters')
-        .populate('distribution', {
-            name : 'distribution.name'
-        })
+        .populate('distribution')
         .then(tasks => {
             res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
         })
@@ -22,9 +20,7 @@ router.get('/', permission.isLogin , (req, res)=> {
         })
     } else {
         Tasks.find({}, 'nameshow name distribution parameters disable')
-        .populate('distribution', {
-            name : 'distribution.name'
-        })
+        .populate('distribution')
         .then(tasks => {
             res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
         })
@@ -41,9 +37,7 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
             _id : taskid,
             disable : false
         }, 'nameshow name distribution parameters')
-        .populate('distribution', {
-            name : 'distribution.name'
-        })
+        .populate('distribution')
         .then(task => {
             if(task){
                 res.status(200).send(MessageHandle.ResponseText("Find One Task", task))
@@ -56,9 +50,7 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
         })
     } else {
         Tasks.findById(taskid, 'nameshow name distribution parameters disable')
-        .populate('distribution', {
-            name : 'distribution.name'
-        })
+        .populate('distribution')
         .then(task => {
             if(task){
                 res.status(200).send(MessageHandle.ResponseText("Find One Task", task))

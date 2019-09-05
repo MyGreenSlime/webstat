@@ -12,7 +12,15 @@ router.get("/", permission.isLogin, (req, res) => {
         Exercises.find({
             section : req.user.section.toLowerCase(),
             disable : false
-        }, 'nameshow name description tasks section')
+        }, 'title name description tasks section')
+        .populate({
+            path : 'tasks',
+            model : 'Tasks',
+            populate : {
+                path : 'distribution',
+                model : 'Distributions'
+            }
+        })
         .then(exercises => {
             res.status(200).send(MessageHandle.ResponseText("Find All Exercise", exercises))
         })
@@ -21,14 +29,22 @@ router.get("/", permission.isLogin, (req, res) => {
         })
     }
     else {
-        Exercises.find({}, 'nameshow name description section tasks disable')
-    .then(exercises => {
-        res.status(200).send(MessageHandle.ResponseText("Find All Exercise", exercises))
-    })
-    .catch(err => {
-        res.status(500).send(MessageHandle.ResponseText("error", err))
-    })
-    }
+        Exercises.find({},'title name description section tasks disable')
+        .populate({
+            path : 'tasks',
+            model : 'Tasks',
+            populate : {
+                path : 'distribution',
+                model : 'Distributions'
+            }
+        })
+        .then(exercises => {
+            res.status(200).send(MessageHandle.ResponseText("Find All Exercise", exercises))
+        })
+        .catch(err => {
+            res.status(500).send(MessageHandle.ResponseText("error", err))
+        })
+        }
 })
 
 
@@ -37,7 +53,15 @@ router.get('/:exerciseid', permission.isLogin, (req, res) => {
         Exercises.findOne({
             _id : req.params.exerciseid,
             disable : false
-        }, 'nameshow name description section tasks')
+        }, 'title name description section tasks')
+        .populate({
+            path : 'tasks',
+            model : 'Tasks',
+            populate : {
+                path : 'distribution',
+                model : 'Distributions'
+            }
+        })
         .then(exercise => {
             if(exercise){
                 res.status(200).send(MessageHandle.ResponseText('Find One Exercise', exercise))
@@ -51,7 +75,15 @@ router.get('/:exerciseid', permission.isLogin, (req, res) => {
     }else {
         Exercises.findOne({
             _id : req.params.exerciseid,
-        }, 'nameshow name description section tasks disable')
+        }, 'title name description section tasks disable')
+        .populate({
+            path : 'tasks',
+            model : 'Tasks',
+            populate : {
+                path : 'distribution',
+                model : 'Distributions'
+            }
+        })
         .then(exercise => {
             if(exercise){
                 res.status(200).send(MessageHandle.ResponseText('Find One Exercise', exercise))
@@ -118,7 +150,7 @@ router.put('/removetask/:exerciseid', permission.isAdmin, (req, res) => {
 router.post("/create", permission.isAdmin, (req,res) => {
     const data = req.body
     Exercises.create({
-        nameshow : data.nameshow,
+        title : data.title,
         name : data.name,
         description : data.description,
         section : data.section.toLowerCase(),
