@@ -2,15 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
 const ExerciseSchema = new Schema({
-    nameshow : String,
+    title : String,
     name : String,
+    description : String,
     section : {
         type : String,
         default : "cpe"
     },
-    tasks : [{
-        taskid : {type : ObjectId, ref : "Tasks"}
-    }],
+    tasks : [
+        {type : ObjectId, ref : "Tasks"}
+    ],
     disable : {
         type : Boolean,
         default : false

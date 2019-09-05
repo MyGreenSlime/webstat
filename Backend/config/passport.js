@@ -15,7 +15,8 @@ module.exports = passport => {
       const [username, password] = credentials.split(':');
       Users.findOne({
         username: username
-      }, 'username fullname section admin').then(user => {
+      }, 'username fullname section admin')
+      .then(user => {
         if (user === null) {
           return done(null, false, { issue: "Incorrect username." });
         } else {
@@ -31,7 +32,10 @@ module.exports = passport => {
               return done(err);
             });
         }
-      });
+      })
+      .catch(err => {
+        return done(err);
+      })
     })
   );
   passport.serializeUser(function(user, done) {
