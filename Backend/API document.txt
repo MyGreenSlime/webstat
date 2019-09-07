@@ -1,8 +1,9 @@
 Base Url : localhost:3001
-
-USER SECTION : /api/users
-
+------------------------------------------------------------------
+User Section : /api/users
+------------------------------------------------------------------
 Method : Register
+Permission : None
 Request Type : POST
 Path : /register
 
@@ -22,19 +23,14 @@ response : {
 
 ----------------------------------------------------------------------
 
-Base Url : localhost:3001
-
 USER SECTION : /api/users
 
 Method : Login
+Permission : None
 Request Type : POST
 Path : /login
 
-require : {
-   username : string 
-   password : string
-   (nontri account)
-}
+use basic auth
 
 response : {
     status code : 200 or 500
@@ -43,9 +39,9 @@ response : {
         userdata or cause of login Failed
     }
 }
-
 ------------------------------------------------------------------
 Method : Get Profile
+Permission : User or Admin
 Request Type : GET
 Path : /profile
 
@@ -57,8 +53,9 @@ response : {
     status code : 200 or 401
     userdata or "unauthorize"
 }
-
+------------------------------------------------------------------
 Method : Logout
+Permission : User or Admin
 Request Type : POST
 Path : /logout
 
@@ -70,3 +67,353 @@ response : {
     status code : 200 or 401
     "Logout succeed" or "unauthorize"
 }
+------------------------------------------------------------------
+Distribution Section : /api/distributions
+------------------------------------------------------------------
+Method : Get All Distribution 
+Permission : Admin
+Request Type : GET
+Path : /
+
+require : {
+   none
+}
+
+response : {
+    status code : 200 or 500
+    message : Find All Distributions
+    detail {[
+        name : String,
+        parameters : [{
+            name : String,
+            meaning : String
+        }]
+    ]}
+}
+------------------------------------------------------------------
+Method : Get Distribution By Name 
+Permission : Admin
+Request Type : GET
+Path : /:Name of Distribution
+
+require : {
+   none
+}
+
+response : {
+    status code : 200 or 500
+    message : Find One Distributions
+    detail {
+        name : String,
+        parameters : [{
+            name : String,
+            meaning : String
+        }]
+    }
+}
+------------------------------------------------------------------
+Method : Create New Distribution
+Permission : Admin
+Request Type : POST
+Path : /create
+
+require : {
+   name : String,
+   parameters : [{
+       name  : String,
+       meaning : String
+   }]
+}
+
+response : {
+    status code : 200 or 500
+    message : Created
+    detail {
+        name : String,
+        parameters : [{
+            name : String,
+            meaning : String
+        }]
+    }
+}
+------------------------------------------------------------------
+Exercise Section : /api/exercises
+------------------------------------------------------------------
+Method : Get All Exercise
+Permission : User or Admin 
+Request Type : GET
+Path : /
+
+require : {
+  None
+}
+
+response : {
+    status code : 200 or 500
+    message : Find All Exercise
+    detail {[{
+        title : String,
+        name : String,
+        description : String,
+        section : {
+            type : String,
+        },
+        tasks : [
+            task
+        ]
+        disable : Boolean (Show when you are admin)
+    }]}
+}
+------------------------------------------------------------------
+Method : Get Exercise By Id
+Permission : User or Admin 
+Request Type : GET
+Path : /: Id of Exercise
+
+require : {
+  None
+}
+
+response : {
+    status code : 200 or 500
+    message : Find All Exercise
+    detail {
+        title : String,
+        name : String,
+        description : String,
+        section : {
+            type : String,
+        },
+        tasks : [
+            task
+        ]
+        disable : Boolean (Show when you are admin)
+    }
+}
+------------------------------------------------------------------
+Method : Create New Exercise
+Permission : Admin 
+Request Type : POST
+Path : /create
+
+require : {
+    title : String
+    name : String
+    description : String
+    section : String
+    disable : Boolean if it is null or undifined , It set by default
+    tasks : [taskid]  not required but you can set it
+}
+
+response : {
+    status code : 200 or 500
+    message : created
+    detail {
+        title : String,
+        name : String,
+        description : String,
+        section : {
+            type : String,
+        },
+        tasks : [
+            taskid
+        ]
+        disable : Boolean
+    }
+}
+------------------------------------------------------------------
+Method : Edit Exercise
+Permission : Admin 
+Request Type : PUT
+Path : /edit/: Id of Exercise
+
+require : {
+   Fields which you wanna edit .
+   This Method is overwrite .
+   If you wanna add new task or remove task .
+   please use other Path.
+   I will provide that paths in next Medthod.
+}
+
+response : {
+    status code : 200 or 500
+    message : edited
+    detail {
+        status edit
+    }
+}
+------------------------------------------------------------------
+Method : Add Task To Exercise
+Permission : Admin 
+Request Type : PUT
+Path : /addtask/: Id of Exercise
+
+require : {
+  tasks : [
+      taskid
+  ]
+}
+
+response : {
+    status code : 200 or 500
+    message : created
+    detail {
+        status edit
+    }
+}
+------------------------------------------------------------------
+Method : Remove Task in Exercise
+Permission : Admin 
+Request Type : PUT
+Path : /removetask/: Id of Exercise
+
+require : {
+  tasks : [
+      taskid
+  ]
+}
+
+response : {
+    status code : 200 or 500
+    message : edited
+    detail {
+        status edit
+    }
+}
+------------------------------------------------------------------
+Task Section : /api/tasks
+------------------------------------------------------------------
+Method : Get All Tasks
+Permission : User or Admin 
+Request Type : GET
+Path : /
+
+require : {
+  None
+}
+
+response : {
+    status code : 200 or 500
+    message : Get All Tasks
+    detail {[
+        {
+            title : String,
+            name : String,
+            distribution : Object
+            parameters : [{
+                name : String,
+                value : Number
+            }],
+            disable : Boolean (Show when you are admin)
+        }
+    ]}
+}
+------------------------------------------------------------------
+Method : Get Task By Id
+Permission : User or Admin 
+Request Type : GET
+Path : /:id of task
+
+require : {
+  None
+}
+
+response : {
+    status code : 200 or 500
+    message : Get One Task
+    detail {
+            title : String,
+            name : String,
+            distribution : Object
+            parameters : [{
+                name : String,
+                value : Number
+            }],
+            disable : Boolean (Show when you are admin)
+    }
+}
+------------------------------------------------------------------
+Method : Create New Task
+Permission : Admin 
+Request Type : POST
+Path : /create
+
+require : {
+    title : String,
+    name : String,
+    distribution : distribution id
+    parameters : [{
+        name : String,
+        value : Number
+    }],
+    disable : Boolean if it is null or undifined , It set by default
+}
+
+response : {
+    status code : 200 or 500
+    message : create
+    detail {
+            title : String,
+            name : String,
+            distribution : Object
+            parameters : [{
+                name : String,
+                value : Number
+            }],
+            disable : Boolean 
+    }
+}
+------------------------------------------------------------------
+Method : Edit Task
+Permission : Admin 
+Request Type : PUT
+Path : /edit/:task id
+
+require : {
+    Fields which you wanna edit .
+    This Method is overwrite .
+}
+
+response : {
+    status code : 200 or 500
+    message : edited
+    detail {
+           edit status
+    }
+}
+------------------------------------------------------------------
+Method : Edit Task
+Permission : Admin 
+Request Type : PUT
+Path : /edit/:task id
+
+require : {
+    Fields which you wanna edit .
+    This Method is overwrite .
+}
+
+response : {
+    status code : 200 or 500
+    message : create
+    detail {
+           edit status
+    }
+}
+------------------------------------------------------------------
+Method : Delete Task
+Permission : Admin 
+Request Type : Delete
+Path : /edit/:task id
+
+require : {
+    None
+}
+
+response : {
+    status code : 200 or 500
+    message : clear task in all Exercises
+    detail {
+           delete status
+    }
+}
+------------------------------------------------------------------
