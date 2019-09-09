@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+
+<section class="generate-page-wrapper">
+  <h1>Exercise Name</h1>
+  <h2>Task Name</h2>
+  <div class="data-area">
+    <span *ngFor="let rand of test;">
+      {{rand}}
+    </span>
+  </div>
+  <div class="button-group">
+    <button class="btn btn-info" (click)="generateClick()">Generate</button>
+    <button class="btn btn-success" (click)="submitClick()">Submit</button>
+    <button class="btn btn-danger" (click)="resetClick()">Reset</button>
+  </div>
+</section>

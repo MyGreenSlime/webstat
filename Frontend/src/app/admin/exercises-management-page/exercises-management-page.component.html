@@ -1,0 +1,14 @@
+<section class="exercises-management-wrapper">
+  <app-navbar></app-navbar>
+  <div class="btn-group-toggle option" data-toggle="buttons">
+    <button class="btn btn-info active" [routerLink]="['/admin/ex/list']" [queryParams]="{type: 'exercise'}" >
+      <input type="radio" name="options" id="option1" autocomplete="off" > Exercises
+    </button>
+    <button class="btn btn-info" [routerLink]="['/admin/ex/list']" [queryParams]="{type: 'task'}" >
+      <input type="radio" name="options" id="option2" autocomplete="off"> Tasks
+    </button>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</section>

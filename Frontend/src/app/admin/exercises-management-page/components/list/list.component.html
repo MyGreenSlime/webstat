@@ -1,0 +1,61 @@
+<section class="list-wrapper">
+  <div *ngIf="type === 'exercise' || !type">
+    <h2>Exercises List!</h2>
+    <button class="btn btn-secondary btn-create" [routerLink]="['/admin/ex/exercise']"> Create Exercise </button>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Title</th>
+          <th scope="col">Section</th>
+          <th scope="col">Show</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ex of excercise;" (click)="exerciseClick(ex)">
+          <th scope="row"> {{ ex.name }} </th>
+          <td>{{ ex.title }}</td>
+          <td>{{ ex.sextion }}</td>
+          <td>
+            <div class="form-group">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="showExercise" checked="!ex.disable">
+              </div>
+            </div>
+          </td>
+          <td><button class="btn btn-secondary">Edit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="type === 'task'">
+      <h2>Tasks List!</h2>
+      <button class="btn btn-secondary btn-create" [routerLink]="['/admin/ex/task']"> Create Task </button>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Distribution</th>
+            <th scope="col">Section</th>
+            <th scope="col">Show</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks;" (click)="exerciseClick(task)">
+            <th scope="row"> {{ task.name }} </th>
+            <td>{{ task.title }}</td>
+            <td>{{ task.sextion }}</td>
+            <td>
+              <div class="form-group">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="showExercise" checked="!task.disable">
+                </div>
+              </div>
+            </td>
+            <td><button class="btn btn-secondary">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</section>

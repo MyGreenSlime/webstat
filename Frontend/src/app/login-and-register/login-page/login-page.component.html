@@ -1,0 +1,32 @@
+<div class="login-page-wrapper">
+  <div *ngIf="showInvalidAlert" class="invalid-alert alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Warning!</h4>
+    <p class="mb-0">Please Complete All Infomation.</p>
+  </div>
+  <div *ngIf="showInvalidUser" class="invalid-alert alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4 class="alert-heading">Error!</h4>
+    <p class="mb-0">Invalid Username Or Password.</p>
+  </div>
+  <div class="login-form">
+    <div class="title-login">MEMBER LOGIN</div>
+    <form [formGroup]="loginForm">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" formControlName="password" placeholder="Password">
+      </div>
+      <div class="button-block">
+        <button class="btn btn-primary btn-block" (click)="loginClick()">
+          Login
+        </button>
+        <span>or</span>
+        <button class="btn btn-info btn-block">
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

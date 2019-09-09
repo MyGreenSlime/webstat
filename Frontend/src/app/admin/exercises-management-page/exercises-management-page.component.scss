@@ -1,0 +1,24 @@
+.exercises-management-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .option {
+    width: 80%;
+    margin: 3% auto;
+    max-width: 880px;
+    display: flex;
+
+    button {
+      padding: 0.5em;
+      font-size: 1.5em;
+      width: calc(100% / 2);
+      margin: 0 2%;
+    }
+  }
+
+  .content {
+    width: 80%;
+    margin: 3% auto;
+    min-width: 300px;
+  }
+}
