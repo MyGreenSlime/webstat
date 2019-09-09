@@ -12,15 +12,51 @@ export class ApiService {
     return this.http.get("/api/users/user");
   }
 
-  addExercise(params): Observable<any> {
-    return this.http.post("/api/exercises/admin/create", params);
+  createExercise(params): Observable<any> {
+    return this.http.post("/api/exercises/create", params);
   }
 
-  getExercises(): Observable<any> {
+  editExercise(id, params): Observable<any> {
+    return this.http.put("/api/exercises/edit/" + id, params);
+  }
+
+  createTask(params): Observable<any> {
+    return this.http.post("/api/tasks/create", params);
+  }
+
+  addTaskToExercis(id, params): Observable<any> {
+    return this.http.put("/api/exercises/addtask/" + id, params);
+  }
+
+  removeTaskFromExercise(id, params): Observable<any> {
+    return this.http.put("/api/exercises/removetask/" + id, params);
+  }
+
+  removeTask(id): Observable<any> {
+    return this.http.delete("/api/tasks/delete/" + id);
+  }
+
+  getExercisesAll(): Observable<any> {
     return this.http.get("/api/exercises");
   }
 
-  getTasks(): Observable<any> {
+  getExercisesById(id): Observable<any> {
+    return this.http.get("/api/exercises/" + id);
+  }
+
+  getTasksAll(): Observable<any> {
     return this.http.get("/api/tasks");
+  }
+
+  getTasks(id): Observable<any> {
+    return this.http.get("/api/tasks/" + id);
+  }
+
+  getDistributionAll(): Observable<any> {
+    return this.http.get("/api/distributions");
+  }
+
+  getDistribution(name): Observable<any> {
+    return this.http.get("/api/distributions/" + name);
   }
 }

@@ -30,8 +30,7 @@ const routes: Routes = [
   },
   {
     path: "register",
-    component: RegisterPageComponent,
-    canActivate: [!AuthGuard]
+    component: RegisterPageComponent
   },
   {
     path: "admin",

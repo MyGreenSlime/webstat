@@ -17,7 +17,7 @@ export class RoleGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // const currentUser = this.currentUserValue;
-    if (this.cookieService.get("connect-isa") === btoa("admin")) {
+    if (atob(this.cookieService.get("cookie-isa")) === "admin") {
       return true;
     }
 

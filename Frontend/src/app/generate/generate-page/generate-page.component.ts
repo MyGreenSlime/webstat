@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import * as random from "random";
 
 @Component({
   selector: "app-generate-page",
@@ -8,9 +9,17 @@ import { Component, OnInit } from "@angular/core";
 export class GeneratePageComponent implements OnInit {
   constructor() {}
 
+  test: any = [];
   ngOnInit() {}
 
-  generateClick() {}
+  generateClick() {
+    // const random = require('random')
+    // for (let i = 0; i<10; i++) {
+      const generate = random.bernoulli()
+      console.log(generate() )
+    // }
+
+  }
 
   submitClick() {
 

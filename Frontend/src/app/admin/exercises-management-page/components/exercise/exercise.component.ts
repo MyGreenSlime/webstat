@@ -21,8 +21,9 @@ export class ExerciseComponent implements OnInit {
     private apiService: ApiService
   ) {
     this.exerciseForm = this.formBuilder.group({
-      nameshow: ["", Validators.required],
+      title: ["", Validators.required],
       name: ["", Validators.required],
+      description: ["", Validators.required],
       section: ["CPE", Validators.required],
       disable: [false, Validators.required]
     });
@@ -35,7 +36,7 @@ export class ExerciseComponent implements OnInit {
       alert("กรอกให้ครบสิ");
       return;
     }
-    this.apiService.addExercise(this.exerciseForm.value).subscribe(
+    this.apiService.createExercise(this.exerciseForm.value).subscribe(
       res => {
         console.log(res);
       },
