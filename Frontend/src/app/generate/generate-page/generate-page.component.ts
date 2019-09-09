@@ -10,22 +10,23 @@ export class GeneratePageComponent implements OnInit {
   constructor() {}
 
   test: any = [];
-  ngOnInit() {}
+  ngOnInit() {
+    // get task type by task id
+  }
 
   generateClick() {
+    //define function by task type
+
+    // how many data per time
+
     // const random = require('random')
     // for (let i = 0; i<10; i++) {
-      const generate = random.bernoulli()
-      console.log(generate() )
+    const generate = random.bernoulli();
+    console.log(generate());
     // }
-
   }
 
-  submitClick() {
+  submitClick() {}
 
-  }
-
-  resetClick() {
-    
-  }
+  resetClick() {}
 }
