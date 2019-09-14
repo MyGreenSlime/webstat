@@ -1,45 +1,53 @@
 <section class="task-wrapper">
-    <h2 class="title">Task</h2>
-    <form [formGroup]="taskForm">
-      <div class="form-group row">
-        <label for="name" class="col-md-3 col-form-label">Task Name: </label>
-        <div class="col-md-9">
-          <input type="text" class="form-control" formControlName="name" placeholder="task name">
-        </div>
+  <h2 class="title">Task</h2>
+  <form [formGroup]="taskForm">
+    <div class="form-group row">
+      <label for="name" class="col-md-3 col-form-label">Task Name: </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="name" placeholder="task name">
       </div>
-      <div class="form-group row">
-        <label for="title" class="col-md-3 col-form-label">Task Title: </label>
-        <div class="col-md-9">
-          <input type="text" class="form-control" formControlName="title" placeholder="task title">
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="title" class="col-md-3 col-form-label">Task Title: </label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" formControlName="title" placeholder="task title">
       </div>
-      <div class="form-group row">
-        <label for="distribution" class="col-md-3 col-form-label">Distribution</label>
-        <div class="col-md-9">
-          <select class="form-control" id="distribution" (change)="changeDist($event)">
-            <option *ngFor="let dist of distributions" [value]="dist.name"> {{dist.name}} </option>
-          </select>
-        </div>
+    </div>
+    <div class="form-group row">
+      <label for="distribution" class="col-md-3 col-form-label">Distribution</label>
+      <div class="col-md-9">
+        <select class="form-control" id="distribution" (change)="changeDist($event)">
+          <option *ngFor="let dist of distributions" [value]="dist.name"> {{dist.name}} </option>
+        </select>
       </div>
-      <h5>Parameter(s)</h5>
-      
-      <div formArrayName="parameters" *ngFor="let param of parameters; let i = index;">
-        <div [formGroupName]="i">
-            <div class="form-group row">
-              <label for="paramName" class="col-md-3 col-form-label">{{param.name}}</label>
-              <div class="col-md-9">
-                <input type="number" value="param.name" class="form-control" formControlName="value" placeholder="parameter value">
-              </div>
-            </div>
+    </div>
+    <div class="form-group row">
+      <label for="genamount" class="col-md-3 col-form-label">Gen Amount: </label>
+      <div class="col-md-9">
+        <input type="number" class="form-control" formControlName="genamount" placeholder="number of data per one click">
+      </div>
+    </div>
+
+    <h5>Parameter(s)</h5>
+
+    <div formArrayName="parameters" *ngFor="let param of parameters; let i = index;">
+      <div [formGroupName]="i">
+        <div class="form-group row">
+          <label for="paramName" class="col-md-3 col-form-label">{{param.name}}</label>
+          <div class="col-md-9">
+            <input type="number" value="param.name" class="form-control" formControlName="value"
+              placeholder="parameter value">
           </div>
+        </div>
       </div>
-      <div class="button-block">
-        <button class="btn btn-primary" (click)="saveClick()">
-          Save
-        </button>
-        <button class="btn btn-danger" (click)="deleteClick()">
-          Delete
-        </button>
-      </div>
-    </form>
-  </section>
+    </div>
+    <div class="button-block">
+      <button class="btn btn-primary" (click)="saveClick()">
+        Save
+      </button>
+      <button class="btn btn-danger" (click)="deleteClick()">
+        Delete
+      </button>
+    </div>
+  </form>
+</section>

@@ -26,6 +26,7 @@ export class TaskComponent implements OnInit {
       title: ["", Validators.required],
       name: ["", Validators.required],
       distribution: ["Bernoulli", Validators.required],
+      genamount: [Number, Validators.required],
       parameters: this.formBuilder.array([]),
       disable: [false, Validators.required]
     });
