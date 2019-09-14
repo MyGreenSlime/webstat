@@ -1,17 +1,16 @@
-let dataset = [1,47, 31, 1 ,1,1,2,2,2,2]
 function Sorted(dataset){
     return dataset.sort((a,b) => {
         return a-b
     })
 }
-function Mean(dataset){
+function FindMean(dataset){
     let sum = dataset.reduce((sum, curr) => {
         return sum+curr
     }) 
     let mean = sum/(dataset.length)
     return mean
 }
-function Median(dataset){
+function FindMedian(dataset){
     let sortedData = Sorted(dataset)
     let medPosition = (dataset.length+1)/2
     if(Number.isInteger(medPosition)){
@@ -21,7 +20,7 @@ function Median(dataset){
         return (sortedData[newPosition-1]+sortedData[newPosition])/2
     }
 }
-function Mode(dataset){
+function FindMode(dataset){
     let count = {}
     dataset.map(num => {
         count[num] = (count[num] || 0) + 1 
@@ -46,7 +45,7 @@ function FindMaxMin(dataset){
     return {max, min}
 }
 
-function Cumulative(dataset){
+function FindCumulative(dataset){
     let cumulative  = []
     dataset.map((value, index) =>{
         let temp =value + (cumulative[cumulative.length-1]? cumulative[cumulative.length-1] : 0) 
@@ -67,10 +66,7 @@ function FindVariance(dataset){
 function FindSD(dataset){
     return Math.sqrt(FindVariance(dataset))
 }
-let dataset2 = [0.1,0.2,0.3,0.4]
-console.log(Mean(dataset))
-console.log(Median(dataset))
-console.log(Mode(dataset))
-console.log(Cumulative(dataset2))
-console.log(FindVariance(dataset))
-console.log(FindSD(dataset))
+
+module.exports = {
+    Sorted, FindCumulative, FindMean,FindMaxMin, FindMedian, FindMode, FindSD, FindVariance
+}

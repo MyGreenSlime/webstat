@@ -8,7 +8,12 @@ const ResultSchema = new Schema({
     user :  {type : ObjectId, ref : "Users"},
     data : [Number],
     summary : [{
-
+        mean : Number, 
+        median : Number,
+        mode :  [Number],
+        sd : Number,
+        variance : Number,
+        cumulative : [Number]
     }]
     
 })
