@@ -13,26 +13,33 @@
           <input type="text" class="form-control" formControlName="title" placeholder="task title">
         </div>
       </div>
-      <div class="form-group">
-        <label for="distribution">Distribution</label>
-        <select class="form-control" id="distribution" formControlName="distribution">
-          <option [(ngModel)]="distribution" *ngFor="let dist of distributions" [value]="dist"> {{dist}} </option>
-        </select>
+      <div class="form-group row">
+        <label for="distribution" class="col-md-3 col-form-label">Distribution</label>
+        <div class="col-md-9">
+          <select class="form-control" id="distribution" (change)="changeDist($event)">
+            <option *ngFor="let dist of distributions" [value]="dist.name"> {{dist.name}} </option>
+          </select>
+        </div>
       </div>
+      <h5>Parameter(s)</h5>
       
-  
-      <div>
-        
+      <div formArrayName="parameters" *ngFor="let param of parameters; let i = index;">
+        <div [formGroupName]="i">
+            <div class="form-group row">
+              <label for="paramName" class="col-md-3 col-form-label">{{param.name}}</label>
+              <div class="col-md-9">
+                <input type="number" value="param.name" class="form-control" formControlName="value" placeholder="parameter value">
+              </div>
+            </div>
+          </div>
       </div>
-  
       <div class="button-block">
         <button class="btn btn-primary" (click)="saveClick()">
           Save
         </button>
-        <button class="btn btn-danger">
+        <button class="btn btn-danger" (click)="deleteClick()">
           Delete
         </button>
       </div>
     </form>
   </section>
-  
