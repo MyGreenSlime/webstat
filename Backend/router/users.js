@@ -49,7 +49,7 @@ router.post("/register", (req,res) => {
         if(err) {
           return res.status(500).send(MessageHandle.ResponseText("Login Failed", err))
         }
-        return res.status(200).send(MessageHandle.ResponseText("Login Succeed", {data : user}))
+        return res.status(200).send(MessageHandle.ResponseText("Login Succeed", {user : user, sessionexpire : req.session['cookie']['expires']}))
       })
     })(req, res, next);
   })

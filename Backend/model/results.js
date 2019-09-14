@@ -6,6 +6,15 @@ const ResultSchema = new Schema({
     exercise :  {type : ObjectId, ref : "Exercises"},
     task : {type : ObjectId, ref : "Tasks"},
     user :  {type : ObjectId, ref : "Users"},
+    data : [Number],
+    summary : [{
+        mean : Number, 
+        median : Number,
+        mode :  [Number],
+        sd : Number,
+        variance : Number,
+        cumulative : [Number]
+    }]
     
 })
 
