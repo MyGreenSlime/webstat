@@ -1,0 +1,56 @@
+@import "../../../styles/styles.scss";
+
+.register-page-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../../../assets/background-gradient.webp");
+
+  .invalid-alert {
+    position: absolute;
+    top: 20px;
+  }
+
+  .title {
+    font-size: 1.7em;
+    margin-bottom: 30px;
+    text-align: center;
+    color: $white;
+  }
+
+  .register-form {
+    width: 450px;
+    max-width: 90%;
+    padding: 3% 5%;
+    font-size: 1.25em;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px 0 $gray-600;
+    background-color: $white;
+
+    .title-register {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: $gray-700;
+    }
+
+    .radio-block {
+      display: flex;
+
+      div {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+    }
+
+    .button-block {
+      text-align: center;
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+}
