@@ -5,6 +5,7 @@ const TaskSchema = new Schema({
     title : String,
     name : String,
     distribution : {type : ObjectId, ref : "Distributions"},
+    genamount : Number,
     parameters : [{
         name : String,
         value : Number

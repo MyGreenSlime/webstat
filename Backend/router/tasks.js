@@ -10,7 +10,7 @@ router.get('/', permission.isLogin , (req, res)=> {
     if(!req.user.admin){
         Tasks.find({
             disable : false
-        }, 'title name distribution parameters')
+        }, 'title name distribution genamount parameters')
         .populate('distribution')
         .then(tasks => {
             res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
@@ -19,7 +19,7 @@ router.get('/', permission.isLogin , (req, res)=> {
             res.status(500).send(MessageHandle.ResponseText("error", err))
         })
     } else {
-        Tasks.find({}, 'title name distribution parameters disable')
+        Tasks.find({}, 'title name distribution genamount parameters disable')
         .populate('distribution')
         .then(tasks => {
             res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks))
@@ -36,7 +36,7 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
         Tasks.findOne({
             _id : taskid,
             disable : false
-        }, 'title name distribution parameters')
+        }, 'title name distribution genamount parameters')
         .populate('distribution')
         .then(task => {
             if(task){
@@ -49,7 +49,7 @@ router.get('/:taskid', permission.isLogin, (req, res) => {
             res.status(200).send(MessageHandle.ResponseText("error", err))
         })
     } else {
-        Tasks.findById(taskid, 'title name distribution parameters disable')
+        Tasks.findById(taskid, 'title name distribution genamount parameters disable')
         .populate('distribution')
         .then(task => {
             if(task){

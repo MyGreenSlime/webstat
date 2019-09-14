@@ -299,7 +299,8 @@ response : {
         {
             title : String,
             name : String,
-            distribution : Object
+            distribution : Object,
+            genamount : Number,
             parameters : [{
                 name : String,
                 value : Number
@@ -324,7 +325,8 @@ response : {
     detail {
             title : String,
             name : String,
-            distribution : Object
+            distribution : Object,
+            genamount : Number,
             parameters : [{
                 name : String,
                 value : Number
@@ -342,6 +344,7 @@ require : {
     title : String,
     name : String,
     distribution : distribution id
+    genamount : Number,
     parameters : [{
         name : String,
         value : Number
@@ -355,7 +358,8 @@ response : {
     detail {
             title : String,
             name : String,
-            distribution : Object
+            distribution : 
+            genamount : Number,
             parameters : [{
                 name : String,
                 value : Number
