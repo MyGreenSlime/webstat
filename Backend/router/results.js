@@ -72,8 +72,9 @@ router.get("/search", permission.isAdmin, async(req, res) => {
     res.status(500).send(MessageHandle.ResponseText("error", err));
   }
 });
-router.get("/:taskid", permission.isAdmin, (req, res) => {
-  Results.find()
+router.get("/:taskid", permission.isAdmin, async (req, res) => {
+  try {
+    let results = await Results.find()
     .populate({ path: "exercisedetail", select: "title name section disable" })
     .populate({
       path: "taskdetail",
@@ -81,47 +82,36 @@ router.get("/:taskid", permission.isAdmin, (req, res) => {
       match: { _id: req.params.taskid }
     })
     .populate({ path: "userdetail", select: "username fullname section admin" })
-    .then(results => {
-      results = results.filter(value => {
-        return value.taskdetail != null;
-      });
-      res
-        .status(200)
-        .send(MessageHandle.ResponseText("Find Result By TaskID", results));
-    })
-    .catch(err => {
-      res.status(500).send(MessageHandle.ResponseText("error", err));
+    results = await results.filter(value => {
+      return value.taskdetail != null;
     });
+    res.status(200).send(MessageHandle.ResponseText("Find Result By TaskID", results));
+    
+  } catch(err) {
+    res.status(500).send(MessageHandle.ResponseText("error", err));
+  }
 });
-router.get("/findone/:resultid", permission.isAdmin, (req, res) => {
-  Results.findById(req.params.resultid)
+router.get("/findone/:resultid", permission.isAdmin, async (req, res) => {
+  try {
+    let result = await Results.findById(req.params.resultid)
     .populate({ path: "exercisedetail", select: "title name section disable" })
     .populate({ path: "taskdetail", select: "title name parameters" })
     .populate({ path: "userdetail", select: "username fullname section admin" })
-    .then(results => {
-      res
-        .status(200)
-        .send(MessageHandle.ResponseText("Find Result By ResultID", results));
-    })
-    .catch(err => {
-      res.status(500).send(MessageHandle.ResponseText("error", err));
-    });
+    res.status(200).send(MessageHandle.ResponseText("Find Result By ResultID", result));
+  } catch(err) {
+    res.status(500).send(MessageHandle.ResponseText("error", err));
+  }
 });
 
-router.delete("/:resultid", permission.isAdmin, (req, res) => {
-  Results.deleteOne({
-    _id: req.params.resultid
-  })
-    .then(delResult => {
-      res
-        .status(200)
-        .send(
-          MessageHandle.ResponseText("Delete Result By ResultID", delResult)
-        );
+router.delete("/:resultid", permission.isAdmin, async (req, res) => {
+  try {
+    let delResult = await Results.deleteOne({
+      _id: req.params.resultid
     })
-    .catch(err => {
-      res.status(500).send(MessageHandle.ResponseText("error", err));
-    });
+    res.status(200).send(MessageHandle.ResponseText("Delete Result By ResultID", delResult));
+  } catch(err) {
+    res.status(500).send(MessageHandle.ResponseText("error", err));
+  }
 });
 
 module.exports = router;
