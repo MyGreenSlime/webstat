@@ -60,20 +60,17 @@ router.post("/create", permission.isLogin, async (req, res) => {
   }
 });
 
-router.get("/search", permission.isAdmin, (req, res) => {
-  let query = req.query;
-  Results.find(query)
+router.get("/search", permission.isAdmin, async(req, res) => {
+  try {
+    let query = req.query;
+    let results = await Results.find(query)
     .populate({ path: "exercisedetail", select: "title name section disable" })
     .populate({ path: "taskdetail", select: "title name parameters" })
     .populate({ path: "userdetail", select: "username fullname section admin" })
-    .then(results => {
-      res
-        .status(200)
-        .send(MessageHandle.ResponseText("Find Result By Query", results));
-    })
-    .catch(err => {
-      res.status(500).send(MessageHandle.ResponseText("error", err));
-    });
+    res.status(200).send(MessageHandle.ResponseText("Find Result By Query", results));
+  } catch(err) {
+    res.status(500).send(MessageHandle.ResponseText("error", err));
+  }
 });
 router.get("/:taskid", permission.isAdmin, (req, res) => {
   Results.find()

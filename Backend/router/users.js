@@ -54,7 +54,7 @@ router.post("/login", async (req, res, next) => {
         .send(
           MessageHandle.ResponseText("Login Succeed", {
             user: user,
-            sessionexpire: req.session["cookie"]["expires"]
+            sessionExpire: req.session["cookie"]["expires"]
           })
         );
     });
