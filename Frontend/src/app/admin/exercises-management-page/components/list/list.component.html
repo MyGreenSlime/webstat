@@ -8,22 +8,23 @@
           <th scope="col">Name</th>
           <th scope="col">Title</th>
           <th scope="col">Section</th>
-          <th scope="col">Show</th>
+          <th scope="col">Hide</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ex of excercise;" (click)="exerciseClick(ex)">
+        <tr *ngFor="let ex of exercises;">
           <th scope="row"> {{ ex.name }} </th>
           <td>{{ ex.title }}</td>
-          <td>{{ ex.sextion }}</td>
+          <td>{{ ex.section }}</td>
           <td>
             <div class="form-group">
               <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="showExercise" checked="!ex.disable">
+                <input type="checkbox" name="{{ex.name}}" class="custom-control-input" id="{{ex.name}}" (change)="changeDisable($event, ex, 'ex')" [checked]="ex.disable">
+                <label class="custom-control-label" for="{{ex.name}}"></label>
               </div>
             </div>
           </td>
-          <td><button class="btn btn-secondary">Edit</button></td>
+          <td><button class="btn btn-secondary" [routerLink]="['/admin/ex/exercise']" [queryParams]="{id: ex._id}">Edit</button></td>
         </tr>
       </tbody>
     </table>
@@ -36,24 +37,25 @@
         <thead>
           <tr>
             <th scope="col">Name</th>
+            <th scope="col">Title</th>
             <th scope="col">Distribution</th>
-            <th scope="col">Section</th>
-            <th scope="col">Show</th>
+            <th scope="col">Hide</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let task of tasks;" (click)="exerciseClick(task)">
             <th scope="row"> {{ task.name }} </th>
-            <td>{{ task.title }}</td>
-            <td>{{ task.sextion }}</td>
+            <th scope="row"> {{ task.title }} </th>
+            <td>{{ task.distribution.name }}</td>
             <td>
               <div class="form-group">
                 <div class="custom-control custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="showExercise" checked="!task.disable">
+                  <input type="checkbox" name="{{task.name}}" class="custom-control-input" id="{{task.name}}" (change)="changeDisable($event, task, 'task')" [checked]="task.disable">
+                  <label class="custom-control-label" for="{{task.name}}"></label>
                 </div>
               </div>
             </td>
-            <td><button class="btn btn-secondary">Edit</button></td>
+            <td><button class="btn btn-secondary" [routerLink]="['/admin/ex/task']" [queryParams]="{id: task._id}">Edit</button></td>
           </tr>
         </tbody>
       </table>

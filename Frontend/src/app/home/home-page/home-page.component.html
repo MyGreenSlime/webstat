@@ -1,3 +1,15 @@
 <section class="home-page-wrapper">
-    <app-navbar></app-navbar>
+  <app-navbar></app-navbar>
+  <div class="content">
+    <div class="exercise-card " *ngFor="let ex of exercises; let i = index;">
+      <h4 > {{ ex.title }} </h4>
+      <hr>
+      <div class=" task-wrapper">
+        <div class="task-item" *ngFor="let task of ex.tasks">
+          <span class="dot"></span> <span class="task-title" [routerLink]="['/exercise']" [queryParams]="{id: task._id}"> {{ task.title }} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>

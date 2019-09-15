@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as random from "random";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ApiService } from "src/app/shared/services/api.service";
 
 @Component({
   selector: "app-generate-page",
@@ -7,11 +9,22 @@ import * as random from "random";
   styleUrls: ["./generate-page.component.scss"]
 })
 export class GeneratePageComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) {}
 
-  test: any = [];
+  task: any;
   ngOnInit() {
-    // get task type by task id
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.apiService.getTaskById(params.id).subscribe(res => {
+          console.log(res.detail);
+          this.task = res.detail;
+        });
+      }
+    });
   }
 
   generateClick() {
