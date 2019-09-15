@@ -1,6 +1,42 @@
+@import "../../../styles/styles.scss";
+
 .home-page-wrapper {
+  // background-color: rgba($color: #78C2AD, $alpha: 0.2);
   .content {
     width: 80%;
-    
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+
+    .exercise-card {
+      margin: 20px;
+      // color: white;
+      width: calc( 50% - 40px);
+
+      hr {
+        background-color: black !important;
+      }
+
+      .task-wrapper {
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 100%;
+          background-color: $primary;
+          display: inline-block;
+          margin-right: 5px;
+        }
+
+        .task-title {
+          font-size: 1.2em;
+          cursor: pointer;
+
+          &:hover {
+            color: $primary;
+          }
+        }
+        
+      }
+    }
   }
 }
