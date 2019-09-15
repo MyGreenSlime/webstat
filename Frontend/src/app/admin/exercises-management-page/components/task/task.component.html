@@ -16,8 +16,8 @@
     <div class="form-group row">
       <label for="distribution" class="col-md-3 col-form-label">Distribution</label>
       <div class="col-md-9">
-        <select class="form-control" id="distribution" (change)="changeDist($event)">
-          <option *ngFor="let dist of distributions" [value]="dist.name"> {{dist.name}} </option>
+        <select class="form-control" id="distribution"  (change)="changeDist($event)">
+          <option *ngFor="let dist of distributions" [selected]="distribution === dist.name" [value]="dist.name"> {{dist.name}} </option>
         </select>
       </div>
     </div>

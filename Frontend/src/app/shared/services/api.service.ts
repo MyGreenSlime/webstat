@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.put("/api/exercises/edit/" + id, params);
   }
 
+  editTask(id, params): Observable<any> {
+    return this.http.put("/api/tasks/edit/" + id, params);
+  }
+
   createTask(params): Observable<any> {
     return this.http.post("/api/tasks/create", params);
   }
@@ -48,7 +52,7 @@ export class ApiService {
     return this.http.get("/api/tasks");
   }
 
-  getTasks(id): Observable<any> {
+  getTaskById(id): Observable<any> {
     return this.http.get("/api/tasks/" + id);
   }
 

@@ -37,7 +37,14 @@ export class LoginPageComponent implements OnInit {
     } else {
       this.authService.login(this.loginForm.value).subscribe(
         res => {
-          if (res.detail.data.admin) {
+          let user = {
+            username: res.detail.user.username,
+            fullname: res.detail.user.fullname,
+            section: res.detail.user.section
+          }
+          localStorage.setItem('user', JSON.stringify(user));
+          this.cookieService.set('exp', res.detail.sessionExpire);
+          if (res.detail.user.admin) {
             this.cookieService.set('cookie-isa', btoa("admin"));
           } else {
             this.cookieService.set('cookie-isa', btoa("user"));
