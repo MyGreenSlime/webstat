@@ -281,6 +281,19 @@ response : {
     }
 }
 ------------------------------------------------------------------
+Method : DELETE Exercise
+Permission : Admin 
+Request Type : DELETE
+Path : /:Id of Exercise
+
+response : {
+    status code : 200 or 500
+    message : delete exercise
+    detail {
+        delete status
+    }
+}
+------------------------------------------------------------------
 Task Section : /api/tasks
 ------------------------------------------------------------------
 Method : Get All Tasks
@@ -421,3 +434,120 @@ response : {
     }
 }
 ------------------------------------------------------------------
+Result Section : /api/result
+------------------------------------------------------------------
+Method : Create or Update Result
+Permission : User 
+Request Type : POST
+Path : /create 
+
+require {
+    exercisename : String 
+    taskname : String,
+    username : String,
+    distribution : String (name)
+    data : [Number]
+}
+
+response {
+    status code 200 or 500
+    message : created or update result
+    detail {
+        _id : String,
+        exercisename : String,
+        taskname : String,
+        username : String,
+        data : [Number]
+        summary : {
+            mode,cumulative, mean, median, variance, sd
+        }
+
+    }
+}
+------------------------------------------------------------------
+Method : Search by query
+Permission : Admin 
+Request Type : GET
+Path : /search
+
+require params {
+    exercisename/ taskname/ username
+}
+response {
+    status code 200 or 500
+    message : Find Task By Query
+    detail {
+        _id : String,
+        exercisename : String,
+        taskname : String,
+        username : String,
+        data : [Number]
+        summary : {
+            mode,cumulative, mean, median, variance, sd
+        },
+        exercisedetail : {Object Task}
+        taskdetail : {Object Task}
+        userdetail : {Object Task}
+        
+        
+    }
+}
+------------------------------------------------------------------
+Method : Find By taskid
+Permission : Admin 
+Request Type : GET
+Path : /:taskid
+
+response {
+    status code 200 or 500
+    message : Find Task By taskid
+    detail {
+        _id : String,
+        exercisename : String,
+        taskname : String,
+        username : String,
+        data : [Number]
+        summary : {
+            mode,cumulative, mean, median, variance, sd
+        },
+        exercisedetail : {Object Task}
+        taskdetail : {Object Task}
+        userdetail : {Object Task}
+    },
+}
+------------------------------------------------------------------
+Method : FindOne By resultid
+Permission : Admin 
+Request Type : GET
+Path : /findone/:resultid
+
+response {
+    status code 200 or 500
+    message : Find Task By resultid
+    detail {
+        _id : String,
+        exercisename : String,
+        taskname : String,
+        username : String,
+        data : [Number]
+        summary : {
+            mode,cumulative, mean, median, variance, sd
+        },
+        exercisedetail : {Object Task}
+        taskdetail : {Object Task}
+        userdetail : {Object Task}
+    },
+}
+------------------------------------------------------------------
+Method : Delete by Resultid
+Permission : Admin 
+Request Type : DELETE
+Path : /:resultid
+
+response {
+    status code 200 or 500
+    message : Delete Result
+    detail {
+        delmessage
+    },
+}
