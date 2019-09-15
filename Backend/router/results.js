@@ -70,9 +70,9 @@ router.post('/create', permission.isLogin, (req, res) => {
 router.get('/search', permission.isAdmin ,(req, res)=>{
     let query = req.query
     Results.find(query)
-    .populate({path :'exercise', select : 'title name section disable'})
-    .populate({path :'task', select :'title name parameters'})
-    .populate({path :'user', select :'username fullname section admin'})
+    .populate({path :'exercisedetail', select : 'title name section disable'})
+    .populate({path :'taskdetail', select :'title name parameters'})
+    .populate({path :'userdetail', select :'username fullname section admin'})
     .then(results => {
         res.status(200).send(MessageHandle.ResponseText('Find Result By Query', results))
     })
@@ -82,16 +82,45 @@ router.get('/search', permission.isAdmin ,(req, res)=>{
 })
 router.get('/:taskid', permission.isAdmin ,(req, res)=>{
     Results.find()
-    .populate({path :'exercise', select : 'title name section disable'})
-    .populate({path :'task', select :'title name parameters', match : {_id : req.params.taskid}})
-    .populate({path :'user', select :'username fullname section admin'})
+    .populate({path :'exercisedetail', select : 'title name section disable'})
+    .populate({path :'taskdetail', select :'title name parameters', match : {_id : req.params.taskid}})
+    .populate({path :'userdetail', select :'username fullname section admin'})
     .then(results => {
-        res.status(200).send(MessageHandle.ResponseText('Find Result By Query', results.filter(value => {
-            return value.task != null
-        })))
+        results =  results.filter(value => {
+            return value.taskdetail != null
+        })
+        res.status(200).send(MessageHandle.ResponseText('Find Result By TaskID',results))
     })
     .catch(err => {
         res.status(500).send(MessageHandle.ResponseText('error', err))
     })
 })
+router.get('/findone/:resultid', permission.isAdmin ,(req, res)=>{
+    Results.findById(req.params.resultid)
+    .populate({path :'exercisedetail', select : 'title name section disable'})
+    .populate({path :'taskdetail', select :'title name parameters'})
+    .populate({path :'userdetail', select :'username fullname section admin'})
+    .then(results => {
+        res.status(200).send(MessageHandle.ResponseText('Find Result By ResultID',results))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText('error', err))
+    })
+})
+
+router.delete('/:resultid', permission.isAdmin ,(req, res)=>{
+    Results.deleteOne({
+        _id : req.params.resultid
+    })
+    .then(delResult => {
+        res.status(200).send(MessageHandle.ResponseText('Delete Result By ResultID',delResult))
+    })
+    .catch(err => {
+        res.status(500).send(MessageHandle.ResponseText('error', err))
+    })
+})
+
+
+
+
 module.exports = router

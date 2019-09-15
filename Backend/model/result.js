@@ -19,21 +19,21 @@ const ResultSchema = new Schema({
     
 },{ toJSON: { virtuals: true }})
 
-ResultSchema.virtual('exercise', {
+ResultSchema.virtual('exercisedetail', {
     ref : 'Exercises',
     localField : 'exercisename',
     foreignField :'name',
     justOne : true
 })
 
-ResultSchema.virtual('task', {
+ResultSchema.virtual('taskdetail', {
     ref : 'Tasks',
     localField : 'taskname',
     foreignField :'name',
     justOne : true
 })
 
-ResultSchema.virtual('user', {
+ResultSchema.virtual('userdetail', {
     ref : 'Users',
     localField : 'username',
     foreignField :'username',

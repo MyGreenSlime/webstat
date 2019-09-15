@@ -154,6 +154,7 @@ router.post("/create", permission.isAdmin, (req,res) => {
         name : data.name,
         description : data.description,
         section : data.section.toLowerCase(),
+        task : data.task,
         disable : data.disable,
     })
     .then(newExercise => {

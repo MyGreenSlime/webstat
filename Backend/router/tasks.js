@@ -4,6 +4,7 @@ const router = express.Router()
 const MessageHandle = require('../middleware/message')
 const Exercises = require('../model/exercise')
 const Tasks = require('../model/task')
+const Results = require('../model/result')
 
 const permission = require('../middleware/permission')
 router.get('/', permission.isLogin , (req, res)=> {
@@ -113,14 +114,14 @@ router.delete('/delete/:taskid', permission.isAdmin, (req, res) => {
     }})
     .then(editExercise => {
         // res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", editExercise))
-        Tasks.deleteOne({
-            _id : req.params.taskid
-        })
-        .then(delTask => {
-            res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", delTask))
-        })
-        .catch(err => {
-            res.status(500).send(MessageHandle.ResponseText('error', err))
+        Tasks.findById(req.params.taskid)
+        .then(task => {
+            Results.deleteMany({
+                taskname : task.name
+            })
+            .then(delResult => {
+                
+            })
         })
     })
     .catch(err => {
