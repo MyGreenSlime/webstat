@@ -55,10 +55,12 @@ const UserApi = require("./router/users");
 const DistributionsApi = require("./router/distributions")
 const ExerciseApi = require('./router/exercises')
 const TaskApi =  require('./router/tasks')
+const ResultApi = require('./router/results')
 app.use("/api/users", UserApi);
 app.use("/api/distributions", DistributionsApi);
 app.use("/api/exercises",ExerciseApi)
 app.use("/api/tasks", TaskApi)
+app.use("/api/results", ResultApi)
 
 
 app.all("/*", function(req, res, next) {

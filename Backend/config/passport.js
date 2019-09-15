@@ -39,7 +39,7 @@ module.exports = passport => {
     })
   );
   passport.serializeUser(function(user, done) {
-    var sessionUser = {username: user.username, fullname: user.fullname, section: user.section, admin : user.admin }
+    var sessionUser = {_id:user._id, username: user.username, fullname: user.fullname, section: user.section, admin : user.admin }
     done(null, sessionUser);
   });
   

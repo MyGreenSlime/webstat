@@ -54,8 +54,8 @@ function FindCumulative(dataset){
     return cumulative
 }
 function FindVariance(dataset){
-    let mean = Mean(dataset)
-    let n = dataset.length
+    let mean = FindMean(dataset)
+    let n = dataset.length-1
     let sum = 0
     dataset.map((value) => {
         sum += ((value-mean)*(value-mean))
