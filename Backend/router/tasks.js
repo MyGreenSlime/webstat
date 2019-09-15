@@ -104,9 +104,9 @@ router.post("/create", permission.isAdmin, async (req, res) => {
 router.delete("/delete/:taskid", permission.isAdmin, async (req, res) => {
   try {
     let task = await Tasks.findById(req.params.taskid);
-    await Results.deleteMany({
-      taskname: task.name
-    });
+    // await Results.deleteMany({
+    //   taskname: task.name
+    // });
     await Exercises.updateMany(
       {
         "tasks.taskid": req.params.taskid
