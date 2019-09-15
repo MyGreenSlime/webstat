@@ -7,35 +7,28 @@ const Users = require('../model/user')
 const passport = require('passport')
 const permission = require('../middleware/permission')
 
-router.post("/register", (req,res) => {
+router.post("/register", async (req,res) => {
     const data = req.body
-    Users.findOne({
-      username : data.username.toLowerCase()
-    })
-    .then(user => {
+    try {
+      let user =  await Users.findOne({
+        username : data.username.toLowerCase()
+      })
       if(user === null){
-        Users.create({
+        let newuser = await Users.create({
           username : data.username.toLowerCase(),
           fullname : data.fullname,
           section : data.section.toLowerCase(),
           admin : data.admin
         })
-        .then((newuser) => {
-          res.status(200).send(MessageHandle.ResponseText("created", newuser))
-        })
-        .catch(err => {
-          console.log(err)
-          res.status(500).send(MessageHandle.ResponseText("error", err))
-        })
-      } else {
+        res.status(200).send(MessageHandle.ResponseText("created", newuser))
+      }else {
         res.status(200).send(MessageHandle.ResponseText("username does exist", user.get))
       }
-    })
-    .catch(err => {
-      console.log(err)
+    }
+    catch(err) {
       res.status(500).send(MessageHandle.ResponseText("error", err))
-    })
-  })
+    }
+})
 
   router.post("/login", (req, res, next) =>{
     passport.authenticate('user',(err, user, info) => {

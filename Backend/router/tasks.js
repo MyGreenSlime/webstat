@@ -114,14 +114,14 @@ router.delete('/delete/:taskid', permission.isAdmin, (req, res) => {
     }})
     .then(editExercise => {
         // res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", editExercise))
-        Tasks.findById(req.params.taskid)
-        .then(task => {
-            Results.deleteMany({
-                taskname : task.name
-            })
-            .then(delResult => {
-                
-            })
+        Tasks.deleteOne({
+            _id : req.params.taskid
+        })
+        .then(delTask => {
+            res.status(200).send(MessageHandle.ResponseText("clear task in all Exercises", delTask))
+        })
+        .catch(err => {
+            res.status(500).send(MessageHandle.ResponseText('error', err))
         })
     })
     .catch(err => {
