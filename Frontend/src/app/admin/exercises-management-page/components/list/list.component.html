@@ -37,6 +37,7 @@
         <thead>
           <tr>
             <th scope="col">Name</th>
+            <th scope="col">Title</th>
             <th scope="col">Distribution</th>
             <th scope="col">Hide</th>
           </tr>
@@ -44,6 +45,7 @@
         <tbody>
           <tr *ngFor="let task of tasks;" (click)="exerciseClick(task)">
             <th scope="row"> {{ task.name }} </th>
+            <th scope="row"> {{ task.title }} </th>
             <td>{{ task.distribution.name }}</td>
             <td>
               <div class="form-group">
