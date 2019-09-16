@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
 const UserSchema = new Schema({
-    userName : String,
+    username : String,
     fullName : String,
     admin :  {
         type : Boolean,
