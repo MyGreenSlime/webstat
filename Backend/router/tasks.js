@@ -105,7 +105,7 @@ router.delete("/delete/:taskid", permission.isAdmin, async (req, res) => {
   try {
     let task = await Tasks.findById(req.params.taskid);
     // await Results.deleteMany({
-    //   taskname: task.name
+    //   taskName: task.name
     // });
     await Exercises.updateMany(
       {

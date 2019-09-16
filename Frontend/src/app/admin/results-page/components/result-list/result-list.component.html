@@ -4,7 +4,7 @@
   </div>
   <div *ngIf="resultList[0]">
     <h2>Result List</h2>
-    <h5>List of {{ resultList[0]?.exercisename }} | Task: {{ resultList[0]?.taskname }} | Distribution:
+    <h5>List of {{ resultList[0]?.exerciseName }} | Task: {{ resultList[0]?.taskName }} | Distribution:
       {{ resultList[0]?.distribution }} </h5>
     <table class="table table-hover">
       <thead>
@@ -13,6 +13,8 @@
           <th scope="col">Mean</th>
           <th scope="col">Median</th>
           <th scope="col">Mode</th>
+          <th scope="col">Min</th>
+          <th scope="col">Max</th>
           <th scope="col">SD</th>
           <th scope="col">Variance</th>
         </tr>
@@ -23,6 +25,8 @@
           <td> {{ res?.summary?.mean }} </td>
           <td> {{ res?.summary?.median }} </td>
           <td> {{ res?.summary?.mode }} </td>
+          <td> {{ res?.summary?.minValue }} </td>
+          <td> {{ res?.summary?.maxValue }} </td>
           <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
         </tr>

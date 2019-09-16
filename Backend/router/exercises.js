@@ -201,7 +201,7 @@ router.delete('/exerciseid', permission.isAdmin, async (req, res) => {
   try{
     let exercise = await Exercises.findById(req.params.exerciseid)
     // await Results.deleteMany({
-    //   exercisename : exercise.name
+    //   exerciseName : exercise.name
     // })
     let delExercise = await Exercises.deleteOne({
       _id : req.params.exerciseid

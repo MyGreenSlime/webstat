@@ -313,7 +313,7 @@ response : {
             title : String,
             name : String,
             distribution : Object,
-            genamount : Number,
+            genAmount : Number,
             parameters : [{
                 name : String,
                 value : Number
@@ -339,7 +339,7 @@ response : {
             title : String,
             name : String,
             distribution : Object,
-            genamount : Number,
+            genAmount : Number,
             parameters : [{
                 name : String,
                 value : Number
@@ -357,7 +357,7 @@ require : {
     title : String,
     name : String,
     distribution : distribution id
-    genamount : Number,
+    genAmount : Number,
     parameters : [{
         name : String,
         value : Number
@@ -372,7 +372,7 @@ response : {
             title : String,
             name : String,
             distribution : 
-            genamount : Number,
+            genAmount : Number,
             parameters : [{
                 name : String,
                 value : Number
@@ -442,8 +442,8 @@ Request Type : POST
 Path : /create 
 
 require {
-    exercisename : String 
-    taskname : String,
+    exerciseName : String 
+    taskName : String,
     username : String,
     distribution : String (name)
     data : [Number]
@@ -454,8 +454,8 @@ response {
     message : created or update result
     detail {
         _id : String,
-        exercisename : String,
-        taskname : String,
+        exerciseName : String,
+        taskName : String,
         username : String,
         data : [Number]
         summary : {
@@ -471,15 +471,15 @@ Request Type : GET
 Path : /search
 
 require params {
-    exercisename/ taskname/ username
+    exerciseName/ taskName/ username
 }
 response {
     status code 200 or 500
     message : Find Task By Query
     detail {
         _id : String,
-        exercisename : String,
-        taskname : String,
+        exerciseName : String,
+        taskName : String,
         username : String,
         data : [Number]
         summary : {
@@ -503,8 +503,8 @@ response {
     message : Find Task By taskid
     detail {
         _id : String,
-        exercisename : String,
-        taskname : String,
+        exerciseName : String,
+        taskName : String,
         username : String,
         data : [Number]
         summary : {
@@ -526,8 +526,8 @@ response {
     message : Find Task By resultid
     detail {
         _id : String,
-        exercisename : String,
-        taskname : String,
+        exerciseName : String,
+        taskName : String,
         username : String,
         data : [Number]
         summary : {

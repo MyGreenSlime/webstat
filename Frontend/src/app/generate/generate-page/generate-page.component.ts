@@ -38,7 +38,7 @@ export class GeneratePageComponent implements OnInit {
           this.task = res.detail;
           this.parameters = res.detail.parameters;
           this.start = 0;
-          this.end = res.detail.genamount;
+          this.end = res.detail.genAmount;
         });
       }
     });
@@ -47,7 +47,7 @@ export class GeneratePageComponent implements OnInit {
   generateClick() {
     this.defineFunction(this.task.distribution.name);
     this.tmp = [];
-    for (let i = 0; i < this.task.genamount; i++) {
+    for (let i = 0; i < this.task.genAmount; i++) {
       let dataGen = this.generate();
       this.data.push(dataGen);
       if (this.task.distribution.name === "exponential" && i > 0) {
@@ -110,8 +110,8 @@ export class GeneratePageComponent implements OnInit {
 
   submitClick() {
     let params = {
-      exercisename: this.exercise.name,
-      taskname: this.task.name,
+      exerciseName: this.exercise.name,
+      taskName: this.task.name,
       username: this.globalService.getLocalStorage("user").username,
       distribution: this.task.distribution.name,
       data: this.data
