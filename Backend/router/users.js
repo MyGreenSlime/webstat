@@ -16,7 +16,7 @@ router.post("/register", async (req, res) => {
     if (user === null) {
       let newuser = await Users.create({
         username: data.username.toLowerCase(),
-        fullname: data.fullname,
+        fullName: data.fullName,
         section: data.section.toLowerCase(),
         admin: data.admin
       });
