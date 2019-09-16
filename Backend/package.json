@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "buildfrontend" : "cd ../Frontend && npm install && npm run build && mv ./dist/Frontend/* ../Backend/client/"
+    "buildfrontend" : "rm -rf ./client/* &&cd ../Frontend && npm install && npm run build && mv ./dist/Frontend/* ../Backend/client/"
   },
   "author": "",
   "license": "ISC",
