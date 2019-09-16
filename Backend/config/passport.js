@@ -14,8 +14,8 @@ module.exports = passport => {
       const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
       const [username, password] = credentials.split(':');
       Users.findOne({
-        username: username
-      }, 'username fullname section admin')
+        userName: username
+      }, 'userName fullName section admin')
       .then(user => {
         if (user === null) {
           return done(null, false, { issue: "Incorrect username." });
@@ -39,7 +39,7 @@ module.exports = passport => {
     })
   );
   passport.serializeUser(function(user, done) {
-    var sessionUser = {_id:user._id, username: user.username, fullname: user.fullname, section: user.section, admin : user.admin }
+    var sessionUser = {_id:user._id, userName: user.userName, fullName: user.fullName, section: user.section, admin : user.admin }
     done(null, sessionUser);
   });
   

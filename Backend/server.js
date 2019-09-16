@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
-
+const path = require('path')
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session);
 
@@ -12,6 +12,7 @@ const uuid = require('uuid/v4')
 const app = express();
 const port = 3001;
 
+app.use(express.static(path.join(__dirname, 'client/')));
 
 mongoose.connect('mongodb://spire.cpe.ku.ac.th:27018/webstat', {
   useNewUrlParser: true,
@@ -72,6 +73,15 @@ app.all("/*", function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   next();
 });
+
+app.get('/', (req,res) => {
+  res.redirect('/login')
+})
+
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname+'/client/index.html'));
+});
+
 
 app.listen(port, () => {
   console.log("server listening on port :", port);
