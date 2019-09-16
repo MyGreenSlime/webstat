@@ -63,4 +63,8 @@ export class ApiService {
   getDistribution(name): Observable<any> {
     return this.http.get("/api/distributions/" + name);
   }
+
+  saveData(params): Observable<any> {
+    return this.http.post("/api/results/create", params)
+  }
 }

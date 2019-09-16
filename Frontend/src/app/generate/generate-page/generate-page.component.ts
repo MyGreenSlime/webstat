@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as random from "random";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from "src/app/shared/services/api.service";
+import { GlobalService } from 'src/app/shared/services/global.service';
 
 @Component({
   selector: "app-generate-page",
@@ -12,9 +13,11 @@ export class GeneratePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private globalService: GlobalService
   ) {}
 
+  exercise: any;
   task: any;
   parameters: any;
   generate: any;
@@ -25,9 +28,13 @@ export class GeneratePageComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      if (params.id) {
-        this.apiService.getTaskById(params.id).subscribe(res => {
-          console.log(res.detail);
+      if (params.ex && params.task) {
+        this.apiService.getExercisesById(params.ex).subscribe(res => {
+          console.log("ex:", res.detail);
+          this.exercise = res.detail;
+        })
+        this.apiService.getTaskById(params.task).subscribe(res => {
+          console.log("task:", res.detail);
           this.task = res.detail;
           this.parameters = res.detail.parameters;
           this.start = 0;
@@ -63,11 +70,17 @@ export class GeneratePageComponent implements OnInit {
         break;
       }
       case "normal": {
-        this.generate = random.normal(this.parameters[0].value, this.parameters[1].value);
+        this.generate = random.normal(
+          this.parameters[0].value,
+          this.parameters[1].value
+        );
         break;
       }
       case "continuous uniform": {
-        this.generate = random.uniform(this.parameters[0].value, this.parameters[1].value);
+        this.generate = random.uniform(
+          this.parameters[0].value,
+          this.parameters[1].value
+        );
         break;
       }
       case "bernoulli": {
@@ -75,7 +88,10 @@ export class GeneratePageComponent implements OnInit {
         break;
       }
       case "binomial": {
-        this.generate = random.binomial(this.parameters[0].value, this.parameters[1].value);
+        this.generate = random.binomial(
+          this.parameters[0].value,
+          this.parameters[1].value
+        );
         break;
       }
       case "geometric": {
@@ -83,13 +99,33 @@ export class GeneratePageComponent implements OnInit {
         break;
       }
       case "discrete uniform": {
-        this.generate = random.uniformInt(this.parameters[0].value, this.parameters[1].value);
+        this.generate = random.uniformInt(
+          this.parameters[0].value,
+          this.parameters[1].value
+        );
         break;
       }
     }
   }
 
-  submitClick() {}
+  submitClick() {
+    let params = {
+      exercisename: this.exercise.name,
+      taskname: this.task.name,
+      username: this.globalService.getLocalStorage("user").username,
+      distribution: this.task.distribution.name,
+      data: this.data
+    };
+    this.apiService.saveData(params).subscribe(
+      res => {
+      console.log("save complete!", res.detail);
+      alert("Save Complete!");
+      }, 
+      error => {
+        console.log("ERROR! Please try again!", error);
+        alert("ERROR! Please try again!");
+      })
+  }
 
   resetClick() {
     this.data = [];

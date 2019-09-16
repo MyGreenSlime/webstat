@@ -18,6 +18,8 @@ import { ExerciseComponent } from './admin/exercises-management-page/components/
 import { TaskComponent } from './admin/exercises-management-page/components/task/task.component';
 import { ListComponent } from './admin/exercises-management-page/components/list/list.component';
 import { GeneratePageComponent } from './generate/generate-page/generate-page.component';
+import { ResultsComponent } from './admin/exercises-management-page/components/results/results.component';
+import { ResultsPageComponent } from './admin/results-page/results-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { GeneratePageComponent } from './generate/generate-page/generate-page.co
     TaskComponent,
     ListComponent,
     GeneratePageComponent,
+    ResultsComponent,
+    ResultsPageComponent,
   ],
   imports: [
     BrowserModule,

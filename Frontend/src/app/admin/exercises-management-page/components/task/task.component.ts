@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormArray } from "@angular/forms";
 import { ApiService } from "src/app/shared/services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -91,6 +91,7 @@ export class TaskComponent implements OnInit {
 
   saveClick() {
     if (this.taskForm.invalid) {
+      console.log(this.taskForm.value);
       alert("กรอกให้ครบสิ");
       return;
     }
@@ -104,9 +105,8 @@ export class TaskComponent implements OnInit {
       this.apiService.createTask(this.taskForm.value).subscribe(
         res => {
           alert("task added!");
-          this.taskForm.reset();
-          this.getParamFromDist();
           console.log("task added!");
+          this.router.navigate(['/admin/ex/list'], { queryParams: { type: 'task' } })
         },
         error => {
           alert("ERROR!");

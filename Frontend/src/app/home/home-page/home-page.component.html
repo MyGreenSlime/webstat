@@ -6,7 +6,7 @@
       <hr>
       <div class=" task-wrapper">
         <div class="task-item" *ngFor="let task of ex.tasks">
-          <span class="dot"></span> <span class="task-title" [routerLink]="['/exercise']" [queryParams]="{id: task._id}"> {{ task.title }} </span>
+          <span class="dot"></span> <span class="task-title" [routerLink]="['/exercise']" [queryParams]="{ex: ex._id, task: task._id}"> {{ task.title }} </span>
         </div>
       </div>
     </div>
