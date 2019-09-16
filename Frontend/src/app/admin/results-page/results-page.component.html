@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <section class="results-page-wrapper">
-  <nav id="sidebar">
+  <nav id="sidebar" [ngClass]="{'active': !showSidebar}">
     <ul class="list-unstyled components">
       <h5 class="sidebar-header">Result List</h5>
       <li *ngFor="let ex of exercises">
@@ -14,21 +14,9 @@
     </ul>
   </nav>
   <div id="content">
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
-          <i class="fas fa-align-left"></i>
-          <span>Toggle Sidebar</span>
-        </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-align-justify"></i>
-        </button>
-      </div>
-    </nav> -->
+    <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="sidebarClick()">
+      <span>Show/Hide Sidebar</span>
+    </button>
     <div *ngIf="resultList">
       <app-result-list [resultList]="resultList"></app-result-list>
     </div>

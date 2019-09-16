@@ -9,6 +9,7 @@ import { ApiService } from "src/app/shared/services/api.service";
 export class ResultsPageComponent implements OnInit {
   exercises: any;
   resultList: any;
+  showSidebar: boolean = true;
 
   constructor(private apiService: ApiService) {}
 
@@ -27,5 +28,9 @@ export class ResultsPageComponent implements OnInit {
       console.log(res.detail)
       this.resultList = res.detail;
     })
+  }
+
+  sidebarClick() {
+    this.showSidebar = !this.showSidebar;
   }
 }
