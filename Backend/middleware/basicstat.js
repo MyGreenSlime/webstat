@@ -8,16 +8,16 @@ function FindMean(dataset){
         return sum+curr
     }) 
     let mean = sum/(dataset.length)
-    return mean
+    return Number(parseFloat(mean).toFixed(4))
 }
 function FindMedian(dataset){
     let sortedData = Sorted(dataset)
     let medPosition = (dataset.length+1)/2
     if(Number.isInteger(medPosition)){
-        return sortedData[medPosition-1]
+        return Number(parseFloat(sortedData[medPosition-1]).toFixed(4))
     } else {
         let newPosition = Math.floor(medPosition)
-        return (sortedData[newPosition-1]+sortedData[newPosition])/2
+        return Number(parseFloat((sortedData[newPosition-1]+sortedData[newPosition])/2).toFixed(4))
     }
 }
 function FindMode(dataset){
@@ -34,7 +34,7 @@ function FindMode(dataset){
             modes.push(Number(key))
             max = count[key]
         } else if(count[key] == max){
-            modes.push(Number(key))
+            modes.push(Number(parseFloat(key).toFixed(4)))
         }
     })
     if(modes.length > 3){
@@ -48,7 +48,7 @@ function FindCumulative(dataset){
     let cumulative  = []
     dataset.map((value, index) =>{
         let temp =value + (cumulative[cumulative.length-1]? cumulative[cumulative.length-1] : 0) 
-        cumulative.push(Number(parseFloat(temp).toFixed(5)))
+        cumulative.push(Number(parseFloat(temp).toFixed(4)))
     })
     return cumulative
 }
@@ -60,10 +60,10 @@ function FindVariance(dataset){
         sum += ((value-mean)*(value-mean))
     })
     let variance = (sum/n)
-    return variance
+    return Number(parseFloat(variance).toFixed(4))
 }
 function FindSD(dataset){
-    return Math.sqrt(FindVariance(dataset))
+    return Number(parseFloat(Math.sqrt(FindVariance(dataset))).toFixed(4))
 }
 
 module.exports = {

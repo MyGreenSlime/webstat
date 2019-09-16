@@ -19,8 +19,8 @@ router.post("/create", permission.isLogin, async (req, res) => {
       mean: BasicStat.FindMean(new Array(...data.data)),
       median: BasicStat.FindMedian(new Array(...data.data)),
       mode:  BasicStat.FindMode(new Array(...data.data)),
-      maxValue : Math.max(...data.data),
-      minValue : Math.min(...data.data),
+      maxValue : Number(parseFloat(Math.max(...data.data)).toFixed(4)),
+      minValue : Number(parseFloat(Math.min(...data.data)).toFixed(4)),
       variance:  BasicStat.FindVariance(new Array(...data.data)),
       sd: BasicStat.FindSD(new Array(...data.data)),
       cumulative:  BasicStat.FindCumulative(new Array(...data.data))
