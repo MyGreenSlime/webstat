@@ -1,0 +1,13 @@
+.result-list-wrapper {
+    .no-result {
+        min-height: calc( 100vh - 56px);
+        display: flex;
+        justify-content: center;align-items: center;
+
+        span {
+            font-size: 1.5em;
+        }
+    }
+    
+
+}

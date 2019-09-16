@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of tasks;" (click)="exerciseClick(task)">
+        <tr *ngFor="let task of tasks;">
           <th scope="row"> {{ task.name }} </th>
           <th scope="row"> {{ task.title }} </th>
           <td>{{ task.distribution.name }}</td>

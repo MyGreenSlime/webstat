@@ -1,7 +1,23 @@
 @import "../../../styles/styles.scss";
 
 .home-page-wrapper {
-  // background-color: rgba($color: #78C2AD, $alpha: 0.2);
+  padding-top: 56px;
+  height: 100vh;
+
+  .welcome-box {
+    width: 75%;
+    text-align: center;
+    margin: 30px auto 20px auto;
+    border-radius: 10px;
+    background-color: rgba($color: $secondary, $alpha: 0.8);
+    padding: 15px 10px 10px 10px;
+
+    h3 {
+      color: white !important;
+
+    }
+  }
+
   .content {
     width: 80%;
     margin: 0 auto;
@@ -10,11 +26,14 @@
 
     .exercise-card {
       margin: 20px;
-      // color: white;
-      width: calc( 50% - 40px);
+      width: calc(50% - 40px);
+      padding: 20px;
+      background-color: rgba($color: $gray-300, $alpha: 0.8);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px 0 rgba($color: $gray-300, $alpha: 0.8);
 
       hr {
-        background-color: black !important;
+        background-color: $gray-600 !important;
       }
 
       .task-wrapper {
@@ -27,6 +46,8 @@
           margin-right: 5px;
         }
 
+        .task-item {}
+
         .task-title {
           font-size: 1.2em;
           cursor: pointer;
@@ -35,7 +56,7 @@
             color: $primary;
           }
         }
-        
+
       }
     }
   }

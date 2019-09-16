@@ -4,8 +4,8 @@
     <ul class="list-unstyled components">
       <h5 class="sidebar-header">Result List</h5>
       <li *ngFor="let ex of exercises">
-        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> {{ ex.name }} </a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
+        <a href="#{{ex.name}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> {{ ex.name }} </a>
+        <ul class="collapse list-unstyled" id="{{ex.name}}">
           <li *ngFor="let task of ex.tasks">
             <a (click)="taskClick(ex, task)"> {{ task.name }} </a>
           </li>
@@ -13,8 +13,6 @@
       </li>
     </ul>
   </nav>
-
-  <!-- Page Content  -->
   <div id="content">
 
     <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,8 +29,9 @@
         </button>
       </div>
     </nav> -->
-
-    <app-result-list></app-result-list>
+    <div *ngIf="resultList">
+      <app-result-list [resultList]="resultList"></app-result-list>
+    </div>
   </div>
 
 </section>
