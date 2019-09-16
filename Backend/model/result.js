@@ -5,7 +5,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId
 const ResultSchema = new Schema({
     exerciseName :  String,
     taskName : String,
-    userName :  String,
+    username :  String,
     distribution : String,
     data : [Number],
     summary : {

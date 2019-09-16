@@ -27,13 +27,13 @@ router.post("/create", permission.isLogin, async (req, res) => {
     }
     let result =  await Results.findOne({
       exerciseName: data.exerciseName,
-      userName: data.userName
+      username: data.username
     })
     if(!result){
       let newResult = await Results.create({
         exerciseName: data.exerciseName,
         taskName: data.taskName,
-        userName: data.userName,
+        username: data.username,
         distribution: data.distribution,
         data: data.data,
         summary: summary
@@ -69,7 +69,7 @@ router.get("/search", permission.isAdmin, async(req, res) => {
     let results = await Results.find(query)
     .populate({ path: "exerciseDetail", select: "title name section disable" })
     .populate({ path: "taskDetail", select: "title name parameters" })
-    .populate({ path: "userDetail", select: "userName fullName section admin" })
+    .populate({ path: "userDetail", select: "username fullName section admin" })
     res.status(200).send(MessageHandle.ResponseText("Find Result By Query", results));
   } catch(err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));
@@ -84,7 +84,7 @@ router.get("/:taskid", permission.isAdmin, async (req, res) => {
       select: "title name parameters",
       match: { _id: req.params.taskid }
     })
-    .populate({ path: "userDetail", select: "userName fullName section admin" })
+    .populate({ path: "userDetail", select: "username fullName section admin" })
     results = await results.filter(value => {
       return value.taskdetail != null;
     });
@@ -99,7 +99,7 @@ router.get("/findone/:resultid", permission.isAdmin, async (req, res) => {
     let result = await Results.findById(req.params.resultid)
     .populate({ path: "exerciseDetail", select: "title name section disable" })
     .populate({ path: "taskDetail", select: "title name parameters" })
-    .populate({ path: "userDetail", select: "userName fullName section admin" })
+    .populate({ path: "userDetail", select: "username fullName section admin" })
     res.status(200).send(MessageHandle.ResponseText("Find Result By ResultID", result));
   } catch(err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));
