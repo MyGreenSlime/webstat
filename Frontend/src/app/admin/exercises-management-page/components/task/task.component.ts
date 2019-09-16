@@ -29,7 +29,7 @@ export class TaskComponent implements OnInit {
       title: ["", Validators.required],
       name: ["", Validators.required],
       distribution: ["bernoulli", Validators.required],
-      genamount: [Number, Validators.required],
+      genAmount: [Number, Validators.required],
       parameters: this.formBuilder.array([]),
       disable: [true, Validators.required]
     });
@@ -45,7 +45,7 @@ export class TaskComponent implements OnInit {
           this.taskForm.controls.distribution.setValue(
             this.task.distribution._id
           );
-          this.taskForm.controls.genamount.setValue(this.task.genamount);
+          this.taskForm.controls.genAmount.setValue(this.task.genAmount);
           this.taskForm.controls.disable.setValue(this.task.disable);
           this.distribution = this.task.distribution.name;
           this.getParamFromDist();

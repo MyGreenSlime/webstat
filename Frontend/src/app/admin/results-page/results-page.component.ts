@@ -20,8 +20,8 @@ export class ResultsPageComponent implements OnInit {
 
   taskClick(ex, task) {
     let param = {
-      exercisename: ex.name,
-      taskname: task.name
+      exerciseName: ex.name,
+      taskName: task.name
     }
     this.apiService.getResult(param).subscribe(res => {
       console.log(res.detail)

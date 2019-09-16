@@ -42,7 +42,7 @@ export class LoginPageComponent implements OnInit {
           console.log(res)
           let user = {
             username: res.detail.user.username,
-            fullname: res.detail.user.fullname,
+            fullName: res.detail.user.fullName,
             section: res.detail.user.section
           }
           this.globalService.setLocalStorage('user', JSON.stringify(user));

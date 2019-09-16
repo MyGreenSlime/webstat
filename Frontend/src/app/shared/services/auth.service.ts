@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
+
+  isLoggedIn() {
+    if (this.cookieService.get("connect.sid")) {
+      let now = new Date();
+      if (new Date(this.cookieService.get("exp")) < now) {
+        this.cookieService.deleteAll();
+        return false;
+      }
+      return true;
+    }
+  }
 
   login(param): Observable<any> {
     const httpOptions = {

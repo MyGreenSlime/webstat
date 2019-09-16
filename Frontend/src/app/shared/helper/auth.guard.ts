@@ -18,8 +18,9 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.cookieService.get("connect.sid")) {
       let now = new Date();
-      console.log(new Date(this.cookieService.get("exp")) < now)
       if (new Date(this.cookieService.get("exp")) < now) {
+        this.cookieService.deleteAll();
+        this.router.navigate(["/login"]);
         return false;
       }
       return true;
