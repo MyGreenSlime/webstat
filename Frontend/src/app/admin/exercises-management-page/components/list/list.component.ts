@@ -56,5 +56,4 @@ export class ListComponent implements OnInit {
     }
   }
 
-  exerciseClick(exercise) {}
 }

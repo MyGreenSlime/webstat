@@ -8,6 +8,7 @@ import { ApiService } from "src/app/shared/services/api.service";
 })
 export class ResultsPageComponent implements OnInit {
   exercises: any;
+  resultList: any;
 
   constructor(private apiService: ApiService) {}
 
@@ -24,6 +25,7 @@ export class ResultsPageComponent implements OnInit {
     }
     this.apiService.getResult(param).subscribe(res => {
       console.log(res.detail)
+      this.resultList = res.detail;
     })
   }
 }
