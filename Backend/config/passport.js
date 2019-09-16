@@ -14,8 +14,8 @@ module.exports = passport => {
       const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
       const [username, password] = credentials.split(':');
       Users.findOne({
-        userName: username
-      }, 'userName fullName section admin')
+        username: username
+      }, 'username fullName section admin')
       .then(user => {
         if (user === null) {
           return done(null, false, { issue: "Incorrect username." });
