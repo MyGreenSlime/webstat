@@ -58,9 +58,9 @@
       color: $primary;
     }
 
-    ul.components {
-      border-bottom: 1px solid $gray-600;
-    }
+    // ul.components {
+    //   border-bottom: 1px solid $gray-600;
+    // }
 
     ul p {
       color: #fff;
@@ -69,7 +69,7 @@
 
     ul li a {
       padding: 10px;
-      font-size: 1.1em !important;
+      // font-size: 1.1em !important;
       display: block;
     }
 
@@ -103,7 +103,7 @@
     }
 
     ul ul a {
-      font-size: 0.9em !important;
+      // font-size: 0.9em !important;
       padding-left: 30px !important;
       background: $primary;
       color: #fff;

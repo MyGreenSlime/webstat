@@ -16,4 +16,14 @@ export class ResultsPageComponent implements OnInit {
       this.exercises = res.detail;
     })
   }
+
+  taskClick(ex, task) {
+    let param = {
+      exercisename: ex.name,
+      taskname: task.name
+    }
+    this.apiService.getResult(param).subscribe(res => {
+      console.log(res.detail)
+    })
+  }
 }

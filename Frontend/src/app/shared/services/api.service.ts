@@ -65,6 +65,10 @@ export class ApiService {
   }
 
   saveData(params): Observable<any> {
-    return this.http.post("/api/results/create", params)
+    return this.http.post("/api/results/create", params);
+  }
+
+  getResult(params): Observable<any> {
+    return this.http.get("/api/results/search", {params: params});
   }
 }
