@@ -18,20 +18,22 @@ router.post("/create", permission.isLogin, async (req, res) => {
     let summary = {
       mean: BasicStat.FindMean(new Array(...data.data)),
       median: BasicStat.FindMedian(new Array(...data.data)),
-      mode: BasicStat.FindMode(new Array(...data.data)),
-      variance: BasicStat.FindVariance(new Array(...data.data)),
+      mode:  BasicStat.FindMode(new Array(...data.data)),
+      maxValue : Math.max(...data.data),
+      minValue : Math.min(...data.data),
+      variance:  BasicStat.FindVariance(new Array(...data.data)),
       sd: BasicStat.FindSD(new Array(...data.data)),
-      cumulative: BasicStat.FindCumulative(new Array(...data.data))
+      cumulative:  BasicStat.FindCumulative(new Array(...data.data))
     }
     let result =  await Results.findOne({
-      exercisename: data.exercisename,
-      username: data.username
+      exerciseName: data.exerciseName,
+      userName: data.userName
     })
     if(!result){
       let newResult = await Results.create({
-        exercisename: data.exercisename,
-        taskname: data.taskname,
-        username: data.username,
+        exerciseName: data.exerciseName,
+        taskName: data.taskName,
+        userName: data.userName,
         distribution: data.distribution,
         data: data.data,
         summary: summary
@@ -40,17 +42,18 @@ router.post("/create", permission.isLogin, async (req, res) => {
     } else {
       let editResult = await Results.updateOne(
         {
-          exercisename: data.exercisename
+          exerciseName: data.exerciseName
         },
         {
           $set: {
-            taskname: data.taskname,
+            taskName: data.taskName,
             data: data.data,
-            summary: summary
+            summary: summary,
+            timeStamp : Date.now()
           }
         }
       )
-      result.taskname = data.taskname;
+      result.taskName = data.taskName;
       result.data = data.data;
       result.summary = summary;
       res.status(200).send(MessageHandle.ResponseText("updateResult", result))
@@ -64,9 +67,9 @@ router.get("/search", permission.isAdmin, async(req, res) => {
   try {
     let query = req.query;
     let results = await Results.find(query)
-    .populate({ path: "exercisedetail", select: "title name section disable" })
-    .populate({ path: "taskdetail", select: "title name parameters" })
-    .populate({ path: "userdetail", select: "username fullname section admin" })
+    .populate({ path: "exerciseDetail", select: "title name section disable" })
+    .populate({ path: "taskDetail", select: "title name parameters" })
+    .populate({ path: "userDetail", select: "userName fullName section admin" })
     res.status(200).send(MessageHandle.ResponseText("Find Result By Query", results));
   } catch(err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));
@@ -75,13 +78,13 @@ router.get("/search", permission.isAdmin, async(req, res) => {
 router.get("/:taskid", permission.isAdmin, async (req, res) => {
   try {
     let results = await Results.find()
-    .populate({ path: "exercisedetail", select: "title name section disable" })
+    .populate({ path: "exerciseDetail", select: "title name section disable" })
     .populate({
-      path: "taskdetail",
+      path: "taskDetail",
       select: "title name parameters",
       match: { _id: req.params.taskid }
     })
-    .populate({ path: "userdetail", select: "username fullname section admin" })
+    .populate({ path: "userDetail", select: "userName fullName section admin" })
     results = await results.filter(value => {
       return value.taskdetail != null;
     });
@@ -94,9 +97,9 @@ router.get("/:taskid", permission.isAdmin, async (req, res) => {
 router.get("/findone/:resultid", permission.isAdmin, async (req, res) => {
   try {
     let result = await Results.findById(req.params.resultid)
-    .populate({ path: "exercisedetail", select: "title name section disable" })
-    .populate({ path: "taskdetail", select: "title name parameters" })
-    .populate({ path: "userdetail", select: "username fullname section admin" })
+    .populate({ path: "exerciseDetail", select: "title name section disable" })
+    .populate({ path: "taskDetail", select: "title name parameters" })
+    .populate({ path: "userDetail", select: "userName fullName section admin" })
     res.status(200).send(MessageHandle.ResponseText("Find Result By ResultID", result));
   } catch(err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));

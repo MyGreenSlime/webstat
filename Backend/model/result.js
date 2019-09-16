@@ -3,40 +3,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId
 const ResultSchema = new Schema({
-    exercisename :  String,
-    taskname : String,
-    username :  String,
+    exerciseName :  String,
+    taskName : String,
+    userName :  String,
     distribution : String,
     data : [Number],
     summary : {
         mean : Number, 
         median : Number,
         mode :  [Number],
+        maxValue : Number,
+        minValue : Number,
         sd : Number,
         variance : Number,
         cumulative : [Number]
-    }
+    },
+    timeStamp : { type : Date, default: Date.now }
     
 },{ toJSON: { virtuals: true }})
 
-ResultSchema.virtual('exercisedetail', {
+ResultSchema.virtual('exerciseDetail', {
     ref : 'Exercises',
-    localField : 'exercisename',
+    localField : 'exerciseName',
     foreignField :'name',
     justOne : true
 })
 
-ResultSchema.virtual('taskdetail', {
+ResultSchema.virtual('taskDetail', {
     ref : 'Tasks',
-    localField : 'taskname',
+    localField : 'taskName',
     foreignField :'name',
     justOne : true
 })
 
-ResultSchema.virtual('userdetail', {
+ResultSchema.virtual('userDetail', {
     ref : 'Users',
-    localField : 'username',
-    foreignField :'username',
+    localField : 'userName',
+    foreignField :'userName',
     justOne : true
 })
 

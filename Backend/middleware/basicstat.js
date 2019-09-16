@@ -37,19 +37,18 @@ function FindMode(dataset){
             modes.push(Number(key))
         }
     })
+    if(modes.length > 3){
+        return []
+    }
     return modes
 }
-function FindMaxMin(dataset){
-    let max = Math.max(dataset)
-    let min = Math.min(dataset)
-    return {max, min}
-}
+
 
 function FindCumulative(dataset){
     let cumulative  = []
     dataset.map((value, index) =>{
         let temp =value + (cumulative[cumulative.length-1]? cumulative[cumulative.length-1] : 0) 
-        cumulative.push(Number(parseFloat(temp).toFixed(2)))
+        cumulative.push(Number(parseFloat(temp).toFixed(5)))
     })
     return cumulative
 }
@@ -68,5 +67,5 @@ function FindSD(dataset){
 }
 
 module.exports = {
-    Sorted, FindCumulative, FindMean,FindMaxMin, FindMedian, FindMode, FindSD, FindVariance
+    Sorted, FindCumulative, FindMean, FindMedian, FindMode, FindSD, FindVariance
 }

@@ -14,7 +14,7 @@ router.get("/", permission.isLogin, async (req, res) => {
         {
           disable: false
         },
-        "title name distribution genamount parameters"
+        "title name distribution genAmount parameters"
       ).populate("distribution");
       res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks));
     } catch (err) {
@@ -24,7 +24,7 @@ router.get("/", permission.isLogin, async (req, res) => {
     try {
       let tasks = await Tasks.find(
         {},
-        "title name distribution genamount parameters disable"
+        "title name distribution genAmount parameters disable"
       ).populate("distribution");
       res.status(200).send(MessageHandle.ResponseText("Find All Tasks", tasks));
     } catch (err) {
@@ -42,7 +42,7 @@ router.get("/:taskid", permission.isLogin, async (req, res) => {
           _id: taskid,
           disable: false
         },
-        "title name distribution genamount parameters"
+        "title name distribution genAmount parameters"
       ).populate("distribution");
       if (task) {
         res.status(200).send(MessageHandle.ResponseText("Find One Task", task));
@@ -56,7 +56,7 @@ router.get("/:taskid", permission.isLogin, async (req, res) => {
     try {
       let task = await Tasks.findById(
         taskid,
-        "title name distribution genamount parameters disable"
+        "title name distribution genAmount parameters disable"
       ).populate("distribution");
       if (task) {
         res.status(200).send(MessageHandle.ResponseText("Find One Task", task));
