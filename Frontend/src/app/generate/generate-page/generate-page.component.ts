@@ -16,30 +16,49 @@ export class GeneratePageComponent implements OnInit {
   ) {}
 
   task: any;
+  parameters: any;
+  generate: any;
+  data = [];
+  tmp: any;
+  start: number;
+  end: number;
+
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params.id) {
         this.apiService.getTaskById(params.id).subscribe(res => {
           console.log(res.detail);
           this.task = res.detail;
+          this.parameters = res.detail.parameters;
+          this.start = 0;
+          this.end = res.detail.genamount;
         });
       }
     });
   }
 
   generateClick() {
-    //define function by task type
+    this.defineFunction(this.task.distribution.name);
+    this.tmp = [];
+    for (let i = 0; i < this.task.genamount; i++) {
+      let dataGen = this.generate();
+      this.data.push(dataGen);
+      this.tmp.push(dataGen);
+    }
+    console.log(this.tmp);
+  }
 
-    // how many data per time
-
-    // const random = require('random')
-    // for (let i = 0; i<10; i++) {
-    const generate = random.bernoulli();
-    console.log(generate());
-    // }
+  defineFunction(dist) {
+    switch (dist) {
+      case "poisson":
+        this.generate = random.poisson(this.parameters[0].value);
+    }
   }
 
   submitClick() {}
 
-  resetClick() {}
+  resetClick() {
+    this.data = [];
+    this.tmp = [];
+  }
 }

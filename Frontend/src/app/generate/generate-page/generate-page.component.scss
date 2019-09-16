@@ -10,11 +10,18 @@
 
   .data-area {
     width: 50%;
-    height: 65%;
+    height: 70%;
+    min-height: 300px;
     background-color: $gray-300;
     border-radius: 5px;
     margin: 20px;
     min-width: 320px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    padding: 20px;
   }
 
   .button-group {
