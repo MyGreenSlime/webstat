@@ -43,15 +43,49 @@ export class GeneratePageComponent implements OnInit {
     for (let i = 0; i < this.task.genamount; i++) {
       let dataGen = this.generate();
       this.data.push(dataGen);
-      this.tmp.push(dataGen);
+      if (this.task.distribution.name === "exponential" && i > 0) {
+        this.tmp.push(this.tmp[i - 1] + dataGen);
+      } else {
+        this.tmp.push(dataGen);
+      }
     }
     console.log(this.tmp);
   }
 
   defineFunction(dist) {
     switch (dist) {
-      case "poisson":
+      case "poisson": {
         this.generate = random.poisson(this.parameters[0].value);
+        break;
+      }
+      case "exponential": {
+        this.generate = random.exponential(this.parameters[0].value);
+        break;
+      }
+      case "normal": {
+        this.generate = random.normal(this.parameters[0].value, this.parameters[1].value);
+        break;
+      }
+      case "continuous uniform": {
+        this.generate = random.uniform(this.parameters[0].value, this.parameters[1].value);
+        break;
+      }
+      case "bernoulli": {
+        this.generate = random.bernoulli(this.parameters[0].value);
+        break;
+      }
+      case "binomial": {
+        this.generate = random.binomial(this.parameters[0].value, this.parameters[1].value);
+        break;
+      }
+      case "geometric": {
+        this.generate = random.geometric(this.parameters[0].value);
+        break;
+      }
+      case "discrete uniform": {
+        this.generate = random.uniformInt(this.parameters[0].value, this.parameters[1].value);
+        break;
+      }
     }
   }
 
