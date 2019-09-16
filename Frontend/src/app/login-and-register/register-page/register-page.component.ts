@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: "app-register-page",
@@ -19,9 +20,15 @@ export class RegisterPageComponent implements OnInit {
   showInvalidAlert = false;
   showInvalidError = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.authService.logout().subscribe(res => {
+        this.cookieService.deleteAll();
+      })
+    }
+  }
 
   registerClick() {
     if (this.registerForm.invalid) {
