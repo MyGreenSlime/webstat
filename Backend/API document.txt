@@ -9,7 +9,7 @@ Path : /register
 
 require : {
     username : string,
-    fullname : string,
+    fullName : string,
     section : string ("cpe" or "ske")
 }
 
