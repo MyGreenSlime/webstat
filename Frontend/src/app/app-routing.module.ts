@@ -9,6 +9,8 @@ import { ExerciseComponent } from './admin/exercises-management-page/components/
 import { TaskComponent } from './admin/exercises-management-page/components/task/task.component';
 import { ListComponent } from './admin/exercises-management-page/components/list/list.component';
 import { GeneratePageComponent } from './generate/generate-page/generate-page.component';
+import { ResultsPageComponent } from './admin/results-page/results-page.component';
+
 import { AuthGuard } from "./shared/helper/auth.guard";
 import { RoleGuard } from "./shared/helper/role.guard";
 
@@ -54,6 +56,10 @@ const routes: Routes = [
           },
           { path: "", redirectTo: "list", pathMatch: "full" }
         ]
+      },
+      {
+        path: "results",
+        component: ResultsPageComponent
       },
       {
         path: "users",

@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { timeout } from "q";
 import { CookieService } from "ngx-cookie-service";
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { GlobalService } from 'src/app/shared/services/global.service';
 
 @Component({
   selector: "app-login-page",
@@ -23,7 +24,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private globalService: GlobalService
   ) {}
 
   ngOnInit() {}
@@ -43,7 +45,7 @@ export class LoginPageComponent implements OnInit {
             fullname: res.detail.user.fullname,
             section: res.detail.user.section
           }
-          localStorage.setItem('user', JSON.stringify(user));
+          this.globalService.setLocalStorage('user', JSON.stringify(user));
           this.cookieService.set('exp', res.detail.sessionExpire);
           if (res.detail.user.admin) {
             this.cookieService.set('cookie-isa', btoa("admin"));
