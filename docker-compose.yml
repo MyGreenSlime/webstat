@@ -4,23 +4,25 @@ services :
     image: webstat:demo
     container_name : webstat
     restart: always
-    expose:
-      - 3001
-  nginx:
-    image: nginx
-    container_name: nginx
-    restart : always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes: 
-      - "/home/statadmin/data/nginx:/etc/nginx/conf.d"
-      - "/home/statadmin/data/certbot/conf:/etc/letsencrypt"
-      - "/home/statadmin/data/certbot/www:/var/www/certbot"
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  certbot:
-    image: certbot/certbot
-    volumes:
-    - "/home/statadmin/data/certbot/conf:/etc/letsencrypt"
-    - "/home/statadmin/data/certbot/www:/var/www/certbot"
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    port : 
+      3001:3001
+    # expose:
+    #   - 3001
+  # nginx:
+  #   image: nginx
+  #   container_name: nginx
+  #   restart : always
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes: 
+  #     - "/home/statadmin/data/nginx:/etc/nginx/conf.d"
+  #     - "/home/statadmin/data/certbot/conf:/etc/letsencrypt"
+  #     - "/home/statadmin/data/certbot/www:/var/www/certbot"
+  #   command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #   - "/home/statadmin/data/certbot/conf:/etc/letsencrypt"
+  #   - "/home/statadmin/data/certbot/www:/var/www/certbot"
+  #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
