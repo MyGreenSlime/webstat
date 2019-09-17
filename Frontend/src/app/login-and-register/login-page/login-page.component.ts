@@ -28,7 +28,13 @@ export class LoginPageComponent implements OnInit {
     private globalService: GlobalService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.authService.logout().subscribe(res => {
+        this.cookieService.deleteAll();
+      })
+    }
+  }
 
   loginClick() {
     if (this.loginForm.invalid) {
