@@ -1,11 +1,5 @@
 version : "2"
 services :
-  webstat:
-    image: webstat:demo
-    container_name : webstat
-    restart: always
-    ports: 
-      - 3000:3001
   mongo:
     image: mongo
     restart: always
