@@ -29,11 +29,11 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.authService.logout().subscribe(res => {
-        this.cookieService.deleteAll();
-      })
-    }
+    // if (this.authService.isLoggedIn()) {
+    //   this.authService.logout().subscribe(res => {
+    //     this.cookieService.deleteAll();
+    //   })
+    // }
   }
 
   loginClick() {

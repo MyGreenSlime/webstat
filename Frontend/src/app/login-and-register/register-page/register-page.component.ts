@@ -23,11 +23,11 @@ export class RegisterPageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private cookieService: CookieService) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.authService.logout().subscribe(res => {
-        this.cookieService.deleteAll();
-      })
-    }
+    // if (this.authService.isLoggedIn()) {
+    //   this.authService.logout().subscribe(res => {
+    //     this.cookieService.deleteAll();
+    //   })
+    // }
   }
 
   registerClick() {
