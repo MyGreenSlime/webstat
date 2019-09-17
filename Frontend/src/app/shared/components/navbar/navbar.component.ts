@@ -15,12 +15,11 @@ export class NavbarComponent implements OnInit {
   constructor(private cookieService: CookieService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    console.log(this.cookieService.get("cookie-isa"))
-    if (atob(this.cookieService.get("cookie-isa")) === "admin") {
-      this.isAdmin = true;
-    }
-    if (this.cookieService.get("connect.sid")) {
+    if (this.cookieService.get("cookie-isa")) {
       this.isLoggedIn = true;
+      if (atob(this.cookieService.get("cookie-isa")) === "admin") {
+        this.isAdmin = true;
+      }
     } 
   }
 
