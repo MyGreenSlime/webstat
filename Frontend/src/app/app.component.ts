@@ -18,7 +18,7 @@ export class AppComponent {
   cookieHandler() {
     let cookies = this.cookieService.get('cookie-isa')
     if(!cookies) {
-      this.router.navigate(["login"]);
+      this.router.navigate(["/login"]);
       return;
     }
   }

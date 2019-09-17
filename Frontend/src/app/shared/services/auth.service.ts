@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   isLoggedIn() {
-    if (this.cookieService.get("connect-isa")) {
+    if (this.cookieService.get("cookie-isa")) {
       let now = new Date();
       if (new Date(this.cookieService.get("exp")) < now) {
         this.cookieService.deleteAll();
