@@ -4,8 +4,8 @@ services :
     image: webstat:demo
     container_name : webstat
     restart: always
-    port : 
-      3001:3001
+    ports: 
+      - "3001:3001"
     # expose:
     #   - 3001
   # nginx:
