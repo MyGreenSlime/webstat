@@ -7,7 +7,7 @@ services :
     expose:
       - 3001
   nginx:
-    image: nginx:1.13.12-alpine
+    image: nginx
     container_name: nginx
     restart : always
     ports:
