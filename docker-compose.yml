@@ -18,7 +18,7 @@ services :
       - "/home/statadmin/configulation/certs:/etc/nginx/certs:ro"
   letsencrypt:
       image: jrcs/letsencrypt-nginx-proxy-companion
-      contianer_name : lets_encrypt
+      container_name : lets_encrypt
       restart: always
       volumes: 
         - "/home/statadmin/configulation/certs:/etc/nginx/certs:rw"
