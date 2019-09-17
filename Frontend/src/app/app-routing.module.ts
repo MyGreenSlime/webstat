@@ -12,7 +12,6 @@ import { GeneratePageComponent } from './generate/generate-page/generate-page.co
 import { ResultsPageComponent } from './admin/results-page/results-page.component';
 
 import { AuthGuard } from "./shared/helper/auth.guard";
-import { RoleGuard } from "./shared/helper/role.guard";
 
 
 const routes: Routes = [
@@ -28,15 +27,20 @@ const routes: Routes = [
   },
   {
     path: "login",
-    component: LoginPageComponent
+    component: LoginPageComponent,
+    canActivate: [AuthGuard],
+    data: { roles: "login" }
   },
   {
     path: "register",
-    component: RegisterPageComponent
+    component: RegisterPageComponent,
+    canActivate: [AuthGuard],
+    data: { roles: "register" }
   },
   {
     path: "admin",
-    canActivate: [RoleGuard],
+    canActivate: [AuthGuard],
+    data: { roles: "admin" },
     children: [
       {
         path: "ex",
@@ -44,15 +48,15 @@ const routes: Routes = [
         children: [
           {
             path: "list",
-            component: ListComponent,
+            component: ListComponent
           },
           {
             path: "exercise",
-            component: ExerciseComponent,
+            component: ExerciseComponent
           },
           {
             path: "task",
-            component: TaskComponent,
+            component: TaskComponent
           },
           { path: "", redirectTo: "list", pathMatch: "full" }
         ]
@@ -72,6 +76,7 @@ const routes: Routes = [
       }
     ]
   },
+  { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "**", redirectTo: "home", pathMatch: "full" }
 ];
 
