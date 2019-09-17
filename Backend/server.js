@@ -5,7 +5,7 @@ const session = require("express-session");
 const path = require('path')
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session);
-
+const permission = require('./middleware/permission')
 const passport = require('passport');
 const uuid = require('uuid/v4')
 
@@ -74,9 +74,13 @@ app.all("/*", function(req, res, next) {
   next();
 });
 
-app.get('/', (req,res) => {
-  res.redirect('/login')
-})
+// app.get('/home', permission.isLogin(req,res) => {
+//   if(req.user){
+//     res.redirect('/home')
+//   } else {
+//     res.redirect('/login')
+//   }
+// })
 
 app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/client/index.html'));
