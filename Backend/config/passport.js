@@ -14,7 +14,7 @@ module.exports = passport => {
       const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
       const [username, password] = credentials.split(':');
       Users.findOne({
-        username: username
+        username: username.toLowerCase()
       }, 'username fullName section admin')
       .then(user => {
         if (user === null) {
