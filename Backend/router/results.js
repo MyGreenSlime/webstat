@@ -23,7 +23,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
       minValue : Number(parseFloat(Math.min(...data.data)).toFixed(4)),
       variance:  BasicStat.FindVariance(new Array(...data.data)),
       sd: BasicStat.FindSD(new Array(...data.data)),
-      cumulative:  BasicStat.FindCumulative(new Array(...data.data))
+      cumulative:  BasicStat.FindCumulative(new Array(...data.data)), 
     }
     let result =  await Results.findOne({
       exerciseName: data.exerciseName,
