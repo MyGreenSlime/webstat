@@ -24,6 +24,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
       variance:  BasicStat.FindVariance(new Array(...data.data)),
       sd: BasicStat.FindSD(new Array(...data.data)),
       cumulative:  BasicStat.FindCumulative(new Array(...data.data)), 
+      count : data.data.length
     }
     let result =  await Results.findOne({
       exerciseName: data.exerciseName,
