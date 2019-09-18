@@ -124,7 +124,7 @@ export class GeneratePageComponent implements OnInit {
     };
     this.apiService.saveData(params).subscribe(
       res => {
-        console.log("save complete!", res.detail);
+        console.log("save complete!");
         alert("Save Complete!");
         this.resetClick();
       },
