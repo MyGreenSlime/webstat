@@ -15,7 +15,8 @@
   </nav>
   <div id="content">
     <button type="button" id="sidebarCollapse" class="btn btn-info" (click)="sidebarClick()">
-      <span>Show/Hide Sidebar</span>
+      <i class="fas fa-align-left"></i>
+      <span style="margin-left: 10px;">Show/Hide Sidebar</span>
     </button>
     <div *ngIf="resultList">
       <app-result-list [resultList]="resultList"></app-result-list>
