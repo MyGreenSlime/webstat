@@ -126,6 +126,7 @@ export class GeneratePageComponent implements OnInit {
       res => {
         console.log("save complete!", res.detail);
         alert("Save Complete!");
+        this.resetClick();
       },
       error => {
         console.log("ERROR! Please try again!", error);

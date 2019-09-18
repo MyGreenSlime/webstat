@@ -48,18 +48,29 @@
 
 ::ng-deep .dark-modal {
   .modal-dialog {
-    max-width: 80%;
+    max-width: 70%;
 
     .user-data {
       display: flex;
+      justify-content: center;
+      
 
-      .data-summary {
+      .summary-area {
         width: 50%;
+        max-width: 200px;
         text-align: center;
         max-height: 75vh;
         overflow: auto;
         display: flex;
         flex-direction: column;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+          span {
+              text-align: start;
+          }
+        }
       }
 
       .data-area {

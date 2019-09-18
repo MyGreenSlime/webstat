@@ -46,15 +46,15 @@
       </button>
     </div>
     <div class="modal-body user-data">
-      <div class="data-summary">
+      <div class="summary-area">
         <h5> Summary </h5>
-        <span> Mean:  {{ currentRes?.summary?.mean }} </span>
-        <span> Median: {{ currentRes?.summary?.median }} </span>
-        <span> Mode: {{ currentRes?.summary?.mode }} </span>
-        <span> Min Value: {{ currentRes?.summary?.minValue }} </span>
-        <span> Max Value: {{ currentRes?.summary?.maxValue }} </span>
-        <span> SD: {{ currentRes?.summary?.sd }} </span>
-        <span> Variance: {{ currentRes?.summary?.variance }} </span>
+        <div><span> Mean: </span><span> {{ currentRes?.summary?.mean }} </span></div>
+        <div><span> Median:</span><span> {{ currentRes?.summary?.median }} </span></div>
+        <div><span> Mode:</span><span> {{ currentRes?.summary?.mode }} </span></div>
+        <div><span> Min Value:</span><span> {{ currentRes?.summary?.minValue }} </span></div>
+        <div><span> Max Value:</span><span> {{ currentRes?.summary?.maxValue }} </span></div>
+        <div> <span> SD:</span><span> {{ currentRes?.summary?.sd }} </span></div>
+        <div> <span> Variance:</span><span> {{ currentRes?.summary?.variance }} </span></div>
       </div>
       <div class="data-area">
         <h5>Data</h5>
