@@ -32,9 +32,35 @@
           <td> {{ res?.summary?.maxValue }} </td>
           <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
-          <td> <button class="btn btn-outline-info" (click)="viewDataClick()">View</button>  </td>
+          <td> <button class="btn btn-outline-info" (click)="viewDataClick(content, res)">View</button> </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> {{ currentRes?.username }} </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body user-data">
+      <div class="data-summary">
+        <h5> Summary </h5>
+        <span> Mean:  {{ currentRes?.summary?.mean }} </span>
+        <span> Median: {{ currentRes?.summary?.median }} </span>
+        <span> Mode: {{ currentRes?.summary?.mode }} </span>
+        <span> Min Value: {{ currentRes?.summary?.minValue }} </span>
+        <span> Max Value: {{ currentRes?.summary?.maxValue }} </span>
+        <span> SD: {{ currentRes?.summary?.sd }} </span>
+        <span> Variance: {{ currentRes?.summary?.variance }} </span>
+      </div>
+      <div class="data-area">
+        <h5>Data</h5>
+        <span *ngFor="let data of currentRes?.data"> {{ data }} </span>
+      </div>
+    </div>
+  </ng-template>
+  <hr>
 </section>

@@ -9,14 +9,20 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ResultListComponent implements OnInit {
   @Input() resultList: any;
   closeResult: string;
+  currentRes: any;
+  currentData = [];
   
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    console.log(this.resultList);
   }
 
-  viewDataClick(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  viewDataClick(content, res) {
+  this.currentData = [];
+  this.currentRes = res;
+  
+    this.modalService.open(content, {windowClass: 'dark-modal'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

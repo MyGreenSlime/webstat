@@ -33,4 +33,51 @@
   .dist-title {
     @include titleOf($warning);
   }
+
+  .modal-dialog {
+    max-width: 100% !important;
+  }
+
+  .test {
+    max-width: 100% !important;
+  }
+
+
 }
+
+
+::ng-deep .dark-modal {
+  .modal-dialog {
+    max-width: 80%;
+
+    .user-data {
+      display: flex;
+
+      .data-summary {
+        width: 50%;
+        text-align: center;
+        max-height: 75vh;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .data-area {
+        width: 50%;
+        text-align: center;
+        max-height: 75vh;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+
+  }
+}
+
+// .data-modal {
+//   width: 80%;
+// .modal-dialog {
+//     max-width: 100% !important;
+// }
