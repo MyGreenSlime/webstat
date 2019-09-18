@@ -197,7 +197,7 @@ router.post("/create", permission.isAdmin, async (req, res) => {
   }
 });
 
-router.delete('/exerciseid', permission.isAdmin, async (req, res) => {
+router.delete('/:exerciseid', permission.isAdmin, async (req, res) => {
   try{
     let exercise = await Exercises.findById(req.params.exerciseid)
     // await Results.deleteMany({

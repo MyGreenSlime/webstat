@@ -7,8 +7,8 @@ services :
     ports: 
       - "3001:3001"
     environment:
-      - MONGODB_PORT="27018"
-      - MONGO_URL="spire.cpe.ku.ac.th" 
+      - MONGODB_PORT=27018
+      - MONGO_URL=spire.cpe.ku.ac.th 
     # expose:
     #   - 3001
   # nginx:
