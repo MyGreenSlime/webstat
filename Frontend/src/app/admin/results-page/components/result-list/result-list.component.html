@@ -19,6 +19,7 @@
           <th scope="col">Max</th>
           <th scope="col">SD</th>
           <th scope="col">Variance</th>
+          <th scope="col">Count</th>
           <th scope="col">Data</th>
         </tr>
       </thead>
@@ -32,6 +33,7 @@
           <td> {{ res?.summary?.maxValue }} </td>
           <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
+          <td> {{ res?.summary?.count }} </td>
           <td> <button class="btn btn-outline-info" (click)="viewDataClick(content, res)">View</button> </td>
         </tr>
       </tbody>
@@ -55,10 +57,15 @@
         <div><span> Max Value:</span><span> {{ currentRes?.summary?.maxValue }} </span></div>
         <div> <span> SD:</span><span> {{ currentRes?.summary?.sd }} </span></div>
         <div> <span> Variance:</span><span> {{ currentRes?.summary?.variance }} </span></div>
+        <div> <span> Count:</span><span> {{ currentRes?.summary?.count }} </span></div>
       </div>
       <div class="data-area">
-        <h5>Data</h5>
+        <h5>Raw Data</h5>
         <span *ngFor="let data of currentRes?.data"> {{ data }} </span>
+      </div>
+      <div class="data-area">
+        <h5>Cumulative Data</h5>
+        <span *ngFor="let data of currentRes?.summary?.cumulative"> {{ data }} </span>
       </div>
     </div>
   </ng-template>

@@ -25,7 +25,7 @@ export class ResultsPageComponent implements OnInit {
       taskName: task.name
     }
     this.apiService.getResult(param).subscribe(res => {
-      console.log(res.detail)
+      // console.log(res.detail)
       this.resultList = res.detail;
     })
   }
