@@ -45,7 +45,7 @@
       <button class="btn btn-primary" (click)="saveClick()">
         Save
       </button>
-      <button class="btn btn-danger" (click)="deleteClick()">
+      <button *ngIf="task" class="btn btn-danger" (click)="deleteClick(task._id)">
         Delete
       </button>
     </div>

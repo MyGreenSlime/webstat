@@ -116,5 +116,10 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  deleteClick() {}
+  deleteClick(id) {
+    this.apiService.removeExercise(id).subscribe(res => {
+      console.log("delete complete");
+      this.router.navigate(['/admin/ex/list']);
+    })
+  }
 }
