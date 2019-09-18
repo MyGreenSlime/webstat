@@ -8,7 +8,7 @@
           <th scope="col">Name</th>
           <th scope="col">Title</th>
           <th scope="col">Section</th>
-          <th scope="col">Hide</th>
+          <th scope="col">Show</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
             <div class="form-group">
               <div class="custom-control custom-switch">
                 <input type="checkbox" name="{{ex.name}}" class="custom-control-input" id="{{ex.name}}"
-                  (change)="changeDisable($event, ex, 'ex')" [checked]="ex.disable">
+                  (change)="changeDisable($event, ex, 'ex')" [checked]="!ex.disable">
                 <label class="custom-control-label" for="{{ex.name}}"></label>
               </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="form-group">
               <div class="custom-control custom-switch">
                 <input type="checkbox" name="{{task.name}}" class="custom-control-input" id="{{task.name}}"
-                  (change)="changeDisable($event, task, 'task')" [checked]="task.disable">
+                  (change)="changeDisable($event, task, 'task')" [checked]="!task.disable">
                 <label class="custom-control-label" for="{{task.name}}"></label>
               </div>
             </div>
