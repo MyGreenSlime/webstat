@@ -19,4 +19,4 @@ services :
     ports: 
       - 27017:27017
     volumes:
-      -  /home/statadmin/data/database/dev:/data/db
+      - /home/statadmin/data/database/dev:/data/db
