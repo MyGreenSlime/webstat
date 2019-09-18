@@ -1,13 +1,94 @@
-.result-list-wrapper {
-    .no-result {
-        min-height: calc( 100vh - 56px);
-        display: flex;
-        justify-content: center;align-items: center;
+@import "../../../../../styles/styles.scss";
 
-        span {
-            font-size: 1.5em;
-        }
+.result-list-wrapper {
+  .no-result {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-size: 1.5em;
     }
-    
+  }
+
+  @mixin titleOf($bg-color) {
+    border-radius: 30px;
+    background-color: $bg-color;
+    font-size: 1.3em;
+    margin: 10px;
+    padding: 5px 15px 8px 15px;
+    color: white;
+    text-align: center;
+  }
+
+  .ex-title {
+    @include titleOf($secondary);
+  }
+
+  .task-title {
+    @include titleOf($info);
+  }
+
+  .dist-title {
+    @include titleOf($warning);
+  }
+
+  .modal-dialog {
+    max-width: 100% !important;
+  }
+
+  .test {
+    max-width: 100% !important;
+  }
+
 
 }
+
+
+::ng-deep .dark-modal {
+  .modal-dialog {
+    max-width: 70%;
+
+    .user-data {
+      display: flex;
+      justify-content: center;
+      
+
+      .summary-area {
+        width: 50%;
+        max-width: 200px;
+        text-align: center;
+        max-height: 75vh;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+          span {
+              text-align: start;
+          }
+        }
+      }
+
+      .data-area {
+        width: 50%;
+        text-align: center;
+        max-height: 75vh;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+
+  }
+}
+
+// .data-modal {
+//   width: 80%;
+// .modal-dialog {
+//     max-width: 100% !important;
+// }

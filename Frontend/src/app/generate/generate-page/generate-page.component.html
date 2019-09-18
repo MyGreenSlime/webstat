@@ -3,6 +3,10 @@
 <section class="generate-page-wrapper">
   <h1> {{ exercise?.title }} </h1>
   <h2> {{ task?.title }} </h2>
+  <div style="display: flex">
+    <span class="aod">Amount of Data: {{ aod }} </span>
+    <span class="noc"> Number of Click: {{ noc }}</span>
+  </div>
   <div class="data-area">
     <span *ngFor="let x of tmp;">
       {{x}}

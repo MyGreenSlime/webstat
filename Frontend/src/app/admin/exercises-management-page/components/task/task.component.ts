@@ -31,7 +31,7 @@ export class TaskComponent implements OnInit {
       distribution: ["bernoulli", Validators.required],
       genAmount: [Number, Validators.required],
       parameters: this.formBuilder.array([]),
-      disable: [true, Validators.required]
+      disable: [false, Validators.required]
     });
   }
 
@@ -116,5 +116,10 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  deleteClick() {}
+  deleteClick(id) {
+    this.apiService.removeExercise(id).subscribe(res => {
+      console.log("delete complete");
+      this.router.navigate(['/admin/ex/list']);
+    })
+  }
 }
