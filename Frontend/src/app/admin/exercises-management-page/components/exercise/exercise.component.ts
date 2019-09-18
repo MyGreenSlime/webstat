@@ -33,7 +33,7 @@ export class ExerciseComponent implements OnInit {
       name: ["", Validators.required],
       description: ["", Validators.required],
       section: ["cpe", Validators.required],
-      disable: [true, Validators.required],
+      disable: [false, Validators.required],
       tasks: this.formBuilder.array([])
     });
   }
