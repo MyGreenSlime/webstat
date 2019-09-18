@@ -3,9 +3,11 @@
     <span> NO RESULT</span>
   </div>
   <div *ngIf="resultList[0]">
-    <h2>Result List</h2>
-    <h5>List of {{ resultList[0]?.exerciseName }} | Task: {{ resultList[0]?.taskName }} | Distribution:
-      {{ resultList[0]?.distribution }} </h5>
+    <div style="display: flex;">
+      <span class="ex-title">Exercise: {{ resultList[0]?.exerciseName }}</span>
+      <span class="task-title">Task: {{ resultList[0]?.taskName }}</span>
+      <span class="dist-title">Distribution: {{ resultList[0]?.distribution }}</span>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -17,6 +19,7 @@
           <th scope="col">Max</th>
           <th scope="col">SD</th>
           <th scope="col">Variance</th>
+          <th scope="col">Data</th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +32,7 @@
           <td> {{ res?.summary?.maxValue }} </td>
           <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
+          <td> <button class="btn btn-outline-info" (click)="viewDataClick()">View</button>  </td>
         </tr>
       </tbody>
     </table>

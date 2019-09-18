@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 import { ApiService } from "../../../../shared/services/api.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: "app-exercise",
@@ -24,7 +25,8 @@ export class ExerciseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.exerciseForm = this.formBuilder.group({
       title: ["", Validators.required],
@@ -114,5 +116,7 @@ export class ExerciseComponent implements OnInit {
     }
   }
 
-  deleteClick() {}
+  deleteClick() {
+    
+  }
 }

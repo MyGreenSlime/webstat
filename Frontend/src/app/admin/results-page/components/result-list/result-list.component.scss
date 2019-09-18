@@ -1,13 +1,36 @@
+@import "../../../../../styles/styles.scss";
+
 .result-list-wrapper {
-    .no-result {
-        min-height: calc( 100vh - 56px);
-        display: flex;
-        justify-content: center;align-items: center;
+  .no-result {
+    min-height: calc(100vh - 56px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        span {
-            font-size: 1.5em;
-        }
+    span {
+      font-size: 1.5em;
     }
-    
+  }
 
+  @mixin titleOf($bg-color) {
+    border-radius: 30px;
+    background-color: $bg-color;
+    font-size: 1.3em;
+    margin: 10px;
+    padding: 5px 15px 8px 15px;
+    color: white;
+    text-align: center;
+  }
+
+  .ex-title {
+    @include titleOf($secondary);
+  }
+
+  .task-title {
+    @include titleOf($info);
+  }
+
+  .dist-title {
+    @include titleOf($warning);
+  }
 }
