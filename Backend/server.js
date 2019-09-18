@@ -5,16 +5,15 @@ const session = require("express-session");
 const path = require('path')
 const mongoose = require("mongoose")
 const MongoStore = require('connect-mongo')(session);
-const permission = require('./middleware/permission')
 const passport = require('passport');
 const uuid = require('uuid/v4')
-
+const MongoConfig = require('./config/database')
 const app = express();
 const port = 3001;
 
 app.use(express.static(path.join(__dirname, 'client/')));
 
-mongoose.connect('mongodb://spire.cpe.ku.ac.th:27018/webstat', {
+mongoose.connect('mongodb://'+MongoConfig.MONGO_URL+':'+MongoConfig.MONGO_PORT+'/webstat', {
   useNewUrlParser: true,
   "auth": { "authSource": "admin" },
     "user": "root",
@@ -24,6 +23,7 @@ mongoose.connect('mongodb://spire.cpe.ku.ac.th:27018/webstat', {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
+  console.log(MongoConfig.MONGO_URL, MongoConfig.MONGO_PORT)
   console.log("connect database")
 });
 
@@ -73,14 +73,6 @@ app.all("/*", function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   next();
 });
-
-// app.get('/home', permission.isLogin(req,res) => {
-//   if(req.user){
-//     res.redirect('/home')
-//   } else {
-//     res.redirect('/login')
-//   }
-// })
 
 app.get('*', (req,res) =>{
   res.sendFile(path.join(__dirname+'/client/index.html'));
