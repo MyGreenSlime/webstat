@@ -3,9 +3,11 @@
     <span> NO RESULT</span>
   </div>
   <div *ngIf="resultList[0]">
-    <h2>Result List</h2>
-    <h5>List of {{ resultList[0]?.exerciseName }} | Task: {{ resultList[0]?.taskName }} | Distribution:
-      {{ resultList[0]?.distribution }} </h5>
+    <div style="display: flex;">
+      <span class="ex-title">Exercise: {{ resultList[0]?.exerciseName }}</span>
+      <span class="task-title">Task: {{ resultList[0]?.taskName }}</span>
+      <span class="dist-title">Distribution: {{ resultList[0]?.distribution }}</span>
+    </div>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -17,6 +19,7 @@
           <th scope="col">Max</th>
           <th scope="col">SD</th>
           <th scope="col">Variance</th>
+          <th scope="col">Data</th>
         </tr>
       </thead>
       <tbody>
@@ -29,8 +32,35 @@
           <td> {{ res?.summary?.maxValue }} </td>
           <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
+          <td> <button class="btn btn-outline-info" (click)="viewDataClick(content, res)">View</button> </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> {{ currentRes?.username }} </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body user-data">
+      <div class="summary-area">
+        <h5> Summary </h5>
+        <div><span> Mean: </span><span> {{ currentRes?.summary?.mean }} </span></div>
+        <div><span> Median:</span><span> {{ currentRes?.summary?.median }} </span></div>
+        <div><span> Mode:</span><span> {{ currentRes?.summary?.mode }} </span></div>
+        <div><span> Min Value:</span><span> {{ currentRes?.summary?.minValue }} </span></div>
+        <div><span> Max Value:</span><span> {{ currentRes?.summary?.maxValue }} </span></div>
+        <div> <span> SD:</span><span> {{ currentRes?.summary?.sd }} </span></div>
+        <div> <span> Variance:</span><span> {{ currentRes?.summary?.variance }} </span></div>
+      </div>
+      <div class="data-area">
+        <h5>Data</h5>
+        <span *ngFor="let data of currentRes?.data"> {{ data }} </span>
+      </div>
+    </div>
+  </ng-template>
+  <hr>
 </section>

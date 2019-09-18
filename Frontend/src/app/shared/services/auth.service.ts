@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post("/api/users/logout", null);
+    this.cookieService.deleteAll();
+    return this.http.post("/api/users/logout", null)
   }
 }
