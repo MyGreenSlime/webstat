@@ -16,7 +16,8 @@ const ResultSchema = new Schema({
         minValue : Number,
         sd : Number,
         variance : Number,
-        cumulative : [Number]
+        cumulative : [Number],
+        count : Number
     },
     timeStamp : { type : Date, default: Date.now }
     
