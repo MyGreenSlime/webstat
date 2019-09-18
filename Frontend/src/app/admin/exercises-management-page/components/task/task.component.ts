@@ -91,7 +91,7 @@ export class TaskComponent implements OnInit {
 
   saveClick() {
     if (this.taskForm.invalid) {
-      console.log(this.taskForm.value);
+      // console.log(this.taskForm.value);
       alert("กรอกให้ครบสิ");
       return;
     }

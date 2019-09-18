@@ -29,12 +29,12 @@ export class ListComponent implements OnInit {
       if (params.type) this.type = params.type;
       if (this.type === "task") {
         this.apiService.getTasksAll().subscribe(res => {
-          console.log(res.detail);
+          // console.log(res.detail);
           this.tasks = res.detail;
         });
       } else {
         this.apiService.getExercisesAll().subscribe(res => {
-          console.log(res.detail);
+          // console.log(res.detail);
           this.exercises = res.detail;
         });
       }

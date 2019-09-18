@@ -18,7 +18,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.apiService.getExercisesAll().subscribe(res => {
       this.exercises = res.detail;
-      console.log(this.exercises);
+      // console.log(this.exercises);
     })
 
     this.user = this.globalService.getLocalStorage("user")

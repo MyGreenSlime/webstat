@@ -31,11 +31,11 @@ export class GeneratePageComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params.ex && params.task) {
         this.apiService.getExercisesById(params.ex).subscribe(res => {
-          console.log("ex:", res.detail);
+          // console.log("ex:", res.detail);
           this.exercise = res.detail;
         });
         this.apiService.getTaskById(params.task).subscribe(res => {
-          console.log("task:", res.detail);
+          // console.log("task:", res.detail);
           this.task = res.detail;
           this.parameters = res.detail.parameters;
         });
@@ -48,16 +48,16 @@ export class GeneratePageComponent implements OnInit {
     this.defineFunction(this.task.distribution.name);
     this.tmp = [];
     for (let i = 0; i < this.task.genAmount; i++) {
-      let dataGen = this.generate();
+      var dataGen = Number(parseFloat(this.generate()).toFixed(4));
       this.data.push(dataGen);
       //case expo
       if (this.task.distribution.name === "exponential") {
         if (this.data.length - 1) {
-          this.culTmp.push(this.culTmp[this.culTmp.length - 1] + dataGen);
+          this.culTmp.push(Number(parseFloat(this.culTmp[this.culTmp.length - 1] + dataGen).toFixed(4)));
         } else {
           this.culTmp.push(dataGen);
         }
-        this.tmp.push(this.culTmp[this.culTmp.length - 1]);
+        this.tmp.push(Number(parseFloat(this.culTmp[this.culTmp.length - 1])).toFixed(4));
       } else {
         this.tmp.push(dataGen);
       }

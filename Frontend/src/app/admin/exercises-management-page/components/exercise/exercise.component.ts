@@ -54,13 +54,13 @@ export class ExerciseComponent implements OnInit {
             for (let i = 0; i < this.exercise.tasks.length; i++) {
               <FormArray>this.exerciseForm.controls.tasks.push(new FormControl(this.exercise.tasks[i]._id))
             }
-            console.log(this.exerciseForm.value)
+            // console.log(this.exerciseForm.value)
           }, 200);
         });
       }
     });
     this.apiService.getTasksAll().subscribe(res => {
-      console.log(res.detail);
+      // console.log(res.detail);
       this.tasks = res.detail;
     });
   }
@@ -73,7 +73,7 @@ export class ExerciseComponent implements OnInit {
       let index = <FormArray>this.exerciseForm.controls.tasks.controls.findIndex(x => x.value == task._id);
       <FormArray>this.exerciseForm.controls.tasks.removeAt(index);
     }
-    console.log(this.exerciseForm.controls.tasks);
+    // console.log(this.exerciseForm.controls.tasks);
   }
 
   findTask(id) {

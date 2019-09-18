@@ -15,7 +15,7 @@ export class ResultListComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
-    console.log(this.resultList);
+    // console.log(this.resultList);
   }
 
   viewDataClick(content, res) {

@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
     } else {
       this.authService.login(this.loginForm.value).subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
           let user = {
             username: res.detail.user.username,
             fullName: res.detail.user.fullName,
