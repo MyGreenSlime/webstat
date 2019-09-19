@@ -43,7 +43,7 @@ export class ListComponent implements OnInit {
 
   changeDisable(e, x, type) {
     let param = {
-      disable: e.target.checked
+      disable: !e.target.checked
     }
     if (type === "ex") {
       this.apiService.editExercise(x._id, param).subscribe(res => {
