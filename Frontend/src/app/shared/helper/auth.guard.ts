@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
     if (this.cookieService.get("cookie-isa") && !this.isExpire()) {
       return true;
     }
-
+    
     this.router.navigate(["/login"]);
     return false;
   }
