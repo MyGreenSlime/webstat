@@ -49,7 +49,7 @@ export class ResultListComponent implements OnChanges {
     this.currentData = [];
     this.currentRes = res;
 
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, { windowClass: 'data-modal' }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
       },
