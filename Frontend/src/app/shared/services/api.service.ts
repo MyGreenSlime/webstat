@@ -44,6 +44,10 @@ export class ApiService {
     return this.http.delete("/api/exercises/" + id);
   }
 
+  removeResult(id): Observable<any> {
+    return this.http.delete("/api/results/" + id);
+  }
+
   getExercisesAll(): Observable<any> {
     return this.http.get("/api/exercises");
   }

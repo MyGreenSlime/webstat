@@ -1,28 +1,37 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
   selector: 'app-result-list',
   templateUrl: './result-list.component.html',
   styleUrls: ['./result-list.component.scss']
 })
-export class ResultListComponent implements OnInit {
-  @Input() resultList: any;
+export class ResultListComponent implements OnChanges {
+  @Input() param: any;
   closeResult: string;
   currentRes: any;
   currentData = [];
+  resultList = [];
   
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private apiService: ApiService) { }
 
-  ngOnInit() {
-    // console.log(this.resultList);
+  ngOnChanges() {
+    this.getResult();
+  }
+
+  getResult() {
+    this.apiService.getResult(this.param).subscribe(res => {
+      // console.log(res.detail)
+      this.resultList = res.detail;
+    })
   }
 
   viewDataClick(content, res) {
   this.currentData = [];
   this.currentRes = res;
   
-    this.modalService.open(content, {windowClass: 'dark-modal'}).result.then((result) => {
+    this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -37,6 +46,23 @@ export class ResultListComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  deleteClick(confirmDelete, res) {
+    this.currentRes = res;
+    this.modalService.open(confirmDelete, { centered: true }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  confirmDeleteClick(res) {
+    this.apiService.removeResult(res.id).subscribe(res => {
+      this.modalService.dismissAll();
+      this.getResult();
+      console.log("remove result complete!");
+    })
   }
 
 }
