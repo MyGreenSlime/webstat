@@ -19,6 +19,7 @@ export class HomePageComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router, private globalService: GlobalService, private authServie: AuthService) { }
 
   ngOnInit() {
+    this.globalService.showPageLoading(false);
     this.apiService.getExercisesAll().subscribe(res => {
       this.exercisesAll = res.detail;
       this.selectSection('cpe');

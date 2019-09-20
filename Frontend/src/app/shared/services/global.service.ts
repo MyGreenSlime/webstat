@@ -6,6 +6,15 @@ import { Injectable } from '@angular/core';
 export class GlobalService {
 
   constructor() { }
+  
+  showPageLoading(isShow) {
+    let className = "page-loading";
+    if (isShow) {
+      document.body.classList.add(className);
+    } else {
+      document.body.classList.remove(className);
+    }
+  }
 
   getLocalStorage(key) {
     var value = null;

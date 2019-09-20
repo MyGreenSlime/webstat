@@ -1,3 +1,32 @@
 @import "./variables";
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/bootswatch/dist/minty/bootswatch"
+@import "../../node_modules/bootswatch/dist/minty/bootswatch";
+
+
+
+body {
+  .page-overlay {
+    display: none;
+  }
+
+  &.page-loading {
+    .page-overlay {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      background-color: rgba($color: #fff, $alpha: 0.5);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 20%;
+      }
+    }
+  }
+
+
+}
