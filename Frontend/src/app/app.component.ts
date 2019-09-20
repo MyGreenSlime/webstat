@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // document.body.classList.remove('page-loading');
+    document.body.classList.remove('page-loading');
   }
 
   cookieHandler() {
