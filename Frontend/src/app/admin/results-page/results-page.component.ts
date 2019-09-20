@@ -10,6 +10,7 @@ export class ResultsPageComponent implements OnInit {
   exercises: any;
   resultList: any;
   showSidebar: boolean = true;
+  param: any;
 
   constructor(private apiService: ApiService) {}
 
@@ -20,14 +21,11 @@ export class ResultsPageComponent implements OnInit {
   }
 
   taskClick(ex, task) {
-    let param = {
+    this.param = {
       exerciseName: ex.name,
       taskName: task.name
     }
-    this.apiService.getResult(param).subscribe(res => {
-      // console.log(res.detail)
-      this.resultList = res.detail;
-    })
+    console.log(this.param);
   }
 
   sidebarClick() {

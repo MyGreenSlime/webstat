@@ -35,6 +35,7 @@
           <td> {{ res?.summary?.variance }} </td>
           <td> {{ res?.summary?.count }} </td>
           <td> <button class="btn btn-outline-info" (click)="viewDataClick(content, res)">View</button> </td>
+          <td> <button class="btn btn-outline-danger" (click)="deleteClick(confirmDelete, res)">Delete</button> </td>
         </tr>
       </tbody>
     </table>
@@ -67,6 +68,20 @@
         <h5>Cumulative Data</h5>
         <span *ngFor="let data of currentRes?.summary?.cumulative"> {{ data }} </span>
       </div>
+    </div>
+  </ng-template>
+
+  <ng-template #confirmDelete let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title"> Are You Sure To Delete Result of User: {{ currentRes?.username }}  </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align: center;">
+        <button class="btn btn-danger" (click)="confirmDeleteClick(currentRes)"> Confirm Delete </button>
+      </div>  
     </div>
   </ng-template>
   <hr>
