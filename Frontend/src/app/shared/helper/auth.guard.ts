@@ -2,36 +2,38 @@ import { Injectable } from "@angular/core";
 import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree,
   CanActivate,
   Router
 } from "@angular/router";
-import { Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
+import { AuthService } from "../services/auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router, private cookieService: CookieService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // case login and register
     if (route.data.roles === "login" || route.data.roles === "register") {
-      if (this.cookieService.get("cookie-isa") && !this.isExpire()) {
-          window.history.back();
-          return false;
+      if (this.authService.isLoggedIn()) {
+        return false;
       }
+      window.history.back();
       return true;
     }
 
     // case admin
     if (route.data.roles === "admin") {
-      if (this.isExpire()) {
+      if (!this.authService.isLoggedIn()) {
         this.router.navigate(["/login"]);
         return false;
       }
-      if (atob(this.cookieService.get("cookie-isa")) === "admin") {
+      if (this.authService.isAdmin()) {
         return true;
       }
       this.router.navigate(["/home"]);
@@ -39,19 +41,11 @@ export class AuthGuard implements CanActivate {
     }
 
     // normal case
-    if (this.cookieService.get("cookie-isa") && !this.isExpire()) {
+    if (this.authService.isLoggedIn()) {
       return true;
     }
-    
-    this.router.navigate(["/login"]);
-    return false;
-  }
 
-  isExpire() {
-    if (new Date(this.cookieService.get("exp")) < new Date()) {
-      this.cookieService.deleteAll();
-      return true;
-    }
+    this.router.navigate(["/login"]);
     return false;
   }
 }

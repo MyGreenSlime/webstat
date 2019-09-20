@@ -13,13 +13,27 @@ export class AuthService {
 
   isLoggedIn() {
     if (this.cookieService.get("cookie-isa")) {
-      let now = new Date();
-      if (new Date(this.cookieService.get("exp")) < now) {
-        this.cookieService.deleteAll();
+      if (this.isExpire()) {
+        this.userLogout();
         return false;
       }
       return true;
     }
+  }
+
+  isExpire() {
+    if (new Date(this.cookieService.get("exp")) < new Date()) {
+      this.cookieService.deleteAll();
+      return true;
+    }
+    return false;
+  }
+
+  isAdmin() {
+    if (atob(this.cookieService.get("cookie-isa")) === "admin") {
+      return true;
+    }
+    return false;
   }
 
   login(param): Observable<any> {

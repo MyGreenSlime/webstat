@@ -15,9 +15,9 @@ export class NavbarComponent implements OnInit {
   constructor(private cookieService: CookieService, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (this.cookieService.get("cookie-isa")) {
+    if (this.authService.isLoggedIn()) {
       this.isLoggedIn = true;
-      if (atob(this.cookieService.get("cookie-isa")) === "admin") {
+      if (this.authService.isAdmin()) {
         this.isAdmin = true;
       }
     } 

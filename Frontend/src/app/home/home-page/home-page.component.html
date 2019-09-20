@@ -4,8 +4,17 @@
     <h3>Probability And Statistic</h3>
     <h5>Welcome, {{ user.fullName }} </h5>
   </div>
+  <div class="section-button-group">
+    <div *ngIf="isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-primary active" (click)="selectSection('cpe')">
+        <input type="radio" name="options" id="cpe" autocomplete="off" checked=""> CPE
+      </label>
+      <label class="btn btn-primary" (click)="selectSection('ske')">
+        <input type="radio" name="options" id="ske" autocomplete="off"> SKE
+      </label>
+    </div>
+  </div>
   <div class="content">
-
     <div class="exercise-card " *ngFor="let ex of exercises; let i = index;">
       <h4> {{ ex.title }} </h4>
       <hr>
