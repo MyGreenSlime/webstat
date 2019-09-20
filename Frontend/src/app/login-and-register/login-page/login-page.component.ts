@@ -43,6 +43,7 @@ export class LoginPageComponent implements OnInit {
         this.showInvalidAlert = false;
       }, 3000);
     } else {
+      this.globalService.showPageLoading(true);
       this.authService.login(this.loginForm.value).subscribe(
         res => {
           // console.log(res)
@@ -61,6 +62,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate(["/home"]);
         },
         error => {
+          this.globalService.showPageLoading(false);
           this.showInvalidUser = true;
           setTimeout(() => {
             this.showInvalidUser = false;

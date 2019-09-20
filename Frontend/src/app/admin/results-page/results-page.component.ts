@@ -25,7 +25,6 @@ export class ResultsPageComponent implements OnInit {
       exerciseName: ex.name,
       taskName: task.name
     }
-    console.log(this.param);
   }
 
   sidebarClick() {
