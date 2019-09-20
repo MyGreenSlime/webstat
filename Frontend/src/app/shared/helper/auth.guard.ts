@@ -14,7 +14,6 @@ import { AuthService } from "../services/auth.service";
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private cookieService: CookieService,
     private authService: AuthService
   ) {}
 
@@ -22,7 +21,7 @@ export class AuthGuard implements CanActivate {
     // case login and register
     if (route.data.roles === "login" || route.data.roles === "register") {
       if (this.authService.isLoggedIn()) {
-        return true;
+        return false;
       }
       window.history.back();
       return true;
