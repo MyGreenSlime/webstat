@@ -28,13 +28,13 @@ router.post("/create", permission.isLogin, async (req, res) => {
     }
     let result =  await Results.findOne({
       exerciseName: data.exerciseName,
-      username: data.username
+      username: req.user.username
     })
     if(!result){
       let newResult = await Results.create({
         exerciseName: data.exerciseName,
         taskName: data.taskName,
-        username: data.username,
+        username: req.user.username,
         distribution: data.distribution,
         data: data.data,
         summary: summary
@@ -48,6 +48,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
         {
           $set: {
             taskName: data.taskName,
+            username: req.user.username,
             data: data.data,
             summary: summary,
             timeStamp : Date.now()
