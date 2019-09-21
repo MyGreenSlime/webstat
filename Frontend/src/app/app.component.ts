@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { GlobalService } from './shared/services/global.service';
 
 @Component({
   selector: "app-root",
@@ -9,21 +8,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private cookieService: CookieService,
-    private router: Router
+    private globalService: GlobalService
   ) {
-    this.cookieHandler();
   }
 
   ngOnInit() {
-    document.body.classList.remove('page-loading');
-  }
-
-  cookieHandler() {
-    // let cookies = this.cookieService.get('cookie-isa')
-    // if(!cookies) {
-    //   this.router.navigate(["/login"]);
-    //   return;
-    // }
+    this.globalService.showPageLoading(false);
   }
 }
