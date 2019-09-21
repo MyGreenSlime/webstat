@@ -13,7 +13,7 @@ router.post("/register", async (req, res) => {
     let user = await Users.findOne({
       username: data.username.toLowerCase()
     });
-    if (user == null) {
+    if (user === null) {
       let newuser = await Users.create({
         username: data.username.toLowerCase(),
         fullName: data.fullName,
