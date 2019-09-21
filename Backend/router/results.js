@@ -27,7 +27,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
       count : (new Array(...data.data)).length
     }
     let result =  await Results.findOne({
-      exerciseName: data.exerciseName,
+      taskName: data.taskName,
       username: req.user.username
     })
     if(!result){
@@ -47,7 +47,6 @@ router.post("/create", permission.isLogin, async (req, res) => {
         },
         {
           $set: {
-            taskName: data.taskName,
             username: req.user.username,
             data: data.data,
             summary: summary,
