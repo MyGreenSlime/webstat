@@ -8,6 +8,18 @@
     <span class="noc"> Number of Click: {{ noc }}</span>
   </div>
   <div class="data-area">
+    <span *ngIf="!tmp.length">
+      To collect samples:
+      <br>
+      <span class="dot"></span> Click "Generate" to collect needed samples. One time click may give you insufficient samples. Copy and paste
+      values into your spreadsheet. Then, click "Generate" to collect more samples without reset.
+      <br>
+      <span class="dot"></span>Once you collect sufficient samples, make sure you click "Submit". Your assignment will be graded upon statistics
+      that you submit.
+      <br>
+      <span class="dot"></span>Click "Reset" to restart the process of sample collection.
+      Activity
+    </span>
     <span *ngFor="let x of tmp;">
       {{x}}
     </span>
