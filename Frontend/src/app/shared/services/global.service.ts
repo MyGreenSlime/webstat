@@ -7,7 +7,7 @@ export class GlobalService {
 
   constructor() { }
   
-  showPageLoading(isShow) {
+  showLoading(isShow) {
     let className = "page-loading";
     if (isShow) {
       document.body.classList.add(className);
