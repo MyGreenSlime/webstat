@@ -8,6 +8,7 @@
           <th scope="col">Name</th>
           <th scope="col">Title</th>
           <th scope="col">Section</th>
+          <th scope="col">Description</th>
           <th scope="col">Show</th>
         </tr>
       </thead>
@@ -15,6 +16,7 @@
         <tr *ngFor="let ex of exercises;">
           <th scope="row"> {{ ex.name }} </th>
           <td>{{ ex.title }}</td>
+          <td>{{ ex.description }}</td>
           <td>{{ ex.section }}</td>
           <td>
             <div class="form-group">

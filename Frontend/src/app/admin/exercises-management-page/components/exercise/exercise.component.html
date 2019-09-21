@@ -2,13 +2,13 @@
   <h2 class="title">Exercise</h2>
   <form [formGroup]="exerciseForm">
     <div class="form-group row">
-      <label for="name" class="col-md-3 col-form-label">Exercise Name: </label>
+      <label for="name" class="col-md-3 col-form-label">Exercise Name* : </label>
       <div class="col-md-9">
         <input type="text" class="form-control" formControlName="name" placeholder="exercise name">
       </div>
     </div>
     <div class="form-group row">
-      <label for="title" class="col-md-3 col-form-label">Exercise Title: </label>
+      <label for="title" class="col-md-3 col-form-label">Exercise Title* : </label>
       <div class="col-md-9">
         <input type="text" class="form-control" formControlName="title" placeholder="exercise title">
       </div>
@@ -36,7 +36,7 @@
     <hr>
 
     <div class="task-list-wrapper">
-      <h5>Task List</h5>
+      <h5>Add Task</h5>
       <table class="table table-hover">
         <thead>
           <tr>

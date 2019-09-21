@@ -12,28 +12,35 @@
       <thead>
         <tr>
           <th scope="col">Username</th>
-          <th scope="col">Mean</th>
-          <th scope="col">Median</th>
+          <!-- <th scope="col">Median</th>
           <th scope="col">Mode</th>
           <th scope="col">Min</th>
-          <th scope="col">Max</th>
-          <th scope="col">SD</th>
+          <th scope="col">Max</th> -->
+          <!-- <th scope="col">SD</th>
           <th scope="col">Variance</th>
+          <th scope="col">Count</th> -->
+          <th scope="col">Time</th>
+          <th scope="col">Mean</th>
+          <th scope="col">SD</th>
           <th scope="col">Count</th>
-          <th scope="col">Data</th>
+          <th scope="col">Full Data</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let res of resultList;">
           <th scope="row"> {{ res?.username }} </th>
-          <td> {{ res?.summary?.mean }} </td>
-          <td> {{ res?.summary?.median }} </td>
+          <!-- <td> {{ res?.summary?.median }} </td>
           <td> {{ res?.summary?.mode }} </td>
           <td> {{ res?.summary?.minValue }} </td>
-          <td> {{ res?.summary?.maxValue }} </td>
-          <td> {{ res?.summary?.sd }} </td>
+          <td> {{ res?.summary?.maxValue }} </td> -->
+          <!-- <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
-          <td> {{ res?.summary?.count }} </td>
+          <td> {{ res?.summary?.count }} </td> -->
+          
+          <td> {{ getTime(res?.timeStamp) }} </td>
+          <td> {{ res?.summary?.mean }} </td>
+          <td> {{ res?.summary?.sd }} </td>
+          <td> {{ res?.summary?.count }}
           <td> <button class="btn btn-outline-info" (click)="viewDataClick(content, res)">View</button> </td>
           <td> <button class="btn btn-outline-danger" (click)="deleteClick(confirmDelete, res)">Delete</button> </td>
         </tr>
@@ -59,6 +66,9 @@
         <div> <span> SD:</span><span> {{ currentRes?.summary?.sd }} </span></div>
         <div> <span> Variance:</span><span> {{ currentRes?.summary?.variance }} </span></div>
         <div> <span> Count:</span><span> {{ currentRes?.summary?.count }} </span></div>
+        <span>Time</span>
+        <span> {{ getTime(currentRes?.timeStamp) }} </span>
+        
       </div>
       <div class="data-area">
         <h5>Raw Data</h5>

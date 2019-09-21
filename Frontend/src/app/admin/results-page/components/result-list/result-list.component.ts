@@ -54,6 +54,11 @@ export class ResultListComponent implements OnChanges {
     );
   }
 
+  getTime(time) {
+    var dt = new Date(time);
+    return String(dt).split("GMT")[0];
+  }
+
   viewDataClick(content, res) {
     this.currentData = [];
     this.currentRes = res;

@@ -31,7 +31,7 @@ export class ExerciseComponent implements OnInit {
     this.exerciseForm = this.formBuilder.group({
       title: ["", Validators.required],
       name: ["", Validators.required],
-      description: ["", Validators.required],
+      description: [""],
       section: ["cpe", Validators.required],
       disable: [false, Validators.required],
       tasks: this.formBuilder.array([])
