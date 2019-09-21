@@ -22,25 +22,34 @@ export class ResultListComponent implements OnChanges {
   ) {}
 
   ngOnChanges() {
-    console.log(this.param)
     if (this.param) {
       this.getResult();
     }
   }
 
   getResult() {
-    // this.globalService.showPageLoading(true);
+    // this.globalService.showLoading(true);
     this.apiService.getResult(this.param).subscribe(
       res => {
         // console.log(res.detail)
         this.resultList = res.detail;
-        // this.globalService.showPageLoading(false);
+        this.resultList = this.resultList.sort((a, b) => {
+          if (a.username < b.username) {
+            return -1;
+          }
+          if (a.username > b.username) {
+            return 1;
+          }
+          return 0;
+        });
+        console.log(this.resultList);
+        // this.globalService.showLoading(false);
       },
       error => {
-        // this.globalService.showPageLoading(false);
+        // this.globalService.showLoading(false);
       },
       () => {
-        // this.globalService.showPageLoading(false);
+        // this.globalService.showLoading(false);
       }
     );
   }
@@ -49,7 +58,7 @@ export class ResultListComponent implements OnChanges {
     this.currentData = [];
     this.currentRes = res;
 
-    this.modalService.open(content, { windowClass: 'data-modal' }).result.then(
+    this.modalService.open(content, { windowClass: "data-modal" }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
       },
