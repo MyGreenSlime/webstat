@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
       if (this.authService.isLoggedIn()) {
         return false;
       }
-      window.history.back();
+      // window.history.back();
       return true;
     }
 
