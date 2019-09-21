@@ -19,12 +19,12 @@ export class HomePageComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router, private globalService: GlobalService, private authServie: AuthService) { }
 
   ngOnInit() {
-    this.globalService.showPageLoading(false);
+    this.globalService.showLoading(false);
     this.apiService.getExercisesAll().subscribe(res => {
       this.exercisesAll = res.detail;
       this.selectSection('cpe');
       // console.log(this.exercisesAll)
-      console.log(this.exercises);
+      // console.log(this.exercises);
     })
 
     this.user = this.globalService.getLocalStorage("user")
@@ -33,7 +33,7 @@ export class HomePageComponent implements OnInit {
 
   selectSection(section) {
     this.exercises = this.exercisesAll.filter(ex => {
-      console.log(ex.section, section);
+      // console.log(ex.section, section);
       return ex.section === section;
     })
     console.log(this.exercises)

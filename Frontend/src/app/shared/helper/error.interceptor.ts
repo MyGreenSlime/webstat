@@ -6,17 +6,19 @@ import {
   HttpInterceptor
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { catchError, finalize } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
+import { GlobalService } from "../services/global.service";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private globalService: GlobalService
   ) {}
 
   intercept(

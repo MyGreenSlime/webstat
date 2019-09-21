@@ -115,7 +115,7 @@ export class GeneratePageComponent implements OnInit {
   }
 
   submitClick() {
-    this.globalService.showPageLoading(true);
+    this.globalService.showLoading(true);
     let params = {
       exerciseName: this.exercise.name,
       taskName: this.task.name,
@@ -125,13 +125,13 @@ export class GeneratePageComponent implements OnInit {
     };
     this.apiService.saveData(params).subscribe(
       res => {
-        this.globalService.showPageLoading(false);
+        this.globalService.showLoading(false);
         console.log("save complete!");
         alert("Save Complete!");
         this.resetClick();
       },
       error => {
-        this.globalService.showPageLoading(false);
+        this.globalService.showLoading(false);
         console.log("ERROR! Please try again!", error);
         alert("ERROR! Please try again!");
       }
