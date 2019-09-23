@@ -6,7 +6,7 @@
   </div>
   <div class="section-button-group">
     <div *ngIf="isAdmin" class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-primary active" [ngClass]="{'active': section === 'cpe'}" (click)="selectSection('cpe')">
+      <label class="btn btn-primary" [ngClass]="{'active': section === 'cpe'}" (click)="selectSection('cpe')">
         <input type="radio" name="options" id="cpe" autocomplete="off" checked=""> CPE
       </label>
       <label class="btn btn-primary" [ngClass]="{'active': section === 'ske'}" (click)="selectSection('ske')">
