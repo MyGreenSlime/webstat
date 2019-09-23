@@ -15,6 +15,7 @@ export class HomePageComponent implements OnInit {
   exercises: any;
   user: any;
   isAdmin: boolean = false;
+  section: string;
 
   constructor(private apiService: ApiService, private router: Router, private globalService: GlobalService, private authServie: AuthService) { }
 
@@ -24,13 +25,15 @@ export class HomePageComponent implements OnInit {
     this.globalService.showLoading(false);
     this.apiService.getExercisesAll().subscribe(res => {
       this.exercisesAll = res.detail;
-      this.selectSection(this.user.section.toLowerCase());
+      this.section = this.user.section.toLowerCase();
+      this.selectSection(this.section);
       // console.log(this.exercisesAll)
       // console.log(this.exercises);
     })
   }
 
   selectSection(section) {
+    this.section = section;
     this.exercises = this.exercisesAll.filter(ex => {
       // console.log(ex.section, section);
       return ex.section === section;
