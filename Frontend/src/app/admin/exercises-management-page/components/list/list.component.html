@@ -2,41 +2,43 @@
   <div *ngIf="type === 'exercise' || !type">
     <h2>Exercises List!</h2>
     <button class="btn btn-secondary btn-create" [routerLink]="['/admin/ex/exercise']"> Create Exercise </button>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Title</th>
-          <th scope="col">Section</th>
-          <th scope="col">Description</th>
-          <th scope="col">Show</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ex of exercises;">
-          <th scope="row"> {{ ex.name }} </th>
-          <td>{{ ex.title }}</td>
-          <td>{{ ex.description }}</td>
-          <td>{{ ex.section }}</td>
-          <td>
-            <div class="form-group">
-              <div class="custom-control custom-switch">
-                <input type="checkbox" name="{{ex.name}}" class="custom-control-input" id="{{ex.name}}"
-                  (change)="changeDisable($event, ex, 'ex')" [checked]="!ex.disable">
-                <label class="custom-control-label" for="{{ex.name}}"></label>
+    <div class="table-wrapper">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Title</th>
+            <th scope="col">Section</th>
+            <th scope="col">Description</th>
+            <th scope="col">Show</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ex of exercises;">
+            <th scope="row"> {{ ex.name }} </th>
+            <td>{{ ex.title }}</td>
+            <td>{{ ex.description }}</td>
+            <td>{{ ex.section }}</td>
+            <td>
+              <div class="form-group">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" name="{{ex.name}}" class="custom-control-input" id="{{ex.name}}"
+                    (change)="changeDisable($event, ex, 'ex')" [checked]="!ex.disable">
+                  <label class="custom-control-label" for="{{ex.name}}"></label>
+                </div>
               </div>
-            </div>
-          </td>
-          <td style="text-align: end"><button class="btn btn-warning" [routerLink]="['/admin/ex/exercise']"
-              [queryParams]="{id: ex._id}">Edit</button></td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td style="text-align: end"><button class="btn btn-warning" [routerLink]="['/admin/ex/exercise']"
+                [queryParams]="{id: ex._id}">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div *ngIf="type === 'task'">
     <h2>Tasks List!</h2>
-    <button class="btn btn-secondary btn-create" [routerLink]="['/admin/ex/task']" > Create Task </button>
+    <button class="btn btn-secondary btn-create" [routerLink]="['/admin/ex/task']"> Create Task </button>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -60,7 +62,7 @@
               </div>
             </div>
           </td>
-          <td style="text-align: end" >
+          <td style="text-align: end">
             <button class="btn btn-secondary" [routerLink]="['/admin/ex/results']"
               [queryParams]="{id: task._id}">View</button>
             <button class="btn btn-warning" style="margin-left: 10px;" [routerLink]="['/admin/ex/task']"

@@ -34,6 +34,10 @@
     display: flex;
     flex-flow: row wrap;
 
+    @include screen-sm {
+      flex-flow: column;
+    }
+
     .exercise-card {
       margin: 20px;
       width: calc(50% - 40px);
@@ -41,6 +45,10 @@
       background-color: rgba($color: $gray-300, $alpha: 0.8);
       border-radius: 10px;
       box-shadow: 0 2px 10px 0 rgba($color: $gray-300, $alpha: 0.8);
+      
+      @include screen-sm {
+        width: calc(100% - 40px);
+      }
 
       hr {
         background-color: $gray-600 !important;
