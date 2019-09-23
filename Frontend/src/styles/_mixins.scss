@@ -1,0 +1,5 @@
+@mixin screen-sm {
+  @media screen and (max-width: 420px) {
+      @content;
+  }
+}
