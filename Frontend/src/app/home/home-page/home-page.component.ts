@@ -19,16 +19,15 @@ export class HomePageComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router, private globalService: GlobalService, private authServie: AuthService) { }
 
   ngOnInit() {
+    this.user = this.globalService.getLocalStorage("user")
+    this.isAdmin = this.authServie.isAdmin();
     this.globalService.showLoading(false);
     this.apiService.getExercisesAll().subscribe(res => {
       this.exercisesAll = res.detail;
-      this.selectSection('cpe');
+      this.selectSection(this.user.section.toLowerCase());
       // console.log(this.exercisesAll)
       // console.log(this.exercises);
     })
-
-    this.user = this.globalService.getLocalStorage("user")
-    this.isAdmin = this.authServie.isAdmin();
   }
 
   selectSection(section) {
