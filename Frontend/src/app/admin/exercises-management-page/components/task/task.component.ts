@@ -16,6 +16,8 @@ export class TaskComponent implements OnInit {
   taskForm: any;
   parameters: any;
   parameterForm: any;
+  dataFile: any;
+  dataArray = [];
 
   task: any;
 
@@ -89,6 +91,29 @@ export class TaskComponent implements OnInit {
     });
   }
 
+  handleFileInput(file) {
+    this.dataFile = file[0];
+    this.dataArray = [];
+    var reader = new FileReader();
+    reader.readAsText(this.dataFile);
+    let rawData;
+    let csvRecordsArray;
+    reader.onload = (data) => {
+      rawData = reader.result;
+      console.log(rawData);
+      csvRecordsArray = rawData.split(/\r\n|\n/);
+      csvRecordsArray.forEach(data => {
+        if (data) {
+          data = data.split(",");
+          data[0] = Number(parseFloat(data[0])).toFixed(5);
+          data[1] = Number(parseFloat(data[1])).toFixed(5);
+          this.dataArray.push(data[0] + ", " + data[1]);
+        }
+      });
+      console.log(this.dataArray);
+    }
+  }
+
   saveClick() {
     if (this.taskForm.invalid) {
       // console.log(this.taskForm.value);
@@ -97,10 +122,10 @@ export class TaskComponent implements OnInit {
     }
     if (this.task) {
       this.apiService.editTask(this.task._id, this.taskForm.value).subscribe(res => {
-          alert("task edited!");
-          this.router.navigate(['/admin/ex/list'], { queryParams: { type: 'task' } })
-          console.log("task edited!");
-        });
+        alert("task edited!");
+        this.router.navigate(['/admin/ex/list'], { queryParams: { type: 'task' } })
+        console.log("task edited!");
+      });
     } else {
       this.apiService.createTask(this.taskForm.value).subscribe(
         res => {
