@@ -15,17 +15,33 @@ router.post("/create", permission.isLogin, async (req, res) => {
   try {
     let data = req.body;
     data.distribution = data.distribution.toLowerCase();
-    let summary = {
-      mean: BasicStat.FindMean(new Array(...data.data)),
-      median: BasicStat.FindMedian(new Array(...data.data)),
-      mode:  BasicStat.FindMode(new Array(...data.data)),
-      maxValue : Number(parseFloat(Math.max(...data.data)).toFixed(4)),
-      minValue : Number(parseFloat(Math.min(...data.data)).toFixed(4)),
-      variance:  BasicStat.FindVariance(new Array(...data.data)),
-      sd: BasicStat.FindSD(new Array(...data.data)),
-      cumulative:  BasicStat.FindCumulative(new Array(...data.data)), 
-      count : (new Array(...data.data)).length
+    let summary = {}
+    if(typeof(data.data[0]) == 'number' ){
+      summary = {
+        mean: BasicStat.FindMean(new Array(...data.data)),
+        median: BasicStat.FindMedian(new Array(...data.data)),
+        mode:  BasicStat.FindMode(new Array(...data.data)),
+        maxValue : Number(parseFloat(Math.max(...data.data)).toFixed(4)),
+        minValue : Number(parseFloat(Math.min(...data.data)).toFixed(4)),
+        variance:  BasicStat.FindVariance(new Array(...data.data)),
+        sd: BasicStat.FindSD(new Array(...data.data)),
+        cumulative:  BasicStat.FindCumulative(new Array(...data.data)), 
+        count : (new Array(...data.data)).length
+      }
+    } else {
+      summary = {
+        mean: [BasicStat.FindMean(new Array(...data.data[0])),BasicStat.FindMean(new Array(...data.data[1]))],
+        median: [BasicStat.FindMedian(new Array(...data.data[0])),BasicStat.FindMedian(new Array(...data.data[1]))],
+        mode:  [BasicStat.FindMode(new Array(...data.data[0])),BasicStat.FindMode(new Array(...data.data[1]))],
+        maxValue : [Number(parseFloat(Math.max(...data.data[0])).toFixed(4)),Number(parseFloat(Math.max(...data.data[1])).toFixed(4))],
+        minValue : [Number(parseFloat(Math.min(...data.data[0])).toFixed(4)),Number(parseFloat(Math.min(...data.data[1])).toFixed(4))],
+        variance:  [BasicStat.FindVariance(new Array(...data.data[0])),BasicStat.FindVariance(new Array(...data.data[1]))],
+        sd: [BasicStat.FindSD(new Array(...data.data[0])),BasicStat.FindSD(new Array(...data.data[1]))],
+        cumulative:  [BasicStat.FindCumulative(new Array(...data.data[0])),BasicStat.FindCumulative(new Array(...data.data[1]))], 
+        count : (new Array(...data.data[0])).length
+      }
     }
+   
     let result =  await Results.findOne({
       taskName: data.taskName,
       username: req.user.username
