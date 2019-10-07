@@ -18,6 +18,8 @@ export class TaskComponent implements OnInit {
   parameterForm: any;
   dataFile: any;
   dataArray = [];
+  xArray = [];
+  yArray = [];
 
   task: any;
 
@@ -70,6 +72,7 @@ export class TaskComponent implements OnInit {
   }
 
   createParam() {
+    (<FormArray>this.taskForm.get('parameters')).clear();
     for (let i = 0; i < this.parameters.length; i++) {
       this.taskForm.controls.parameters.push(
         this.formBuilder.group({
@@ -84,7 +87,8 @@ export class TaskComponent implements OnInit {
   }
 
   changeDist(e) {
-    this.apiService.getDistribution(e.target.value).subscribe(res => {
+    this.distribution = e.target.value;
+    this.apiService.getDistribution(this.distribution).subscribe(res => {
       this.parameters = res.detail.parameters;
       this.createParam();
       this.taskForm.controls.distribution.setValue(res.detail._id);
@@ -100,7 +104,6 @@ export class TaskComponent implements OnInit {
     let csvRecordsArray;
     reader.onload = (data) => {
       rawData = reader.result;
-      console.log(rawData);
       csvRecordsArray = rawData.split(/\r\n|\n/);
       csvRecordsArray.forEach(data => {
         if (data) {
@@ -108,15 +111,17 @@ export class TaskComponent implements OnInit {
           data[0] = Number(parseFloat(data[0])).toFixed(5);
           data[1] = Number(parseFloat(data[1])).toFixed(5);
           this.dataArray.push(data[0] + ", " + data[1]);
+          this.xArray.push(data[0]);
+          this.yArray.push(data[1]);
         }
       });
-      console.log(this.dataArray);
+      this.taskForm.controls.parameters.controls[0].controls.value.setValue(this.xArray);
+      this.taskForm.controls.parameters.controls[1].controls.value.setValue(this.yArray);
     }
   }
 
   saveClick() {
     if (this.taskForm.invalid) {
-      // console.log(this.taskForm.value);
       alert("กรอกให้ครบสิ");
       return;
     }

@@ -31,25 +31,28 @@
     </div>
 
     <h5>Parameter(s)</h5>
-
-    <div formArrayName="parameters" *ngFor="let param of parameters; let i = index;">
-      <div [formGroupName]="i">
-        <div class="form-group row">
-          <label for="paramName" class="col-md-3 col-form-label">{{param.name}}</label>
-          <div class="col-md-9">
-            <input type="number" value="param.name" class="form-control" formControlName="value"
-              placeholder="parameter value">
+    <ng-template [ngIf]="distribution !== 'multiple random variable'">
+      <div formArrayName="parameters" *ngFor="let param of parameters; let i = index;">
+        <div [formGroupName]="i">
+          <div class="form-group row">
+            <label for="paramName" class="col-md-3 col-form-label">{{param.name}}</label>
+            <div class="col-md-9">
+              <input type="number" value="param.name" class="form-control" formControlName="value"
+                placeholder="parameter value">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div *ngIf="distribution === 'multiple random variables'"  class="form-group">
-      <label for="file">Please Upload Data File (.csv)</label>
-      <br>
-      <button class="btn btn-outline-info" (click)="fileUpload.click()">Upload</button>
-      <input type="file" id="file" (change)="handleFileInput($event.target.files)" #fileUpload hidden>
-      <span style="margin-left: 10px;"> {{ dataFile?.name }} </span>
-    </div>
+    </ng-template>
+    <ng-template [ngIf]="distribution === 'multiple random variable'">
+      <div class="form-group">
+        <label for="file">Please Upload Data File (.csv)</label>
+        <br>
+        <button class="btn btn-outline-info" (click)="fileUpload.click()">Upload</button>
+        <input type="file" id="file" (change)="handleFileInput($event.target.files)" #fileUpload hidden>
+        <span style="margin-left: 10px;"> {{ dataFile?.name }} </span>
+      </div>
+    </ng-template>
     <div class="button-block">
       <button class="btn btn-primary" (click)="saveClick()">
         Save
