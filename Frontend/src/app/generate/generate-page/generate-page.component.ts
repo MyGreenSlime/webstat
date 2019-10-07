@@ -15,7 +15,7 @@ export class GeneratePageComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private globalService: GlobalService
-  ) {}
+  ) { }
 
   exercise: any;
   task: any;
@@ -38,6 +38,8 @@ export class GeneratePageComponent implements OnInit {
           // console.log("task:", res.detail);
           this.task = res.detail;
           this.parameters = res.detail.parameters;
+          this.defineFunction(this.task.distribution.name);
+
         });
       }
     });
@@ -45,8 +47,28 @@ export class GeneratePageComponent implements OnInit {
 
   generateClick() {
     this.noc += 1;
-    this.defineFunction(this.task.distribution.name);
     this.tmp = [];
+
+    // case multiple random variables
+    if (this.task.distribution.name === "multiple random variable") {
+      var xArray = this.parameters[0].value;
+      var yArray = this.parameters[1].value;
+      var indexArray = [];
+      while (indexArray.length < this.task.genAmount) {
+        var generate = Math.floor(Math.random() * this.parameters[1].value.length) + 1;
+        if (indexArray.indexOf(generate) === -1) {
+          indexArray.push(generate);
+          this.data[0].push(Number(xArray[generate]));
+          this.data[1].push(Number(yArray[generate]));
+          this.tmp.push(xArray[generate] + ", " + yArray[generate]);
+        }
+      }
+      this.aod = this.data.length;
+      console.log(this.data);
+      return;
+    }
+
+    // other cases
     for (let i = 0; i < this.task.genAmount; i++) {
       var dataGen = Number(parseFloat(this.generate()).toFixed(4));
       this.data.push(dataGen);
@@ -111,6 +133,11 @@ export class GeneratePageComponent implements OnInit {
         );
         break;
       }
+      case "multiple random variable": {
+        this.data.push([]);
+        this.data.push([]);
+        break;
+      }
     }
   }
 
@@ -144,5 +171,6 @@ export class GeneratePageComponent implements OnInit {
     this.culTmp = [];
     this.aod = 0;
     this.noc = 0;
+    this.defineFunction(this.task.distribution.name);
   }
 }
