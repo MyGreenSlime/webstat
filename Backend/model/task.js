@@ -8,7 +8,7 @@ const TaskSchema = new Schema({
     genAmount : Number,
     parameters : [{
         name : String,
-        value : Number
+        value : mongoose.Schema.Types.Mixed
     }],
     disable : {
         type : Boolean,
