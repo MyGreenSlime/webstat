@@ -36,7 +36,7 @@
           <!-- <td> {{ res?.summary?.sd }} </td>
           <td> {{ res?.summary?.variance }} </td>
           <td> {{ res?.summary?.count }} </td> -->
-          
+
           <td> {{ getTime(res?.timeStamp) }} </td>
           <td> {{ res?.summary?.mean }} </td>
           <td> {{ res?.summary?.sd }} </td>
@@ -58,23 +58,29 @@
     <div class="modal-body user-data">
       <div class="summary-area">
         <h5> Summary </h5>
-        <div><span> Mean: </span><span> {{ currentRes?.summary?.mean }} </span></div>
-        <div><span> Median:</span><span> {{ currentRes?.summary?.median }} </span></div>
-        <div><span> Mode:</span><span> {{ currentRes?.summary?.mode }} </span></div>
-        <div><span> Min Value:</span><span> {{ currentRes?.summary?.minValue }} </span></div>
-        <div><span> Max Value:</span><span> {{ currentRes?.summary?.maxValue }} </span></div>
-        <div> <span> SD:</span><span> {{ currentRes?.summary?.sd }} </span></div>
-        <div> <span> Variance:</span><span> {{ currentRes?.summary?.variance }} </span></div>
-        <div> <span> Count:</span><span> {{ currentRes?.summary?.count }} </span></div>
+        <div><span> Mean: </span><span>{{ currentRes?.summary?.mean }} </span></div>
+        <div><span> Median: </span><span> {{ currentRes?.summary?.median }} </span></div>
+        <div><span> Mode: </span><span> {{ currentRes?.summary?.mode }} </span></div>
+        <div><span> Min Value: </span><span> {{ currentRes?.summary?.minValue }} </span></div>
+        <div><span> Max Value: </span><span> {{ currentRes?.summary?.maxValue }} </span></div>
+        <div> <span> SD: </span><span> {{ currentRes?.summary?.sd }} </span></div>
+        <div> <span> Variance: </span><span> {{ currentRes?.summary?.variance }} </span></div>
+        <div> <span> Count: </span><span> {{ currentRes?.summary?.count }} </span></div>
         <span>Time</span>
         <span> {{ getTime(currentRes?.timeStamp) }} </span>
-        
+
       </div>
-      <div class="data-area">
+      <div class="data-area" *ngIf="resultList[0]?.distribution !== 'multiple random variable' ">
         <h5>Raw Data</h5>
         <span *ngFor="let data of currentRes?.data"> {{ data }} </span>
       </div>
-      <div class="data-area">
+
+      <div class="data-area" *ngIf="resultList[0]?.distribution === 'multiple random variable' ">
+        <h5>Raw Data</h5>
+        <span *ngFor="let x of currentRes?.data[0]; let y of currentRes?.data[1]"> {{ x }}, {{ y }} </span>
+      </div>
+
+      <div class="data-area" *ngIf="resultList[0]?.distribution !== 'multiple random variable' ">
         <h5>Cumulative Data</h5>
         <span *ngFor="let data of currentRes?.summary?.cumulative"> {{ data }} </span>
       </div>
@@ -83,7 +89,8 @@
 
   <ng-template #confirmDelete let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title"> Are You Sure To Delete Result of User: {{ currentRes?.username }}  </h4>
+      <h4 class="modal-title" id="modal-basic-title"> Are You Sure To Delete Result of User: {{ currentRes?.username }}
+      </h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -91,7 +98,7 @@
     <div class="modal-body">
       <div style="text-align: center;">
         <button class="btn btn-danger" (click)="confirmDeleteClick(currentRes)"> Confirm Delete </button>
-      </div>  
+      </div>
     </div>
   </ng-template>
   <hr>

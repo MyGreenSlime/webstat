@@ -15,7 +15,7 @@ export class GeneratePageComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private globalService: GlobalService
-  ) {}
+  ) { }
 
   exercise: any;
   task: any;
@@ -26,6 +26,7 @@ export class GeneratePageComponent implements OnInit {
   tmp = [];
   aod = 0;
   noc = 0;
+  indexArray = [];
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -38,6 +39,8 @@ export class GeneratePageComponent implements OnInit {
           // console.log("task:", res.detail);
           this.task = res.detail;
           this.parameters = res.detail.parameters;
+          this.defineFunction(this.task.distribution.name);
+
         });
       }
     });
@@ -45,8 +48,31 @@ export class GeneratePageComponent implements OnInit {
 
   generateClick() {
     this.noc += 1;
-    this.defineFunction(this.task.distribution.name);
     this.tmp = [];
+
+    // case multiple random variables
+    if (this.task.distribution.name === "multiple random variable") {
+      var xArray = this.parameters[0].value;
+      var yArray = this.parameters[1].value;
+      if (this.data[0].length >= xArray.length) {
+        // console.log(1)
+        return;
+      }
+      while (this.tmp.length < this.task.genAmount) {
+        var generate = Math.floor(Math.random() * this.parameters[1].value.length) + 1;
+        // console.log(generate);
+        if (this.indexArray.indexOf(generate) === -1) {
+          this.indexArray.push(generate);
+          this.data[0].push(Number(xArray[generate]));
+          this.data[1].push(Number(yArray[generate]));
+          this.tmp.push(xArray[generate] + ", " + yArray[generate]);
+        }
+      }
+      this.aod = this.data[0].length;
+      return;
+    }
+
+    // other cases
     for (let i = 0; i < this.task.genAmount; i++) {
       var dataGen = Number(parseFloat(this.generate()).toFixed(4));
       this.data.push(dataGen);
@@ -111,6 +137,12 @@ export class GeneratePageComponent implements OnInit {
         );
         break;
       }
+      case "multiple random variable": {
+        this.data.push([]);
+        this.data.push([]);
+        this.indexArray = [];
+        break;
+      }
     }
   }
 
@@ -144,5 +176,6 @@ export class GeneratePageComponent implements OnInit {
     this.culTmp = [];
     this.aod = 0;
     this.noc = 0;
+    this.defineFunction(this.task.distribution.name);
   }
 }
