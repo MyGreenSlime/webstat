@@ -26,6 +26,7 @@ export class GeneratePageComponent implements OnInit {
   tmp = [];
   aod = 0;
   noc = 0;
+  indexArray = [];
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -53,18 +54,21 @@ export class GeneratePageComponent implements OnInit {
     if (this.task.distribution.name === "multiple random variable") {
       var xArray = this.parameters[0].value;
       var yArray = this.parameters[1].value;
-      var indexArray = [];
-      while (indexArray.length < this.task.genAmount) {
+      if (this.data[0].length >= xArray.length) {
+        // console.log(1)
+        return;
+      }
+      while (this.tmp.length < this.task.genAmount) {
         var generate = Math.floor(Math.random() * this.parameters[1].value.length) + 1;
-        if (indexArray.indexOf(generate) === -1) {
-          indexArray.push(generate);
+        // console.log(generate);
+        if (this.indexArray.indexOf(generate) === -1) {
+          this.indexArray.push(generate);
           this.data[0].push(Number(xArray[generate]));
           this.data[1].push(Number(yArray[generate]));
           this.tmp.push(xArray[generate] + ", " + yArray[generate]);
         }
       }
-      this.aod = this.data.length;
-      console.log(this.data);
+      this.aod = this.data[0].length;
       return;
     }
 
@@ -136,6 +140,7 @@ export class GeneratePageComponent implements OnInit {
       case "multiple random variable": {
         this.data.push([]);
         this.data.push([]);
+        this.indexArray = [];
         break;
       }
     }
