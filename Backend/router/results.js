@@ -16,7 +16,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
     let data = req.body;
     data.distribution = data.distribution.toLowerCase();
     let summary = {}
-    if(typeof(data.data[0]) == 'number' ){
+    if(typeof(data.data[0]) == 'number'){
       summary = {
         mean: BasicStat.FindMean(new Array(...data.data)),
         median: BasicStat.FindMedian(new Array(...data.data)),
@@ -43,6 +43,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
     }
    
     let result =  await Results.findOne({
+      exerciseName: data.exerciseName,
       taskName: data.taskName,
       username: req.user.username
     })
@@ -59,7 +60,8 @@ router.post("/create", permission.isLogin, async (req, res) => {
     } else {
       let editResult = await Results.updateOne(
         {
-          exerciseName: data.exerciseName
+          exerciseName: data.exerciseName,
+          taskName: data.taskName
         },
         {
           $set: {
