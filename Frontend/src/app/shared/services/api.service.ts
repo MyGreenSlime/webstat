@@ -37,7 +37,7 @@ export class ApiService {
   }
 
   removeTask(id): Observable<any> {
-    return this.http.delete("/api/tasks/delete/" + id);
+    return this.http.delete("/api/tasks/" + id);
   }
 
   removeExercise(id): Observable<any> {
