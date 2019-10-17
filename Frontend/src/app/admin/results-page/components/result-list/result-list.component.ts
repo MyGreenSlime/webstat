@@ -42,7 +42,7 @@ export class ResultListComponent implements OnChanges {
           }
           return 0;
         });
-        console.log(this.resultList);
+        // console.log(this.resultList);
         // this.globalService.showLoading(false);
       },
       error => {

@@ -53,22 +53,23 @@
     .user-data {
       display: flex;
       justify-content: center;
-      
 
       .summary-area {
         width: 40%;
-        max-width: 200px;
+        max-width: 250px;
         text-align: center;
         max-height: 75vh;
         overflow: auto;
         display: flex;
         flex-direction: column;
+        padding: 20px;
 
         div {
           display: flex;
           justify-content: space-between;
+
           span {
-              text-align: left;
+            text-align: left;
           }
         }
       }
@@ -80,15 +81,9 @@
         overflow: auto;
         display: flex;
         flex-direction: column;
+        padding: 20px;
       }
+
     }
-
-
   }
 }
-
-// .data-modal {
-//   width: 80%;
-// .modal-dialog {
-//     max-width: 100% !important;
-// }

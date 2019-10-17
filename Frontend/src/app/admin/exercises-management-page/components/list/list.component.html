@@ -15,10 +15,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let ex of exercises;">
-            <th scope="row"> {{ ex.name }} </th>
-            <td>{{ ex.title }}</td>
-            <td>{{ ex.description }}</td>
-            <td>{{ ex.section }}</td>
+            <th scope="row"> {{ ex?.name }} </th>
+            <td>{{ ex?.title }}</td>
+            <td>{{ ex?.description }}</td>
+            <td>{{ ex?.section }}</td>
             <td>
               <div class="form-group">
                 <div class="custom-control custom-switch">
@@ -50,9 +50,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let task of tasks;">
-          <th scope="row"> {{ task.name }} </th>
-          <th scope="row"> {{ task.title }} </th>
-          <td>{{ task.distribution.name }}</td>
+          <th scope="row"> {{ task?.name }} </th>
+          <th scope="row"> {{ task?.title }} </th>
+          <td>{{ task?.distribution?.name }}</td>
           <td>
             <div class="form-group">
               <div class="custom-control custom-switch">
@@ -63,8 +63,6 @@
             </div>
           </td>
           <td style="text-align: end">
-            <button class="btn btn-secondary" [routerLink]="['/admin/ex/results']"
-              [queryParams]="{id: task._id}">View</button>
             <button class="btn btn-warning" style="margin-left: 10px;" [routerLink]="['/admin/ex/task']"
               [queryParams]="{id: task._id}">Edit</button>
           </td>

@@ -38,7 +38,7 @@ export class HomePageComponent implements OnInit {
       // console.log(ex.section, section);
       return ex.section === section;
     })
-    console.log(this.exercises)
+    // console.log(this.exercises)
   } 
 
 }
