@@ -62,6 +62,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
         {
           exerciseName: data.exerciseName,
           taskName: data.taskName
+          username: req.user.username
         },
         {
           $set: {
