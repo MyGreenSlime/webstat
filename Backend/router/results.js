@@ -61,7 +61,7 @@ router.post("/create", permission.isLogin, async (req, res) => {
       let editResult = await Results.updateOne(
         {
           exerciseName: data.exerciseName,
-          taskName: data.taskName
+          taskName: data.taskName,
           username: req.user.username
         },
         {
