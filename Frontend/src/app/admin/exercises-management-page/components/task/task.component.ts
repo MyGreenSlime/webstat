@@ -53,6 +53,11 @@ export class TaskComponent implements OnInit {
           this.taskForm.controls.disable.setValue(this.task.disable);
           this.distribution = this.task.distribution.name;
           this.getParamFromDist();
+          if (this.distribution === 'multiple random variable') {
+            this.dataFile = {
+              name: this.task.parameters[2].value
+            }
+          }
         });
       } else {
         this.getParamFromDist();
@@ -117,11 +122,13 @@ export class TaskComponent implements OnInit {
       });
       this.taskForm.controls.parameters.controls[0].controls.value.setValue(this.xArray);
       this.taskForm.controls.parameters.controls[1].controls.value.setValue(this.yArray);
+      this.taskForm.controls.parameters.controls[2].controls.value.setValue(this.dataFile.name);
     }
   }
 
   saveClick() {
     if (this.taskForm.invalid) {
+      console.log(this.taskForm.value)
       alert("กรอกให้ครบสิ");
       return;
     }

@@ -55,12 +55,10 @@ export class GeneratePageComponent implements OnInit {
       var xArray = this.parameters[0].value;
       var yArray = this.parameters[1].value;
       if (this.data[0].length >= xArray.length) {
-        // console.log(1)
         return;
       }
       while (this.tmp.length < this.task.genAmount) {
-        var generate = Math.floor(Math.random() * this.parameters[1].value.length) + 1;
-        // console.log(generate);
+        var generate = Math.floor(Math.random() * this.parameters[1].value.length);
         if (this.indexArray.indexOf(generate) === -1) {
           this.indexArray.push(generate);
           this.data[0].push(Number(xArray[generate]));
