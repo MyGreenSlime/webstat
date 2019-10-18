@@ -62,6 +62,11 @@ export class ResultListComponent implements OnChanges {
   viewDataClick(content, res) {
     this.currentData = [];
     this.currentRes = res;
+    let xArray = res.data[0];
+    let yArray = res.data[1];
+    for (let i = 0; i < xArray.length; i++) {
+      this.currentData.push(xArray[i] + ", " + yArray[i])
+    }
 
     this.modalService.open(content, { windowClass: "data-modal" }).result.then(
       result => {

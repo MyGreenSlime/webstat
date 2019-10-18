@@ -77,14 +77,15 @@
 
       <div class="data-area" *ngIf="resultList[0]?.distribution === 'multiple random variable' ">
         <h5>Raw Data</h5>
-        <div style="display: flex; justify-content: center;">
+        <!-- <div style="display: flex; justify-content: center;">
           <div style="display: flex; flex-direction: column; align-items: flex-start;">
             <span *ngFor=" let x of currentRes?.data[0]"> {{ x }}, </span>
           </div>
           <div style="display: flex; flex-direction: column; align-items: flex-start; margin-left: 10px;">
             <span *ngFor=" let y of currentRes?.data[1]"> {{ y }} </span>
           </div>
-        </div>
+        </div> -->
+        <span *ngFor="let data of currentData"> {{ data }} </span>
       </div>
 
       <div class="data-area" *ngIf="resultList[0]?.distribution !== 'multiple random variable' ">
