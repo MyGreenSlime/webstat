@@ -4,7 +4,7 @@ const router = express.Router();
 const MessageHandle = require("../middleware/message");
 const Exercises = require("../model/exercise");
 const Tasks = require("../model/task");
-const Results = require("../model/result")
+const Results = require("../model/result");
 
 const permission = require("../middleware/permission");
 
@@ -14,17 +14,17 @@ router.get("/", permission.isLogin, async (req, res) => {
       let exercises = await Exercises.find(
         {
           section: req.user.section.toLowerCase(),
-          disable: false
+          disable: false,
         },
         "title name description tasks section"
       ).populate({
         path: "tasks",
-        match : {disable : false},
+        match: { disable: false },
         model: "Tasks",
         populate: {
           path: "distribution",
-          model: "Distributions"
-        }
+          model: "Distributions",
+        },
       });
       res
         .status(200)
@@ -42,8 +42,8 @@ router.get("/", permission.isLogin, async (req, res) => {
         model: "Tasks",
         populate: {
           path: "distribution",
-          model: "Distributions"
-        }
+          model: "Distributions",
+        },
       });
       res
         .status(200)
@@ -60,7 +60,7 @@ router.get("/:exerciseid", permission.isLogin, async (req, res) => {
       let exercise = await Exercises.findOne(
         {
           _id: req.params.exerciseid,
-          disable: false
+          disable: false,
         },
         "title name description section tasks"
       ).populate({
@@ -68,8 +68,8 @@ router.get("/:exerciseid", permission.isLogin, async (req, res) => {
         model: "Tasks",
         populate: {
           path: "distribution",
-          model: "Distributions"
-        }
+          model: "Distributions",
+        },
       });
       if (exercise) {
         res
@@ -87,7 +87,7 @@ router.get("/:exerciseid", permission.isLogin, async (req, res) => {
     try {
       let exercise = await Exercises.findOne(
         {
-          _id: req.params.exerciseid
+          _id: req.params.exerciseid,
         },
         "title name description section tasks disable"
       ).populate({
@@ -95,8 +95,8 @@ router.get("/:exerciseid", permission.isLogin, async (req, res) => {
         model: "Tasks",
         populate: {
           path: "distribution",
-          model: "Distributions"
-        }
+          model: "Distributions",
+        },
       });
       if (exercise) {
         res
@@ -118,7 +118,7 @@ router.put("/edit/:exerciseid", permission.isAdmin, async (req, res) => {
     const data = req.body;
     let editedExercise = await Exercises.updateOne(
       {
-        _id: req.params.exerciseid
+        _id: req.params.exerciseid,
       },
       { $set: data }
     );
@@ -133,14 +133,14 @@ router.put("/addtask/:exerciseid", permission.isAdmin, async (req, res) => {
     const data = req.body;
     let editedExercise = await Exercises.updateOne(
       {
-        _id: req.params.exerciseid
+        _id: req.params.exerciseid,
       },
       {
         $push: {
           tasks: {
-            $each: data.tasks
-          }
-        }
+            $each: data.tasks,
+          },
+        },
       }
     );
     res.status(200).send(MessageHandle.ResponseText("edited", editedExercise));
@@ -154,16 +154,16 @@ router.put("/removetask/:exerciseid", permission.isAdmin, async (req, res) => {
     const data = req.body;
     let editedExercise = await Exercises.updateOne(
       {
-        _id: req.params.exerciseid
+        _id: req.params.exerciseid,
       },
       {
         $pull: {
           tasks: {
             taskid: {
-              $in: data.tasks
-            }
-          }
-        }
+              $in: data.tasks,
+            },
+          },
+        },
       }
     );
     res.status(200).send(MessageHandle.ResponseText("edited", editedExercise));
@@ -176,40 +176,43 @@ router.post("/create", permission.isAdmin, async (req, res) => {
   try {
     const data = req.body;
     let exercise = await Exercises.findOne({
-      name : data.name
-    })
-    if(!exercise){
+      name: data.name,
+    });
+    if (!exercise) {
       let newExercise = await Exercises.create({
         title: data.title,
         name: data.name,
         description: data.description,
         section: data.section.toLowerCase(),
         tasks: data.tasks,
-        disable: data.disable
+        disable: data.disable,
       });
       res.status(200).send(MessageHandle.ResponseText("created", newExercise));
     } else {
-      res.status(200).send(MessageHandle.ResponseText("Exercise does exist", exercise));
+      res
+        .status(200)
+        .send(MessageHandle.ResponseText("Exercise does exist", exercise));
     }
-    
   } catch (err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));
   }
 });
 
-router.delete('/:exerciseid', permission.isAdmin, async (req, res) => {
-  try{
-    let exercise = await Exercises.findById(req.params.exerciseid)
+router.delete("/:exerciseid", permission.isAdmin, async (req, res) => {
+  try {
+    let exercise = await Exercises.findById(req.params.exerciseid);
     // await Results.deleteMany({
     //   exerciseName : exercise.name
     // })
     let delExercise = await Exercises.deleteOne({
-      _id : req.params.exerciseid
-    })
-    res.status(200).send(MessageHandle.ResponseText("Delete Exercise", delExercise));
-  } catch(err) {
+      _id: req.params.exerciseid,
+    });
+    res
+      .status(200)
+      .send(MessageHandle.ResponseText("Delete Exercise", delExercise));
+  } catch (err) {
     res.status(500).send(MessageHandle.ResponseText("error", err));
   }
-})
+});
 
 module.exports = router;
